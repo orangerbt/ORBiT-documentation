@@ -1,0 +1,352 @@
+
+\documentclass[12pt,article]{memoir}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{xpatch}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
+
+\renewcommand{\familydefault}{\sfdefault} % set font
+\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
+
+\renewcommand\contentsname{Table of Contents}
+
+\chapterstyle{section}
+\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
+\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
+
+\makeatletter 
+% define macro for itemcode
+\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
+\newcommand\@itemcode{}
+
+% define macro for rev number
+\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
+\newcommand\@revnumber{}
+\makeatother
+
+\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
+
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout 
+
+\setlength{\beforechapskip}{0cm} % reduce chapter spacing
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% set up code instances
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+%**********************************************************************
+%Document titles etc. defined here: (replace [] as well)
+\title{User Guide}
+\author{Cem Eden}
+\itemcode{guide-gen}
+\revnumber{1}
+\date{\today}
+%end of document titles etc.
+%**********************************************************************
+
+\makeatletter
+\let\runtitle\@title
+\let\runitemcode\@itemcode
+\makeatother
+
+% set header style
+\pagestyle{fancy}
+{
+	\fancyheadoffset{0cm}
+
+	\lhead{\runtitle \ - \runitemcode}
+	\rhead{Page: \thepage }
+	%\chead{\leftmark} % section name
+}
+
+\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
+\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+    \coordinate (A) at ($(bl)+(0,3cm)$);
+    \coordinate (B) at ($(r)+(0,-2cm)$);
+    \coordinate (C) at (current page.south east);
+    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+    \fill[orbitOrange, fill opacity=0.2]
+    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+\end{tikzpicture}
+}
+
+\cfoot{\OrbitBackground}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+    \coordinate (A) at ($(bl)+(0,3cm)$);
+    \coordinate (B) at ($(r)+(0,-2cm)$);
+    \coordinate (C) at (current page.south east);
+    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+    \fill[orbitOrange]
+    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+\end{tikzpicture}
+
+\makeatletter
+	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+	\begin{center}
+	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
+	{\LARGE  \@itemcode}\\
+	\end{center}
+	\begin{flushright}
+	\vspace*{\fill}
+	{\LARGE Rev: \@revnumber}\\[2ex]
+	{\large \@author}\\[2ex]
+	{\large \@date}\\[20ex]
+	\end{flushright}
+\makeatother
+\thispagestyle{empty}
+\newpage
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+\tableofcontents*
+\thispagestyle{fancy}
+\newpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line,
+
+\chapter{Beaglebone Black}
+\section{Introduction}
+The Beaglebone Black is essentially a full mini-computer that can run Unix systems. In our case, we run a command-line only Debian distribution. This means that we can easily use almost any programing or scripting language that suits our needs.\\\\
+
+\noindent
+Most of this guide will be focusing on the programs that are being or have been written for the Beaglebone and how to use them. In addition, you will find a short guide on how to use Unix systems, with emphasis on Debian.\\
+
+\newpage
+\section{Connecting to the Beaglebone}
+In most cases, connecting to the Beaglebone will be done over a protocol called "ssh" (short for Secure SHell), which is a secure connection to remotely access a shell session.\\
+
+\noindent
+A remote connection is required since in most cases the Beaglebone will not have a screen and keyboard connected to it. While this can be set up, usually there won’t be space or access to the Beaglebone when it is built into a rocket or enclosed within a command console.\\\\
+
+\subsection{Using a Mac}
+While the Mac operating system is not the ideal OS  to work on engineering projects, it can easily be used to connect via ssh. However, there are some things to consider. Since Apple has changed the USB ports on some of their computers to USB-C, it is required that a way to connect to the Beaglebones USB mini-B port is available.\\
+This can be achieved with either a dongle and a USB-A to USB-mini-B cable or a USB-C to USB-mini-B cable. The former seems to be the more available option since USB-C to USB-mini-B cables are likely not widely available.\\\\
+
+\noindent
+The connection itself is rather easy, however\\
+First open the Terminal, which can be found in the Utilities folder under Applications. A white window with black text should pop up, where commands can be entered.\\\\
+\noindent
+To connect to the Beaglebone, type the command:\\
+
+\begin{lstlisting}
+ssh debian@192.168.2.7
+\end{lstlisting}
+
+\noindent
+A prompt may ask to accept an ECDSA key fingerprint. For this answer "yes", and the prompt should not come up again for the same Beaglebone.\\
+
+\noindent
+Depending on how the Beaglebone was configured previously, either a welcome text should be displayed, or a new line of text reading "Password:" will be prompting for a password.\\
+If a password is required, then enter "temppwd". When typing, it may seem as if nothing is getting typed, but rest assured since this is intended, and no text will be displayed until the enter key is pressed. (Note: this is an engineering club and not a computer security club. Just make sure the rocket is never connected to the internet when primed and ready to launch!)\\\\
+
+\noindent
+At this point a connection to a shell session should be established. If not, it may be that some settings need to be charged under network settings.\\
+
+
+\newpage
+\subsection{Using Windows}
+With recent updates to windows, an ssh client has been added to windows itself. Alternatively, you may also use a separate program to do this. The latter tends to be more convenient since these programs can save sessions and thus require less to be typed to start a session.
+
+\subsubsection{Using Powershell}
+PowerShell is the new and updated command line interface that comes with windows since windows 7, which is meant to replace the old cmd.exe.\\
+To open a PowerShell session, search for "PowerShell" in the corresponding windows search bar (found in the start menu or directly on the bottom right).\\
+An application called "Windows PowerShell" should appear. Click on it to launch it. (Make sure that the application us not called "Windows PowerShell ISE", which is a debug/ide style wrapper to the command shell and not needed in this case)\\\\
+
+\noindent
+Once the shell window has opened you should see a blue window with white text on it. The last line should be reading something like:
+\begin{lstlisting}
+PS C:\Users\Your_Username>
+\end{lstlisting}
+
+\noindent
+At this point type the command:
+\begin{lstlisting}
+ssh debian@192.168.2.7
+\end{lstlisting}
+
+\noindent
+A prompt may ask to accept an ECDSA key fingerprint. For this answer "yes", and the prompt should not come up again for the same Beaglebone.\\
+
+\noindent
+Depending on how the Beaglebone was configured previously, either a welcome text should be displayed, or a new line of text reading "Password:" will be prompting for a password.\\
+If a password is required, then enter "temppwd". When typing, it may seem as if nothing is getting typed, but rest assured since this is intended, and no text will be displayed until the enter key is pressed. (Note: this is an engineering club and not a computer security club. Just make sure the rocket is never connected to the internet when primed and ready to launch!)
+
+\subsubsection{Using PuTTY}
+If you choose to use a separate application, then a popular ssh client is "PuTTY", which can be downloaded under:\\
+\url{https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html}\\
+
+\noindent
+After installing or extracting PuTTY, launch "PUTTY.EXE", which should popup a configuration window. Here type "192.168.2.7" under Host Name, "22" under Port and select SSH under Connection type.\\
+Once done, either save the session to expedite future connections, and press Open.\\\\
+
+\noindent
+At this point the Configuration window should have closed, and a new window with black background and white text should appear. In addition, a prompt may ask to accept an ECDSA key fingerprint. For this press Accept, and the prompt should not come up again for the same Beaglebone.\\
+
+\noindent
+The new window should now be prompting for a username. For this enter "debian" and press enter.\\
+
+\noindent
+Depending on how the Beaglebone was configured previously, either a welcome text should be displayed, or a new line of text reading "Password:" will be prompting for a password.\\
+If a password is required, then enter "temppwd". When typing, it may seem as if nothing is getting typed, but rest assured since this is intended, and no text will be displayed until the enter key is pressed. (Note: this is an engineering club and not a computer security club. Just make sure the rocket is never connected to the internet when primed and ready to launch!)\\\\
+
+
+
+\newpage
+\section{Using Debian}
+Once you have successfully connected and logged into a shell session, you can start using Debian.\\
+
+\noindent
+At first it may seem daunting to use a command line only operating system, however, once you get used to it, it may seem to be more convenient to use when doing repetitive tasks. Instead of having to repeat the same set of mouse clicks and typing, now everything can be easily automated and streamlined thanks to command line scripting. More on that later.\\
+
+\subsection{Basic commands}
+Until you get to advanced use cases, however, it is beneficial to learn some basic commands:\\
+
+\subsubsection{ls}
+The command "ls" will print all the files and directories in the current directory (LiSt files). This command will probably be one of the most used, since you will need to know what is available to you where you currently are.\\
+\noindent
+If you type "ls -a", now you will also see hidden files and directories as well as the directory "." and "..". The two aforementioned directories are not really directories, but rather shorthand for the current directory and parent directory respectively.\\
+\noindent
+If you type "ls -l", you will now be shown more detail about each file and directory, such as its access privileges and last modification date.\\
+
+\subsubsection{cd}
+The command "cd" allows you to change your working directory (Change Directory). Again, one of the most used commands, since it enables you to traverse your files.\\
+\noindent
+For example, after you used "ls" to find out what directories are available, you can type "cd coolFolder" to enter the "coolFolder" directory.\\
+Also typing "cd \\" will bring you to the root directory, and "cd" on its own will bring you to your home directory.
+
+
+\subsubsection{cp}
+The command "cp" allows you to copy files and directories (CoPy). To copy a file named "file1" to a new file called "file2" enter the command "cp file1 file2".\\
+\noindent
+To copy entire directories, enter "cp -r directory1 directory2", which will copy the entirety of the directory "directory1" to a new directory called "directory2".
+
+\newpage
+\subsubsection{mv}
+The command "mv" allows you to move and rename files and directories (MoVe). To move a file called "file1" to a directory called "directory1" and also rename the file to "file2", enter the command "mv file1 directory1/file2".
+
+\subsubsection{rm}
+The command "rm" allows you to remove files and directories (ReMove). To remove a file called "file1", type "rm file1".\\
+\noindent
+To remove an empty directory called "directory1", type "rm directory1". If you want to remove a full directory called "directory2", type "rm -rf directory2".\\
+NOTE: Do be careful when removing files and directories, since Linux does not forgive accidental removals. Once a file is gone, it is gone and any recovery is either extremely difficult or dependent on specific circumstances.
+
+\subsubsection{pwd}
+The command "pwd" will print out the path to your current working directory (present Working Directory). Useful if you want to copy files from a faraway destination to another, since in those instances a full path may be needed.
+
+\newpage
+\subsection{Command Line Text Editors}
+Sometimes it is not enough to simply move around files and directories, and files need to be modified. In graphical operating systems, this is easily done using a simple text editor. Well, in Debian there also are some text editors that are purely command line based.
+
+\subsubsection{nano}
+Nano is the most user-friendly text editor in the command line interface. To open a file called "file1", simply type "nano file1" and the nano interface should pop up with whatever was in that file. If file1 didn't exist, nano also creates it once saved.\\
+In nano, a couple of helpful bars are shown at the bottom. These show the commands available to you, such as how to save and how to exit the editor. For instance, the command "\^O" called "Write Out", writes all changes to the current file and the command "\^X" called "Exit" will exit the editor. When exiting, if changes have been made since the last save, nano will prompt if the current file should be saved or not.\\
+Also, there is a single line at the top of the editor, that shows the current nano version and the opened file.
+
+
+\subsubsection{vim}
+Vim is the command line text editor that is closer to a graphical text editor called "Emacs". It is regarded as the quicker editor, since it comes with a lot of commands to use to manipulate text.\\
+To open a file called "file1" with vim, simply type "vim file1". You may immediately notice that there is not convenient list of commands at the bottom, unlike in nano.\\
+In fact, it is not obvious how to even exit or save. For this press the escape key and type ":q". Similarly, to save type ":w".\\
+This is because unlike editors you may be familiar with, vim has two modes, namely the command mode and the insert mode.\\
+While it may seem like the harder to use text editor, this is partly due to its simplicity. While nano has a nicer user interface, it also relies on special instructions that get sent over your shell connection. If your setup only supports text-only, then vim may be the better choice.
+
+\newpage
+\subsection{Bash Scripting}
+While manually typing out commands is all well and good, but when certain commands have to be done in a specific order periodically, it can be helpful to write a script that does all this for you.\\
+\noindent
+This is where bash scripting comes in. Basically, it is possible to create a simple file that contains all the commands that should be executed in a particular order.\\
+To do this, simply create a file ending with ".sh". Although it's not strictly required to do so, the ".sh" extension signifies that the file is indeed a script.\\
+In that file the first line is commonly "\#!/bin/bash" which signifies what command line interface to use. This line can be left out, but it is advised to have it, since systems with other scripting interfaces may interpret commands differently.\\
+Beyond this, any combination of commands can be written. As an example, see the contents of the file below:
+
+\begin{lstlisting}
+#!/bin/bash
+clear
+echo "Hello World"
+pwd
+cd ..
+pwd
+\end{lstlisting}
+This script will do the following:\\
+First, it will clear the screen.\\
+Next, it will print out the text "Hello World"\\
+Next, it will print out the current working directory\\
+Next, it will switch to the parent directory, but won’t be printing out anything to the user\\
+Finally, it will print out the new current working directory.\\\\
+
+\noindent
+You may realize that we have seen some of these commands before. Since this is not a complete guide on Debian, we have not gone over every command available.\\
+You may also notice that all these lines can be typed directly into the command line and will have the same effect.\\
+That is because, by design, a bash script is simply made to autonomously execute its contents on the command line.\\
+
+\newpage
+\subsection{Further Reading}
+To find out more about how to use Debian, simply search on the internet using your favorite search engine.\\
+In fact, (while a large part of the Debian community may look down on me for the following statement) you can usually find simple to understand guides and Q\&As if you search for something for Ubuntu instead of strictly Debian. This is since Ubuntu is one of the more popular flavors of Debian since it is more akin to windows out of the box, when used with its graphical user interface.\\
+Speaking of Ubuntu, if you want to play around with Linux on your everyday computer, you may want to install Ubuntu on a virtual machine and just play around.
+
+
+\newpage
+\chapter{Telemetry Board}
+\chapter{Actuator Board}
+\chapter{Scate Board}
+\chapter{Floor Board}
+\chapter{Water Board}
+\chapter{Advisory  Board}
+\chapter{Mid-Sized Staffed with Volunteering Board}
+\chapter{3 ply construction Board}
+
+%end of document
+%**********************************************************************
+\end{document}
