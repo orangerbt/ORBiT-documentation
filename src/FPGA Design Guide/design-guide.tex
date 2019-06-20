@@ -1,0 +1,251 @@
+
+\documentclass[12pt,article]{memoir}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{xpatch}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
+
+\renewcommand{\familydefault}{\sfdefault} % set font
+\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
+
+\renewcommand\contentsname{Table of Contents}
+
+\chapterstyle{section}
+\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
+\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
+
+\makeatletter 
+% define macro for itemcode
+\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
+\newcommand\@itemcode{}
+
+% define macro for rev number
+\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
+\newcommand\@revnumber{}
+\makeatother
+
+\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
+
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout 
+
+\setlength{\beforechapskip}{0cm} % reduce chapter spacing
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+%**********************************************************************
+%Document titles etc. defined here: (replace [] as well)
+\title{FPGA Design Guide}
+\author{Jinzhi Cai}
+\itemcode{guide-fpga}
+\revnumber{A01}
+\date{\today}
+%end of document titles etc.
+%**********************************************************************
+
+\makeatletter
+\let\runtitle\@title
+\let\runitemcode\@itemcode
+\makeatother
+
+% set header style
+\pagestyle{fancy}
+{
+	\fancyheadoffset{0cm}
+
+	\lhead{\runtitle \ - \runitemcode}
+	\rhead{Page: \thepage }
+	%\chead{\leftmark} % section name
+}
+
+\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
+\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+    \coordinate (A) at ($(bl)+(0,3cm)$);
+    \coordinate (B) at ($(r)+(0,-2cm)$);
+    \coordinate (C) at (current page.south east);
+    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+    \fill[orbitOrange, fill opacity=0.2]
+    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+\end{tikzpicture}
+}
+
+\cfoot{\OrbitBackground}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+    \coordinate (A) at ($(bl)+(0,3cm)$);
+    \coordinate (B) at ($(r)+(0,-2cm)$);
+    \coordinate (C) at (current page.south east);
+    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+    \fill[orbitOrange]
+    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+\end{tikzpicture}
+
+\makeatletter
+	\includegraphics[width=\textwidth]{logo.jpg}\\[4ex]
+	\begin{center}
+	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
+	{\LARGE  \@itemcode}\\
+	\end{center}
+	\begin{flushright}
+	\vspace*{\fill}
+	{\LARGE Rev: \@revnumber}\\[2ex]
+	{\large \@author}\\[2ex]
+	{\large \@date}\\[20ex]
+	\end{flushright}
+\makeatother
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents*
+\thispagestyle{fancy}
+\newpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line,
+
+\chapter{Introduction}
+In this guide, we will discuss Field－Programmable Gate Array and System on Chip technologies and relative application. Due to the need, ORBiT Avionics department desided to create next generation bus system for the rocket. For help club member to learn and understand this technology, this guide will introdute the basic knowledge of FPGA and SoC.
+\section{FPGA and SoC}
+\subsection{FPGA}
+test2
+\subsection{SoC FPGA}
+SoC FPGA is a new kind of FPGA chip which embedded a hardware processor inside to improve performent. In a SoC FPGA, there are two parts. Programmable Logic(PL) is the part that use FPGA technology which allow user to create costum logic, and Processor System(PS) is an embedded hardware processor to provide computing power. Cyclone V(Intel) and ZYNQ 7000(Xilinux) are two most known SoC FPGA platform. They both use ARM Cortex processor and its AXI bus system.
+\section{What is VHDL}
+\subsection{Basic Structure}
+The example following is a example format entity in VHDL. When writing entity, the name for the entity should be unique and match with the name in the architecture. Architecture name and port name should also unique.
+\lstset{
+	language=VHDL, 
+    keywordstyle= \color{ blue!70},
+    commentstyle= \color{red!50!green!50!blue!50}, 
+    rulesepcolor= \color{ red!20!green!20!blue!20} ,
+}
+\begin{lstlisting}
+library ieee; -- import libraries
+use ieee.std_logic_1164.all; -- use standard library
+
+entity <entity_name> is port(
+
+	<name>	: <in/out/inout> <type>;
+	<name>	: <in/out/inout> <type>
+		
+);
+end <entity_name>;
+	
+architecture <arch_name> of <entity_name> is
+	-- this is a comment
+	-- add signals and other variables
+begin
+
+	-- VHDL sentence
+
+end <arch_name>;
+\end{lstlisting}
+This is a example design for a Single port RAM.
+\begin{lstlisting}
+-- Quartus Prime VHDL Template
+-- Single port RAM with single read/write address 
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity single_port_ram is
+
+	generic 
+	(
+		DATA_WIDTH : natural := 8;
+		ADDR_WIDTH : natural := 6
+	);
+
+	port 
+	(
+		clk: in std_logic;
+		addr: in natural range 0 to 2**ADDR_WIDTH - 1;
+		data: in std_logic_vector((DATA_WIDTH-1) downto 0);
+		we: in std_logic := '1';
+		q: out std_logic_vector((DATA_WIDTH -1) downto 0)
+	);
+
+end entity;
+
+architecture rtl of single_port_ram is
+
+	-- Build a 2-D array type for the RAM
+	subtype word_t is std_logic_vector((DATA_WIDTH-1) downto 0);
+	type memory_t is array(2**ADDR_WIDTH-1 downto 0) of word_t;
+
+	-- Declare the RAM signal.	
+	signal ram : memory_t;
+
+	-- Register to hold the address 
+	signal addr_reg : natural range 0 to 2**ADDR_WIDTH-1;
+
+begin
+
+	process(clk) -- process block indecate the code will synchronize with the clock.
+	begin
+	if(rising_edge(clk)) then -- if block indecate only when clock have a rising edge, then the event in the block will happen.
+		if(we = '1') then
+			ram(addr) <= data;
+		end if;
+
+		-- Register the address for reading
+		addr_reg <= addr;
+	end if;
+	end process;
+
+	q <= ram(addr_reg);
+
+end rtl;
+\end{lstlisting}
+\section{Introduction of Quartus Prime}
+test3
+\section{Introduction of Vivado Design Suite(TBD)}
+test3
+\section{Introduction of Embedded Linux}
+test3
+\section{Introduction of Hardware Bus}
+test3
+\chapter{Quartus Prime SoC FPGA Development}
+\section{Hello World for FPGA}
+test
+\section{Create a Complex Entity}
+test
+\section{Introduction of Platform Designer(QSYS)}
+test
+\section{Introduction of NIOS II and HPS}
+test
+\section{Introduction of Avalon Memory Mapping Bus and AXI4 Bus}
+test
+\chapter{Vivado Design Suite SoC FPGA Development(TBD)}
+
+
+%end of document
+%**********************************************************************
+\end{document}
