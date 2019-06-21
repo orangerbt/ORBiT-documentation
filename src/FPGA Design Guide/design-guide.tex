@@ -227,11 +227,16 @@ end rtl;
 \section{Introduction of Quartus Prime}
 test3
 \section{Introduction of Vivado Design Suite(TBD)}
-test3
 \section{Introduction of Embedded Linux}
-test3
+\subsection{Embedded Linux}
+\subsection{Common Use Command}
 \section{Introduction of Hardware Bus}
-test3
+\subsection{I2C}
+\subsection{SPI}
+\subsection{UART}
+\chapter{Improtant Circuit Design Requirement}
+\section{SoC FPGA Power and CLock Design}
+\section{SoC FPGA JTAG Programming Design}
 \chapter{Quartus Prime SoC FPGA Development}
 \section{Hello World for FPGA}
 test
@@ -240,12 +245,14 @@ test
 \section{Introduction of Platform Designer(QSYS)}
 test
 \section{Introduction of NIOS II and HPS}
-test
+In Platform Designer, it majorly has two type of processor core; softcore and hardcore. Softcore processor only require LUT(Look Up Table) resource to perform. Hardcore processor require special design processor circuit to function. In resource, softcore processor have a adventage due to it only need about 3000 LUT to function, but the trade off is the performent is worse than hardcore processor. In Cyclone V series, it contain an ARM Cortex A9 hardcore processor and over 30000 LUT for extra IP core.
+\subsection{Recommend Configration for NIOS II(Softcore)}
+\subsection{Recommend Configration for HPS(ARM Cortex A9)}
+\subsection{How to create a costum IP core}
 \section{Introduction of Avalon Memory Mapping Bus and AXI4 Bus}
-test
+\subsection{Timming Diagram for Avalon Memory Mapping Bus}
+\subsection{Timming Diagram for AXI4 Bus}
 \chapter{Vivado Design Suite SoC FPGA Development(TBD)}
-
-
 %end of document
 %**********************************************************************
 \end{document}
