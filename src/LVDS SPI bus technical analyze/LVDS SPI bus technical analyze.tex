@@ -11,19 +11,6 @@
 \usepackage{xpatch}
 \usepackage{hyperref}
 
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
-\usepackage{tabu}
-\usepackage{float}
-\usepackage[autostyle, english = american]{csquotes}
-
 
 \usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
 
@@ -64,9 +51,9 @@
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
-\title{ORBiT Avionics II System Architecture}
+\title{LVDS SPI Bus Technical Analyze}
 \author{Jinzhi Cai}
-\itemcode{Sys-Arch}
+\itemcode{Tech-Ana}
 \revnumber{A01}
 \date{\today}
 %end of document titles etc.
@@ -141,72 +128,17 @@
 
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
-\chapter{ORBiT Avionics II On Board Part (OA-II OBP) System Architecture}
-\section{System Description}
-\section{Software System Architecture}
-The software system for OA-II can be divided to three layer: physics layer, system layer, and application layer.
-\subsection{Physics Layer}
-The physics layer program is program that directly interact with hardware memory. It include driver for different buses. It also include the program that directly execute on processor.
-\subsection{System Layer}
-The system layer program is program what connect between physics level and application level. It receive data from different physics layer source and group them. It will feed all the grouped data to relative application program. It also provide critical control before and during the fly. In the same time, it also record all the data to on board storage.
-\subsection{Application Layer}
-The application layer program is use to process data that provided by the system and provide infomation that will send back to OA-II BSP.
-\section{Hardware System Architecture}
-\subsection{Mission Platform Container (MPC)}
-\subsection{Swappable Mission Platform}
-\subparagraph{Swappable Computing Module (SCM)}
-\subparagraph{Swappable Telemetering Module (STM)}
-\subparagraph{Swappable Actuator Module (SAM)}
-\subsection{Adaptable Rockets}
-\section{PCB Layout and Manufacture Description}
-\subsection{PCB Layout}
-\subsection{PCB Manufacture Requirement}
-%***************************************************************************
-\chapter{ORBiT Avionics II Base Station Part (OA-II BSP) System Architecture}
-\section{System Description}
-\section{Software System Architecture}
-\subsection{Physics Layer}
-\subsection{System Layer}
-\subsection{Application Layer}
-\section{Hardware System Architecture}
-%\section{PCB Dimension Description}
-%\section{PCB Layout and Manufacture Description}
-%\subsection{PCB Layout}
-%\subsection{PCB Manufacture Requirement}
-%***************************************************************************
-\chapter{ORBiT Avionics II Backplane System (OA-II BPS) System Architecture}
-\section{System Description}
-\section{Software System Structure}
-\section{Hardware System Structure}
-%\section{System Description}
-%\section{Backplane Connection Protocal}
-%\subsection{Connection Protocal}
-%\subsection{Pin Diagram}
-%***************************************************************************
-\chapter{ORBiT Avionics II Wireless System (OA-II WLS) System Architecture}
-\section{System Description}
-\section{Software System Structure}
-\section{Hardware System Structure}
-\subsection{High Speed Wireless Connection Protocal}
-\subsection{Low Power Wireless Connection Protocal}
 
-%\section{System Description}
-%\section{}
-%\section{}
+\chapter{Introduction of LVDS Technology}
+\section{Section}
+test
+\subsection{Subsection}
+test2
+\section{Section2}
+test3
+\chapter{Deisgn of LVDS SPI bus}
+\chapter{Deisgn of LVDS SPI bus}
+
 %end of document
 %**********************************************************************
 \end{document}
-
-%\begin{table}[H]
-%	\centering
-%	\begin{tabu}{r || c | c  }
-%		Rocket Series & Part Number & Date\\ \hline
-%		 ?& ?& ?\\
-%		 & & \\
-%		 & & \\ 
-%		 & & \\
-%	\end{tabu}
-%	\caption{Adaptable Rockets}
-	%\label{tab:edatools}
-%\end{table}
-%

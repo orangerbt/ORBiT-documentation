@@ -144,14 +144,14 @@
 
 \chapter{Introduction to ORBiT Avionics II System (OA-II)}
 \section{Introduction}
-ORBiT Avionics II System is a new generation avionics system for Orange Rocket Ballistics Team rocket. It include twq major part, the On Board part, and the Base Station part. All the compone in the OA-II system are inter connect with a unique backplane system and wireless system.
+ORBiT Avionics II System is a new generation avionics system for Orange Rocket Ballistics Team rocket. It include twq major part, the On Board part, and the Base Station part. All the component in the OA-II system are inter connect with a unique backplane system and wireless system.
 \includegraphics[width=\textwidth]{sys_diag.png}
 \subsection{On Board Part (OBP)}
 The OA-II OBP is use to collecting information about the rocket and deliver it to the OA-II BSP for further analysis. In the same time, it also will back up all the information to a on board storage in case wireless connection failure.
 \subsection{Base Station Part (BSP)}
 The OA-II BSP is use to receive the information delivered by OA-II OBP via wireless connection and perform basic analyze on roket status. The OA-II BSP provide live for rocket status and location and data storage for further analysis. The OA-II BSP also help to indetify the rocket location after it is landed for reclaim personnel to locate the rocket.
 \subsection{Backplane System (BPS)}
-The OA-II BPS is a unique, muti-level information exchange system that link different part in the OA-II BSP and the OA-II OBP. It provide different speed mode for different compone.
+The OA-II BPS is a unique, muti-level information exchange system that link different part in the OA-II BSP and the OA-II OBP. It provide different speed mode for different component.
 \subsection{Wireless System (WLS)}
 The OA-II WLS is a wireless communication system which provide communication between OA-II BPS and OA-II OBP. In the same time, it also provide landing locating signal.
 \section{Requirement}
@@ -161,15 +161,15 @@ Reqire feature
 \item Three dimension linear kinematics data. P(position), V(velocity), A(acceleration) data.
 \item Three dimension Rotational kinematics data. \theta(angle), \omega(angular velocity), \alpha(angular acceleration) data.
 \item Air pressure data.
-\item Sound frequency level ADC(Sample frequency \geq 40kHz)
+\item Sound frequency level ADC($Sample frequency \geq 40kHz$)
 \item Power manage (convert from 24V)
-\item High power driver (Peak Power \geq 50W)
+\item High power driver ($Peak Power \geq 50W$)
 \item 720p 24Hz RGB Camera 
 \item Landing location broadcast (up to 2 hours, 3km range, low power consumption)
 \end{itemize}
 Addtional feature
 \begin{itemize}
-\item Radio frequency level ADC(Sample frequency \geq 4GHz)
+\item Radio frequency level ADC($Sample frequency \geq 4GHz$)
 \item 1080p 60Hz RGB Camera 
 \end{itemize}
 \subsection{Base Station Part (BSP)}
@@ -193,9 +193,9 @@ Addtional feature
 \subsection{Backplane System (BPS)}
 \begin{itemize}
 \item Provide different speed mode with ms level delay \\
-Info level( \leq 3MB/s)\\
-Data level(\approx 50MB/s)\\
-Stream level(\geq 100MB/s)
+Info level($\leq 3MB/s$)\\
+Data level($\approx 50MB/s$)\\
+Stream level($\geq 100MB/s$)
 \item Tolerance high vibration and EMP
 \item Tolerance high temperture (\leq $75^{\circ}C$)
 \end{itemize}
@@ -208,7 +208,7 @@ Stream level(\geq 100MB/s)
 \begin{table}[H]
 	\centering
 	\begin{tabu}{r || c | c | c }
-		Reversion Number & Person & Change Log & Time\\ \hline
+		Rev\# & Editor & Delta & Time\\ \hline
 		A01 & Jinzhi Cai & Initialize  & 2019-6-21 \\
 		 & & & \\
 		 & & & \\
