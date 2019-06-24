@@ -145,19 +145,32 @@
 \section{System Description}
 \section{Software System Architecture}
 The software system for OA-II can be divided to three layer: physics layer, system layer, and application layer.
+
+\includegraphics[width=\textwidth]{softarch.png}
 \subsection{Physics Layer}
 The physics layer program is program that directly interact with hardware memory. It include driver for different buses. It also include the program that directly execute on processor.
 \subsection{System Layer}
 The system layer program is program what connect between physics level and application level. It receive data from different physics layer source and group them. It will feed all the grouped data to relative application program. It also provide critical control before and during the fly. In the same time, it also record all the data to on board storage.
 \subsection{Application Layer}
 The application layer program is use to process data that provided by the system and provide infomation that will send back to OA-II BSP.
+
 \section{Hardware System Architecture}
-\subsection{Mission Platform Container (MPC)}
-\subsection{Swappable Mission Platform}
+\subsection{Payload Catalogue}
+\textbf{Critical Payload} - It is the most important payload which provide data for launch and landing. It will not operating in very high speed, so EMC require will be minimum. It will directly attach to the Swappable Computing Module (SCM). Any of them fail will lead to the cancelation of launch.\\\\
+\textbf{High Speed Payload} - It is the major part of the OA-II payload system. It include the sensor that will collect data conduct futher research. Most of those sensor will be running at $10kHz$ with high standard EMC requirement. It will locate at the Swappable Telemetering Module (STM).\\\\
+\textbf{Low Speed Payload} - It is the minor part of the OA-II payload system. It contain non-research related sensor and actuator related component. \textit{It might be conatin EMI source.}
+
+\subsection{Mission Module Container (MMC)}
+The Mission Module Container (MMC) is use to contain all the Swappable Mission Module (SMM) and provide a high speed bus controller and power supply. The MMC should be a four layers board. The second layer should be use to route high speed traces and the first and third layer be signal ground.
+\subsection{Swappable Mission Module (SMM)}
+The Swappable Mission Module (SMM) is a highly specialize circuit that perform special job during and after whole mission. It majorly can be divided to three kinds of SMM, Swappable Computing Module (SCM), Swappable Telemetering Module (STM), Swappable Actuator Module (SAM).
 \subparagraph{Swappable Computing Module (SCM)}
+The Swappable Computing Module (SCM) is use to collecting data from Swappable Telemetering Module (STM). In the same time, it also in charge of the rocket status analyze and control. SCM will determine the status of the rocket and provide emergent countermeasure. SCM also have data storage for future analyze.
 \subparagraph{Swappable Telemetering Module (STM)}
+The Swappable Telemetering Module (STM) is providing sensing ability and wireless communication with OA-II BSP.
 \subparagraph{Swappable Actuator Module (SAM)}
-\subsection{Adaptable Rockets}
+
+%\subsection{Adaptable Rockets}
 \section{PCB Layout and Manufacture Description}
 \subsection{PCB Layout}
 \subsection{PCB Manufacture Requirement}
