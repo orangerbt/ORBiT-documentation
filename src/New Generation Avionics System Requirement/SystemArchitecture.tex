@@ -178,25 +178,26 @@ The application layer program is use to process data that provided by the system
 \includegraphics[width=\textwidth]{payloadCata.png}
  \caption{Payload Diagram}	
 \end{figure}
-\section{PCB Layout}
-\section{High Speed Lane Protection}
+%\section{PCB Layout}
+%\section{High Speed Lane Protection}
 %*************************************************************************************
 %*************************************************************************************
 %*************************************************************************************
 \chapter{ORBiT Avionics II Vehicle Electronics (OA-II VEH) System Architecture}
 \section{General Description}
+The OA-II VEH is used to control the rocket's various subsystems, collect information about the rocket's performance, and communicate this with the BAS for remote control and monitoring. It also has autonomous software and onboard storage, to allow for continued operation in case of failure of the wireless link. It contain two main part, Mission Module Container (MMC) and Substitutable Mission Module (SMM).
 \section{Mission Module Container (MMC)}
-The Mission Module Container (MMC) is use to contain all the Swappable Mission Module (SMM) and provide a high speed bus controller and power supply. The MMC should be a four layers board. The second layer should be use to route high speed traces and the first and third layer be signal ground.
-\section{Swappable Mission Module (SMM)}
-The Swappable Mission Module (SMM) is a highly specialize circuit that perform special job during and after whole mission. It majorly can be divided to three kinds of SMM, Swappable Computing Module (SCM), Swappable Telemetering Module (STM), Swappable Actuator Module (SAM).\\\\
-\subsection{Swappable Computing Module (SCM)}
-The Swappable Computing Module (SCM) is use to collecting data from Swappable Telemetering Module (STM). In the same time, it also in charge of the rocket status analyze and control. SCM will determine the status of the rocket and provide emergent countermeasure. SCM also have data storage for future analyze.\\\\
+The Mission Module Container (MMC) is use to contain all the Swappable Mission Module (SMM) and provide a high speed bus controller and power supply. The MMC should be a four layers board. The second layer should be use to route high speed traces and the first and third layer be signal ground. More information about bus trace please refer to OA-II BPS.
+\section{Substitutable Mission Module (SMM)}
+The Substitutable Mission Module (SMM) is a highly specialize circuit that perform special job during and after whole mission. It majorly can be divided to three kinds of SMM, Substitutable Computing and Operation Module (SCOM), Substitutable Telecommunication and Acquisition Module (STAM), Substitutable Power and Actuator Module (SPAM).
+\subsection{Substitutable Computing and Operation Module (SCOM)}
+The Substitutable Computing and Operation Module (SCOM) is use to collecting data from Substitutable Telemetering Module (STAM). In the same time, it also in charge of the rocket status analyze and control. SCOM will determine the status of the rocket and provide emergent countermeasure. SCOM also have data storage for future analyze.
 %*****************************************************************************
-\subsection{Swappable Telemetering Module (STM)}
-The Swappable Telemetering Module (STM) is providing sensing ability and wireless communication with OA-II BSP. The STM system include most of the high speed sensor and low speed sensor, and it provide FIFO buffer for high speed sensor.\\\\
+\subsection{Substitutable Telecommunication and Acquisition Module (STAM)}
+The Substitutable Telecommunication and Acquisition Module (STAM) is providing sensing ability and wireless communication with OA-II BSP. The STAM system include most of the high speed sensor and low speed sensor, and it provide FIFO buffer for high speed sensor.
 %*****************************************************************************
-\subsection{Swappable Actuator Module (SAM)}%Use for landing?
-TBD
+\subsection{Substitutable Power and Actuator Module (SPAM)}%Use for landing?
+The Substitutable Power and Actuator Module (SPAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow SCOM to control high power electronic. The SPAM also offer limited control for safety cutoff in case SCOM lost connection or power.
 %\subsection{Adaptable Rockets}
 %\section{PCB Layout Description}%\section{PCB Layout and Manufacture Description}
 %\subsection{PCB Layout}
@@ -213,27 +214,35 @@ The "Supervisor" Launch Pad Control Module is use to manage the rocket status, f
 The "Adviser" Automatic Vehicle Analysis Module use funicle cable to supply power for the vehicle and diagnosing it. It will compare each key value with theoretical value that previous storage in the module and send automatic generated advise to "Demonstrator".
 \section{"Demonstrator" Live Data Analysis and Display Module}
 The "Demonstrator" Live Data Analysis and Display Module is the core module in the OA-II BAS becasue it control the other two module. The "Demonstrator" contain three part. The OA-II WLS unit allow communication with VEH, computing unit will collect data fromm different source and feed it to the display unit.
-%***************************************************************************
-%**********************************************************************s
+%**********************************************************************
+%**********************************************************************
 \chapter{ORBiT Avionics II Backplane System (OA-II BPS) System Architecture}
 \section{General Description}
-sadasdasd
+The OA-II BPS is the main bus system for all the OA-II relative component. It will provide up to 500MB/s band width. In the same time, it also provide low data lane for smaller component and low power, sample application. It also provide 24V power for all the module that attach with it.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{BPS_Pin.png}
  \caption{Example Pin Out}	
 \end{figure}
-\section{Software System Structure}
-\section{Hardware System Structure}
-%\section{System Description}
-%\section{Backplane Connection Protocal}
-%\subsection{Connection Protocal}
-%\subsection{Pin Diagram}
+
 %***************************************************************************
 \chapter{ORBiT Avionics II Wireless System (OA-II WLS) System Architecture}
 \section{General Description}
-\subsection{High Speed Wireless Connection Protocal}
-\subsection{Low Power Wireless Connection Protocal}
+The ORBiT Avionics II Wireless System (OA-II WLS) is use to connect vehicle and base station. It is important part of OA-II STAM and OA-II "Demonstrator". The OA-II WLS provide two type of communication between the vehicle and base station, the high speed mode and low power mode.
+\section{High Speed Wireless Connection Protocal}
+The OA-II HSWLS is use mainly during the fly and allow to provide high speed communication to the base station. It will download live vehicle status and video stream to the base station.
+\section{Low Power Wireless Connection Protocal}
+The OA-II LPWLS is mainly use for landing and component recovery. It provide location tracing and boardcast system and also allow radio locating in range.
 
+\chapter{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c }
+		Rev\# & Editor & Delta & Date\\ \hline
+		A01 & Jinzhi Cai & Initialize  & 2019-6-27\\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:edatools}
+\end{table}
 %\section{System Description}
 %\section{}
 %\section{}
