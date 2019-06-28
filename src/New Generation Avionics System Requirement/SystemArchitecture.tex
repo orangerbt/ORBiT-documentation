@@ -64,10 +64,10 @@
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
-\title{ORBiT Avionics II System Architecture}
+\title{ORBiT Avionics System II Architecture}
 \author{Jinzhi Cai}
 \itemcode{Sys-Arch}
-\revnumber{A01}
+\revnumber{A02}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -141,63 +141,73 @@
 
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
-\chapter{ORBiT Avionics II General Software System Architecture}
-The software system for OA-II can be divided to three layer: physics layer, system layer, and application layer.
+\chapter{General Software System Architecture}
+The software system for OA-II can be divided to three layers: data link layer, Transport layer, and application layer.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{softarch.png}
 \caption{Software Architecture}	
 \end{figure}
-\section{Physics Layer}
-The physics layer program is program that directly interact with hardware memory. It include driver for different buses. It also include the program that directly execute on processor.
-\section{System Layer}
-The system layer program is program what connect between physics level and application level. It receive data from different physics layer source and group them. It will feed all the grouped data to relative application program. It also provide critical control before and during the fly. In the same time, it also record all the data to on board storage.
+\section{Data Link Layer}
+The data link layer directly interacts with hardware memory. It include drivers for all hardware buses. It also includes programs which execute direction on the CPU.
+\section{Transport Layer}
+The transport layer connects the data link and application layers. It receives data from different data link layer sources and packetizes it. It will feed all the packetized data to relevant application program. It provides critical control before and during the flight. Finally, the transport layer records all data to onboard storage.
 \section{Application Layer}
-The application layer program is use to process data that provided by the system and provide infomation that will send back to OA-II BAS.\\
-\chapter{ORBiT Avionics II General Hardware System Architecture}
-\section{Payload Catalogue}
-\subsection{Critical Payload} - It is the most important payload which provide data for launch and landing. It will not operating in very high speed, so EMC require will be minimum. It will directly attach to the Swappable Computing Module (SCM). Any of them fail will lead to the cancelation of launch.
+The application layer is used to process data provided by the transport layer, as well as to provide information that will be sent back to OA-II BAS.
+
+\newpage
+
+\chapter{General Hardware System Architecture}
+\section{Payload Catalog}
+\subsection{Critical Payload}
+The critical payload controls basic launch and recovery operations. It will attach directly to the Compute Module (CM). Any failure of the critical payload will result in a launch abort. The critical payload contains:
 \begin{itemize}
-\item GPS receivor
-\item Battery sensor
+\item Power management
+\item GPS receiver
 \item Low speed IMU
 \item Storage media
 \item Radio system
 \end{itemize}
-\subsection{High Speed Payload} - It is the major part of the OA-II payload system. It include the sensor that will collect data conduct futher research. Most of those sensor will be running at $10kHz$ with high standard EMC requirement. It will locate at the Swappable Telemetering Module (STM).
+
+\subsection{High Speed Payload} - The high speed payload contains non-critical devices, in particular sensors. This payload is primarily for research purposes. These devices will be located in the Telemetry Module (TM), and include:
 \begin{itemize}
-\item Camera
-\item Air pressure sensor
-\item Other high speed sensor
+\item Static and dynamic air pressure sensors
+\item High speed IMU
+\item Cameras
+\item Temperature sensors
+\item Pressure sensors
 \end{itemize}
-\subsection{Low Speed Payload} - It is the minor part of the OA-II payload system. It contain non-research related sensor and actuator related component. \textit{It might be conatin EMI source.}
+
+\subsection{Low Speed Payload} - The low speed payload contains non-critical devices which are significant EMI sources. The low speed payload must be fully galvanically isolated from the rest of the system. This includes:
 \begin{itemize}
-\item Actuator
-\item TBD
+\item Actuators
+\item Pyrotechnics
 \end{itemize}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{payloadCata.png}
  \caption{Payload Diagram}	
 \end{figure}
-%\section{PCB Layout}
-%\section{High Speed Lane Protection}
+\section{PCB Layout}
+\section{High Speed Lane Protection}
 %*************************************************************************************
 %*************************************************************************************
 %*************************************************************************************
-\chapter{ORBiT Avionics II Vehicle Electronics (OA-II VEH) System Architecture}
-\section{General Description}
-The OA-II VEH is used to control the rocket's various subsystems, collect information about the rocket's performance, and communicate this with the BAS for remote control and monitoring. It also has autonomous software and onboard storage, to allow for continued operation in case of failure of the wireless link. It contain two main part, Mission Module Container (MMC) and Substitutable Mission Module (SMM).
-\section{Mission Module Container (MMC)}
-The Mission Module Container (MMC) is use to contain all the Swappable Mission Module (SMM) and provide a high speed bus controller and power supply. The MMC should be a four layers board. The second layer should be use to route high speed traces and the first and third layer be signal ground. More information about bus trace please refer to OA-II BPS.
-\section{Substitutable Mission Module (SMM)}
-The Substitutable Mission Module (SMM) is a highly specialize circuit that perform special job during and after whole mission. It majorly can be divided to three kinds of SMM, Substitutable Computing and Operation Module (SCOM), Substitutable Telecommunication and Acquisition Module (STAM), Substitutable Power and Actuator Module (SPAM).
-\subsection{Substitutable Computing and Operation Module (SCOM)}
-The Substitutable Computing and Operation Module (SCOM) is use to collecting data from Substitutable Telemetering Module (STAM). In the same time, it also in charge of the rocket status analyze and control. SCOM will determine the status of the rocket and provide emergent countermeasure. SCOM also have data storage for future analyze.
+
+\newpage
+
+\chapter{Vehicle Electronics (VEH) System Architecture}
+\section{Description}
+The OA-II VEH is a compact, modular system which is tightly integrated with the flight vehicle.
+\section{Payload Frame (PF)}
+The Payload Frame (PF) contains interchangeable modules and provides a high speed bus controller and power supply. The PF should be a four layer board.
+\section{Payload Modules (PM)}
+Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing Modules (CM), Telemetry Modules (TM), and Actuator Modules (AM).
+\subsection{Compute Module (CM)}
+The Compute Module (CM) has several purposes. It controls other modules and monitors the vehicle status. It collects data from Telemetry Modules, and contains long-term storage for collected data. 
+\subsection{Telemetry Module (TM)}
+The Telemetry Module (TM) is an interface to both sensors and radios. The TM connects to both low and high speed sensors. The TM also FIFO buffers for high speed sensors.
 %*****************************************************************************
-\subsection{Substitutable Telecommunication and Acquisition Module (STAM)}
-The Substitutable Telecommunication and Acquisition Module (STAM) is providing sensing ability and wireless communication with OA-II BSP. The STAM system include most of the high speed sensor and low speed sensor, and it provide FIFO buffer for high speed sensor.
-%*****************************************************************************
-\subsection{Substitutable Power and Actuator Module (SPAM)}%Use for landing?
-The Substitutable Power and Actuator Module (SPAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow SCOM to control high power electronic. The SPAM also offer limited control for safety cutoff in case SCOM lost connection or power.
+\subsection{Actuator Module (AM)}%Use for landing?
+TBD
 %\subsection{Adaptable Rockets}
 %\section{PCB Layout Description}%\section{PCB Layout and Manufacture Description}
 %\subsection{PCB Layout}
@@ -205,44 +215,45 @@ The Substitutable Power and Actuator Module (SPAM) is providing power and operat
 %***************************************************************************
 %**********************************************************************
 %**********************************************************************
-\chapter{ORBiT Avionics II Base Station Electronics (OA-II BAS) System Architecture}
+
+\newpage
+
+\chapter{Base Station Electronics (BAS) System Architecture}
 \section{General Description}
-The OA-II BAS is a modulized launch pad and fly control center. It include three untility module: "Supervisor" launch pad control module, "Adviser" automatic vehicle analysis module, "Demonstrator" live data analysis and display module. All of those three 
-\section{"Supervisor" Launch Pad Control Module}
-The "Supervisor" Launch Pad Control Module is use to manage the rocket status, fuel and oxidizer injection, ignition and cutoff.
-\section{"Adviser" Automatic Vehicle Analysis Module}
-The "Adviser" Automatic Vehicle Analysis Module use funicle cable to supply power for the vehicle and diagnosing it. It will compare each key value with theoretical value that previous storage in the module and send automatic generated advise to "Demonstrator".
-\section{"Demonstrator" Live Data Analysis and Display Module}
-The "Demonstrator" Live Data Analysis and Display Module is the core module in the OA-II BAS becasue it control the other two module. The "Demonstrator" contain three part. The OA-II WLS unit allow communication with VEH, computing unit will collect data fromm different source and feed it to the display unit.
-%**********************************************************************
-%**********************************************************************
-\chapter{ORBiT Avionics II Backplane System (OA-II BPS) System Architecture}
+The OA-II BAS is a modular launch pad and flight control center. It performs three major functions: launch control operations, live data analysis and display, and vehicle status indication.
+\section{Launch Control}
+The Launch Control Module monitors and controls the vehicle before, during, and after flight. This includes ignition and oxidizer control, parameter tuning, and launch abort functionality.
+\section{Live Data}
+The Live Data Module shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data.
+\section{Vehicle Status}
+The Vehicle Status Module performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.
+%***************************************************************************
+%**********************************************************************s
+
+\newpage
+
+\chapter{Backplane System (BPS) Architecture}
 \section{General Description}
-The OA-II BPS is the main bus system for all the OA-II relative component. It will provide up to 500MB/s band width. In the same time, it also provide low data lane for smaller component and low power, sample application. It also provide 24V power for all the module that attach with it.
+sadasdasd
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{BPS_Pin.png}
  \caption{Example Pin Out}	
 \end{figure}
-
+\section{Software System Structure}
+\section{Hardware System Structure}
+%\section{System Description}
+%\section{Backplane Connection Protocal}
+%\subsection{Connection Protocal}
+%\subsection{Pin Diagram}
 %***************************************************************************
-\chapter{ORBiT Avionics II Wireless System (OA-II WLS) System Architecture}
-\section{General Description}
-The ORBiT Avionics II Wireless System (OA-II WLS) is use to connect vehicle and base station. It is important part of OA-II STAM and OA-II "Demonstrator". The OA-II WLS provide two type of communication between the vehicle and base station, the high speed mode and low power mode.
-\section{High Speed Wireless Connection Protocal}
-The OA-II HSWLS is use mainly during the fly and allow to provide high speed communication to the base station. It will download live vehicle status and video stream to the base station.
-\section{Low Power Wireless Connection Protocal}
-The OA-II LPWLS is mainly use for landing and component recovery. It provide location tracing and boardcast system and also allow radio locating in range.
 
-\chapter{Revision History}
-\begin{table}[H]
-	\centering
-	\begin{tabu}{r || c | c | c }
-		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize  & 2019-6-27\\
-	\end{tabu}
-	\caption{Summary of Revision History}
-	\label{tab:edatools}
-\end{table}
+\newpage
+
+\chapter{Wireless System (WLS) Architecture}
+\section{General Description}
+\subsection{High Speed Wireless Connection Protocol}
+\subsection{Low Power Wireless Connection Protocol}
+
 %\section{System Description}
 %\section{}
 %\section{}
