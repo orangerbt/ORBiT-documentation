@@ -198,14 +198,14 @@ The OA-II VEH is a compact, modular system which is tightly integrated with the 
 \section{Payload Frame (PF)}
 The Payload Frame (PF) contains interchangeable modules and provides a high speed bus controller and power supply. The PF should be a four layer board.
 \section{Payload Modules (PM)}
-Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing Modules (CM), Telemetry Modules (TM), and Actuator Modules (AM).
+Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing Modules (CM), Telemetry Modules (TM), and Power and Actuator Module (PAM).
 \subsection{Compute Module (CM)}
 The Compute Module (CM) has several purposes. It controls other modules and monitors the vehicle status. It collects data from Telemetry Modules, and contains long-term storage for collected data. 
 \subsection{Telemetry Module (TM)}
 The Telemetry Module (TM) is an interface to both sensors and radios. The TM connects to both low and high speed sensors. The TM also FIFO buffers for high speed sensors.
 %*****************************************************************************
-\subsection{Actuator Module (AM)}%Use for landing?
-The Substitutable Power and Actuator Module (SPAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow SCOM to control high power electronic. The SPAM also offer limited control for safety cutoff in case SCOM lost connection or power.
+\subsection{Power and Actuator Module (PAM)}%Use for landing?
+The Power and Actuator Module (PAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow CM to control high power electronic. The PAM also offer limited control for safety cutoff in case CM lost connection or power.
 %\subsection{Adaptable Rockets}
 %\section{PCB Layout Description}%\section{PCB Layout and Manufacture Description}
 %\subsection{PCB Layout}
