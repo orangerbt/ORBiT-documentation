@@ -186,8 +186,6 @@ The critical payload controls basic launch and recovery operations. It will atta
 \includegraphics[width=\textwidth]{payloadCata.png}
  \caption{Payload Diagram}	
 \end{figure}
-\section{PCB Layout}
-\section{High Speed Lane Protection}
 %*************************************************************************************
 %*************************************************************************************
 %*************************************************************************************
@@ -207,7 +205,7 @@ The Compute Module (CM) has several purposes. It controls other modules and moni
 The Telemetry Module (TM) is an interface to both sensors and radios. The TM connects to both low and high speed sensors. The TM also FIFO buffers for high speed sensors.
 %*****************************************************************************
 \subsection{Actuator Module (AM)}%Use for landing?
-TBD
+The Substitutable Power and Actuator Module (SPAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow SCOM to control high power electronic. The SPAM also offer limited control for safety cutoff in case SCOM lost connection or power.
 %\subsection{Adaptable Rockets}
 %\section{PCB Layout Description}%\section{PCB Layout and Manufacture Description}
 %\subsection{PCB Layout}
