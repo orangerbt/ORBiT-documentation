@@ -234,13 +234,11 @@ The Vehicle Status Module performs basic analysis on the live telemetry data. Th
 
 \chapter{Backplane System (BPS) Architecture}
 \section{General Description}
-sadasdasd
+The OA-II BPS is the main bus system for all the OA-II relative component. It will provide up to 500MB/s band width. In the same time, it also provide low data lane for smaller component and low power, sample application. It also provide 24V power for all the module that attach with it.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{BPS_Pin.png}
  \caption{Example Pin Out}	
 \end{figure}
-\section{Software System Structure}
-\section{Hardware System Structure}
 %\section{System Description}
 %\section{Backplane Connection Protocal}
 %\subsection{Connection Protocal}
@@ -251,9 +249,23 @@ sadasdasd
 
 \chapter{Wireless System (WLS) Architecture}
 \section{General Description}
-\subsection{High Speed Wireless Connection Protocol}
-\subsection{Low Power Wireless Connection Protocol}
+The ORBiT Avionics II Wireless System (OA-II WLS) is use to connect vehicle and base station. It is important part of OA-II STAM and OA-II "Demonstrator". The OA-II WLS provide two type of communication between the vehicle and base station, the high speed mode and low power mode.
+\section{High Speed Wireless Connection Protocal}
+The OA-II HSWLS is use mainly during the fly and allow to provide high speed communication to the base station. It will download live vehicle status and video stream to the base station.
+\section{Low Power Wireless Connection Protocal}
+The OA-II LPWLS is mainly use for landing and component recovery. It provide location tracing and boardcast system and also allow radio locating in range.
 
+\chapter{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c }
+		Rev\# & Editor & Delta & Date\\ \hline
+		A01 & Jinzhi Cai & Initialize  & 2019-6-27\\ \hline
+		A02 & .... & ....  & 2019-6-28
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:edatools}
+\end{table}
 %\section{System Description}
 %\section{}
 %\section{}
