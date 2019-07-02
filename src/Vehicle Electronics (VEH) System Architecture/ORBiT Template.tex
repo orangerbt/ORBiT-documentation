@@ -141,10 +141,11 @@ The feature board is adding more features to the module. It usually need the mai
 \newpage
 \chapter{Payload Frame (PF)}
 \section{Discribtion}
+In the Payload Frame, most of the signal and power will run throught it and arrive to the target board. The payload frame will have different sector for different module. In general, it will at least provide three power line, more than one commend line, and four high speed data lane.
 \section{Naming Method}
 \begin{LARGE}
 OA2-PF-XXX-YY-Z
-\end{LARGE}\\\\
+\end{LARGE}\\
 \subparagraph{XXX}
 indecate how much board it can fit for each module. The first number is for COM, then TAM and PAM.
 \subparagraph{YY}
@@ -159,6 +160,7 @@ OA2-PF-333-JC-1
 First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM boards.
 \newpage
 \chapter{Payload Modules (PM)}
+\section{Discribtion}
 \section{Computing and Operation Module (COM)}
 \subsection{Main Control Board (1)}
 The main control board will execute all the critical process during the whole launch. It will send commend via a commend lane to other module main board to proform action.
