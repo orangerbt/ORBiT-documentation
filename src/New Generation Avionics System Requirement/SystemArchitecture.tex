@@ -10,16 +10,6 @@
 \usepackage{xcolor}
 \usepackage{xpatch}
 \usepackage{hyperref}
-
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
 \usepackage{tabu}
 \usepackage{float}
 \usepackage[autostyle, english = american]{csquotes}
@@ -67,7 +57,7 @@
 \title{ORBiT Avionics System II Architecture}
 \author{Jinzhi Cai}
 \itemcode{Sys-Arch}
-\revnumber{A02}
+\revnumber{A03}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -199,10 +189,10 @@ The OA-II VEH is a compact, modular system which is tightly integrated with the 
 The Payload Frame (PF) contains interchangeable modules and provides a high speed bus controller and power supply. The PF should be a four layer board.
 \section{Payload Modules (PM)}
 Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing Modules (CM), Telemetry Modules (TM), and Power and Actuator Module (PAM).
-\subsection{Compute Module (CM)}
-The Compute Module (CM) has several purposes. It controls other modules and monitors the vehicle status. It collects data from Telemetry Modules, and contains long-term storage for collected data. 
-\subsection{Telemetry Module (TM)}
-The Telemetry Module (TM) is an interface to both sensors and radios. The TM connects to both low and high speed sensors. The TM also FIFO buffers for high speed sensors.
+\subsection{Computing and Operation Module (COM)}
+The Computing and Operation Module (COM) has several purposes. It controls other modules and monitors the vehicle status. It collects data from Telemetry Modules, and contains long-term storage for collected data. 
+\subsection{Telecommunication and Acquisition Module (TAM)}
+The Telecommunication and Acquisition Module (TAM) is an interface to both sensors and radios. The TM connects to both low and high speed sensors. The TM also FIFO buffers for high speed sensors.
 %*****************************************************************************
 \subsection{Power and Actuator Module (PAM)}%Use for landing?
 The Power and Actuator Module (PAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow CM to control high power electronic. The PAM also offer limited control for safety cutoff in case CM lost connection or power.
@@ -219,11 +209,11 @@ The Power and Actuator Module (PAM) is providing power and operating any mechani
 \chapter{Base Station Electronics (BAS) System Architecture}
 \section{General Description}
 The OA-II BAS is a modular launch pad and flight control center. It performs three major functions: launch control operations, live data analysis and display, and vehicle status indication.
-\section{Launch Control}
+\section{Launch Control Module}
 The Launch Control Module monitors and controls the vehicle before, during, and after flight. This includes ignition and oxidizer control, parameter tuning, and launch abort functionality.
-\section{Live Data}
+\section{Live Data Module}
 The Live Data Module shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data.
-\section{Vehicle Status}
+\section{Vehicle Status Module}
 The Vehicle Status Module performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.
 %***************************************************************************
 %**********************************************************************s
@@ -259,7 +249,9 @@ The OA-II LPWLS is mainly use for landing and component recovery. It provide loc
 	\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize  & 2019-6-27\\ \hline
-		A02 & .... & ....  & 2019-6-28
+		A02 & .... & ....  & 2019-6-28\\ \hline
+		A03 & Jinzhi Cai & Fix BAS naming  & 2019-6-29\\
+		- & Jinzhi Cai & Fix VEH naming  & 2019-7-2\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}
