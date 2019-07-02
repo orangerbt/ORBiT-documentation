@@ -132,7 +132,7 @@
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
 \chapter{General Setting}
-In the OA-II VEH system, each payload module is specilize for a special function. In each module, it have three type of board.  
+In the OA-II VEH system, each payload module is specilize for a special function. In each module, it have three type of board.
 \section{Main Board}%
 The main board is indecate this board finish the most foundmental function of this module. It is a stand alone board that build the fundation for the other board. It will be the first board in the module. 
 %It will have an "\begin{LARGE}$\alpha$\end{LARGE}" in the board.
@@ -166,6 +166,11 @@ Fourth generation payload frame test brench design by Jinzhi Cai which can conta
 \newpage
 \chapter{Payload Modules (PM)}
 \section{Discribtion}
+Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing and Operation Module (COM), Telecommunication and Acquisition Module (TAM), and Power and Actuator Module (PAM).
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{sysdia.png}
+ \caption{System Diagram}	
+\end{figure}
 \section{Computing and Operation Module (COM)}
 \subsection{Main Control Board (1)}
 The main control board will execute all the critical process during the whole launch. It will send commend via a commend lane to other module main board to proform action.

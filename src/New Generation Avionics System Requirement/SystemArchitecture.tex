@@ -188,7 +188,7 @@ The OA-II VEH is a compact, modular system which is tightly integrated with the 
 \section{Payload Frame (PF)}
 The Payload Frame (PF) contains interchangeable modules and provides a high speed bus controller and power supply. The PF should be a four layer board.
 \section{Payload Modules (PM)}
-Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing Modules (CM), Telemetry Modules (TM), and Power and Actuator Module (PAM).
+Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing and Operation Module (COM), Telecommunication and Acquisition Module (TAM), and Power and Actuator Module (PAM).
 \subsection{Computing and Operation Module (COM)}
 The Computing and Operation Module (COM) has several purposes. It controls other modules and monitors the vehicle status. It collects data from Telemetry Modules, and contains long-term storage for collected data. 
 \subsection{Telecommunication and Acquisition Module (TAM)}
@@ -209,11 +209,11 @@ The Power and Actuator Module (PAM) is providing power and operating any mechani
 \chapter{Base Station Electronics (BAS) System Architecture}
 \section{General Description}
 The OA-II BAS is a modular launch pad and flight control center. It performs three major functions: launch control operations, live data analysis and display, and vehicle status indication.
-\section{Launch Control Module}
+\section{Launch Control Module (LCM)}
 The Launch Control Module monitors and controls the vehicle before, during, and after flight. This includes ignition and oxidizer control, parameter tuning, and launch abort functionality.
-\section{Live Data Module}
+\section{Live Data Module (LDM)}
 The Live Data Module shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data.
-\section{Vehicle Status Module}
+\section{Vehicle Status Module (VSM)}
 The Vehicle Status Module performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.
 %***************************************************************************
 %**********************************************************************s
@@ -249,7 +249,7 @@ The OA-II LPWLS is mainly use for landing and component recovery. It provide loc
 	\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize  & 2019-6-27\\ \hline
-		A02 & .... & ....  & 2019-6-28\\ \hline
+		A02 & Gabriel Smolnycki & System architecture cleanup  & 2019-6-28\\ \hline
 		A03 & Jinzhi Cai & Fix BAS naming  & 2019-6-29\\
 		- & Jinzhi Cai & Fix VEH naming  & 2019-7-2\\ \hline
 	\end{tabu}
