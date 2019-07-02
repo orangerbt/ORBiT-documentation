@@ -132,11 +132,48 @@
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
 \chapter{General Setting}
-In the OA-II VEH system, each payload module is specilize for a special function. In each module, it have three type of board. "$\alpha$"
+In the OA-II VEH system, each payload module is specilize for a special function. In each module, it have three type of board.  
+\section{Main Board}%
+The main board is indecate this board finish the most foundmental function of this module. It is a stand alone board that build the fundation for the other board. It will be the first board in the module. 
+%It will have an "\begin{LARGE}$\alpha$\end{LARGE}" in the board.
+\section{Feature Board}%
+The feature board is adding more features to the module. It usually need the main board to function and receive commend from the the main board.
 \newpage
 \chapter{Payload Frame (PF)}
+\section{Discribtion}
+\section{Naming Method}
+\begin{LARGE}
+OA2-PF-XXX-YY-Z
+\end{LARGE}\\\\
+\subparagraph{XXX}
+indecate how much board it can fit for each module. The first number is for COM, then TAM and PAM.
+\subparagraph{YY}
+Designer name.
+\subparagraph{Z}
+Revision number.
+\\\\
+example: 
+\begin{large}
+OA2-PF-333-JC-1
+\end{large}\\\\
+First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM boards.
 \newpage
 \chapter{Payload Modules (PM)}
+\section{Naming Method}
+\begin{LARGE}
+OA2-[COM/PAM/TAM]-XX-YY-Z
+\end{LARGE}\\\\
+\subparagraph{XX}
+The first number indecate the require board for this board to function, zero for stand alone. The second number indecate the role for the board.
+\subparagraph{YY}
+Designer name.
+\subparagraph{Z}
+Revision number.\\\\
+example: 
+\begin{large}
+OA2-COM-01-JC-1
+\end{large}\\\\
+First generation Computing and Operation Module main board design by Jinzhi Cai.
 \section{Computing and Operation Module (COM)}
 \section{Telecommunication and Acquisition Module (TAM)}
 \section{Power and Actuator Module (PAM)}
