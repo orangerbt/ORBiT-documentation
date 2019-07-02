@@ -159,6 +159,31 @@ OA2-PF-333-JC-1
 First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM boards.
 \newpage
 \chapter{Payload Modules (PM)}
+\section{Computing and Operation Module (COM)}
+\subsection{Main Control Board (1)}
+The main control board will execute all the critical process during the whole launch. It will send commend via a commend lane to other module main board to proform action.
+\subsection{Failure Recover Board (2)}
+The failure recover board will execute similar code as the main control board and detect any error that send out from the main control board. When main control board have error, it will inquire the main board and check the answer. If a failure scenario is fullfill, it will take over the commend line and try to fix the problem by the program storage inside.
+\subsection{Sensor Fusion Board (3)}
+The sensor fusion board will communicate with the TAM and analyze the data. It will provide to the main control board for more information.
+\section{Telecommunication and Acquisition Module (TAM)}
+\subsection{Data record Board (1)}
+The data record board is use to collecting data from the rest of the sensor board in the module and provide to COM and telecommunication board. It also will back up all the data to a storageto the media for recover after landing.
+\subsection{Telecommunication Board (2)}
+The telecommunication board is use to collect data from the record board and send it down to the base station. It also will get commend that send from the base station and relay it to the COM.
+\subsection{Low Speed Sensor Board (3)}
+The low speed sensor board is use to contain sensors that have less then 100MB/s data rate. This board will also have memory to buffering some of the data. The power supply for this board will be a low voltage line from the PAM.
+\subsection{High Speed Sensor Board (4)}
+The high speed sensor board will use to contain sensors that have more than 100MB/s (ex: camera) It will have a special power line from the PAM and itself will have memory for buffing data.
+\section{Power and Actuator Module (PAM)}
+\subsection{Power Manager Board (1)}
+The power manager board is use to control charge and discharge of the on board main battery. It also have regulator to provide main rail power for the whole vehicle.
+\subsection{Sensor Power Board (2)}
+This board contain spcial k purpose voltage regulator and power manager chip. It will provide power for high sensitive sensors and isolate it from high power module.
+\subsection{Actuator Power Board (3)}
+This board will directly get power from the battery and retablize it for the high power actuator. It also try to provide jitter from high power device.
+\subsection{Actuator Board (4)}
+\newpage
 \section{Naming Method}
 \begin{LARGE}
 OA2-[COM/PAM/TAM]-XX-YY-Z
@@ -174,9 +199,6 @@ example:
 OA2-COM-01-JC-1
 \end{large}\\\\
 First generation Computing and Operation Module main board design by Jinzhi Cai.
-\section{Computing and Operation Module (COM)}
-\section{Telecommunication and Acquisition Module (TAM)}
-\section{Power and Actuator Module (PAM)}
 \newpage
 \chapter{Revision History}
 \begin{table}[H]
