@@ -168,17 +168,26 @@ Fourth generation payload frame test brench design by Jinzhi Cai which can conta
 \section{Discribtion}
 Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing and Operation Module (COM), Telecommunication and Acquisition Module (TAM), and Power and Actuator Module (PAM).
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{sysdia.png}
+\includegraphics[width=\textwidth]{Globaldia.png}
  \caption{System Diagram}	
 \end{figure}
 \section{Computing and Operation Module (COM)}
-\subsection{Main Control unit (1)}
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{COMdia.png}
+ \caption{Computing and Operation Module Diagram}	
+\end{figure}
+\subsection{Main Control Unit (1)}
 The main control unit will execute all the critical process during the whole launch. It will send commend via a commend lane to other module main unit to proform action. \textbf{This unit is require for all the OA-II VEH system.}
 \subsection{Failure Recover Unit (2)}
 The failure recover unit will execute similar code as the main control unit and detect any error that send out from the main control unit. When main control unit have error, it will inquire the main unit and check the answer. If a failure scenario is fullfill, it will take over the commend line and try to fix the problem by the program storage inside.
 \subsection{Sensor Fusion Unit (3)}
 The sensor fusion unit will communicate with the TAM and analyze the data. It will provide to the main control unit for more information.
+
 \section{Telecommunication and Acquisition Module (TAM)}
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{TAMdia.png}
+ \caption{Telecommunication and Acquisition Module Diagram}	
+\end{figure}
 \subsection{Data Record Unit (1)}
 The data record unit is use to collecting data from the rest of the sensor unit in the module and provide to COM and telecommunication unit. It also will back up all the data to a storageto the media for recover after landing.
 \subsection{Telecommunication Unit (2)}
@@ -188,13 +197,16 @@ The low speed sensor unit is use to contain sensors that have less then 100MB/s 
 \subsection{High Speed Sensor Unit (4)}
 The high speed sensor unit will use to contain sensors that have more than 100MB/s (ex: camera) It will have a special power line from the PAM and itself will have memory for buffing data.
 \section{Power and Actuator Module (PAM)}
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{PAMdia.png}
+ \caption{Power and Actuator Module Diagram}	
+\end{figure}
 \subsection{Power Manager Unit (1)}
 The power manager unit is use to control charge and discharge of the on unit main battery. It also have regulator to provide main rail power for the whole vehicle. \textbf{This unit is require for all the OA-II VEH system.}
 \subsection{Pyrotechnic Power Unit (2)}
 This unit contain spcial purpose voltage regulator and pyrotechnic driver. It will use to control the pyrotechnic device in the ship base on the commend come from the COM. 
 \subsection{Actuator Power Unit (3)}
 This unit contain spcial purpose voltage regulator and actuator driver. It will use to control the actuator in the ship base on the commend come from the COM.
-\newpage
 \section{Naming Method}
 \begin{LARGE}
 OA2-<COM/PAM/TAM>-XXX-[YY-Z]
@@ -219,7 +231,8 @@ First generation Computing and Operation Module main unit design by Jinzhi Cai.
 		A01 & Jinzhi Cai & Initialize  & 2019-7-2\\
 		- & Jinzhi Cai & change name from "board" to "unit" & 2019-7-3\\
 		- & Jinzhi Cai & change naming method & 2019-7-3\\ \hline
-		A02 & Jinzhi Cai & change PAM unit describtion & 2019-7-3\\ \hline
+		A02 & Jinzhi Cai & change PAM unit describtion & 2019-7-3\\
+		- & Jinzhi Cai & add diagram & 2019-7-3\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}
