@@ -57,7 +57,7 @@
 \title{Vehicle Electronics (VEH) System Architecture}
 \author{Jinzhi Cai}
 \itemcode{sys-veh}
-\revnumber{A01}
+\revnumber{A02}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -95,7 +95,6 @@
 \cfoot{\OrbitBackground}
 
 \begin{document}
-
 \begin{tikzpicture}[remember picture,overlay] % draw background
 	\coordinate (bl) at (current page.south west);
 	\coordinate (r) at (current page.east);
@@ -132,37 +131,38 @@
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
 \chapter{General Setting}
-In the OA-II VEH system, each payload module is specilize for a special function. In each module, it have three type of board.
-\section{Main Board}%
-The main board is indecate this board finish the most foundmental function of this module. It is a stand alone board that build the fundation for the other board. It will be the first board in the module. 
-%It will have an "\begin{LARGE}$\alpha$\end{LARGE}" in the board.
-\section{Feature Board}%
-The feature board is adding more features to the module. It usually need the main board to function and receive commend from the the main board.
+	In the OA-II VEH system, each payload module is specilize for a special function. In each module, it have three type of units.
+\subparagraph{Basic unit}%
+The basic unit is indecate this unit finish the most foundmental function of this module. It is a stand alone unit that build the fundation for the the unit. It will be the first unit in the module. 
+%It will have an "\begin{LARGE}$\alpha$\end{LARGE}" in the unit.
+\subparagraph{Feature Unit}%
+The feature unit is adding more features to the module. It usually need the basic unit to function and receive commend from the the basic unit.\\\\
+For a functioning OA-II VEH, it only require the basic unit in COM and PAM. For more feature, more unit in each module is needed. In the most basic OA-II VEH system, it only contain two unit, the basic unit for COM and PAM.
 \newpage
 \chapter{Payload Frame (PF)}
 \section{Discribtion}
-In the Payload Frame, most of the signal and power will run throught it and arrive to the target board. The payload frame will have different sector for different module. In general, it will at least provide three power line, more than one commend line, and four high speed data lane.
+In the Payload Frame, most of the signal and power will run throught it and arrive to the target unit. The payload frame will have different sector for different module. In general, it will at least provide three power line, more than one commend line, and four high speed data lane.
 \section{Naming Method}
 \begin{LARGE}
 OA2-PF-XXX-YY-Z
 \end{LARGE}\\
 \subparagraph{XXX}
-indecate how much board it can fit for each module. The first number is for COM, then TAM and PAM.
+indecate how much unit it can fit for each module. The first number is for COM, then TAM and PAM.
 \subparagraph{YY}
 Designer name.
 \subparagraph{Z}
-Revision number. If it is greek numerals, it mean this board is a test brench.
+Revision number. If it is greek numerals, it mean this unit is a test brench.
 \\\\
 example: 
 \begin{large}
-OA2-PF-333-JC-1
+OA2-PF-333-[JC-1]
 \end{large}\\\\
-First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM boards.\\\\
+First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM units.\\\\
 example: 
 \begin{large}
-OA2-PF-111-JC-IV
+OA2-PF-111-[JC-IV]
 \end{large}\\\\
-Fourth generation payload frame test brench design by Jinzhi Cai which can contain one COM,TAM,PAM boards.
+Fourth generation payload frame test brench design by Jinzhi Cai which can contain one COM,TAM,PAM units.
 \newpage
 \chapter{Payload Modules (PM)}
 \section{Discribtion}
@@ -172,53 +172,54 @@ Payload Modules are specialized circuits which slot into the Payload Frame. They
  \caption{System Diagram}	
 \end{figure}
 \section{Computing and Operation Module (COM)}
-\subsection{Main Control Board (1)}
-The main control board will execute all the critical process during the whole launch. It will send commend via a commend lane to other module main board to proform action.
-\subsection{Failure Recover Board (2)}
-The failure recover board will execute similar code as the main control board and detect any error that send out from the main control board. When main control board have error, it will inquire the main board and check the answer. If a failure scenario is fullfill, it will take over the commend line and try to fix the problem by the program storage inside.
-\subsection{Sensor Fusion Board (3)}
-The sensor fusion board will communicate with the TAM and analyze the data. It will provide to the main control board for more information.
+\subsection{Main Control unit (1)}
+The main control unit will execute all the critical process during the whole launch. It will send commend via a commend lane to other module main unit to proform action. \textbf{This unit is require for all the OA-II VEH system.}
+\subsection{Failure Recover Unit (2)}
+The failure recover unit will execute similar code as the main control unit and detect any error that send out from the main control unit. When main control unit have error, it will inquire the main unit and check the answer. If a failure scenario is fullfill, it will take over the commend line and try to fix the problem by the program storage inside.
+\subsection{Sensor Fusion Unit (3)}
+The sensor fusion unit will communicate with the TAM and analyze the data. It will provide to the main control unit for more information.
 \section{Telecommunication and Acquisition Module (TAM)}
-\subsection{Data record Board (1)}
-The data record board is use to collecting data from the rest of the sensor board in the module and provide to COM and telecommunication board. It also will back up all the data to a storageto the media for recover after landing.
-\subsection{Telecommunication Board (2)}
-The telecommunication board is use to collect data from the record board and send it down to the base station. It also will get commend that send from the base station and relay it to the COM.
-\subsection{Low Speed Sensor Board (3)}
-The low speed sensor board is use to contain sensors that have less then 100MB/s data rate. This board will also have memory to buffering some of the data. The power supply for this board will be a low voltage line from the PAM.
-\subsection{High Speed Sensor Board (4)}
-The high speed sensor board will use to contain sensors that have more than 100MB/s (ex: camera) It will have a special power line from the PAM and itself will have memory for buffing data.
+\subsection{Data Record Unit (1)}
+The data record unit is use to collecting data from the rest of the sensor unit in the module and provide to COM and telecommunication unit. It also will back up all the data to a storageto the media for recover after landing.
+\subsection{Telecommunication Unit (2)}
+The telecommunication unit is use to collect data from the record unit and send it down to the base station. It also will get commend that send from the base station and relay it to the COM.
+\subsection{Low Speed Sensor Unit (3)}
+The low speed sensor unit is use to contain sensors that have less then 100MB/s data rate. This unit will also have memory to buffering some of the data. The power supply for this unit will be a low voltage line from the PAM.
+\subsection{High Speed Sensor Unit (4)}
+The high speed sensor unit will use to contain sensors that have more than 100MB/s (ex: camera) It will have a special power line from the PAM and itself will have memory for buffing data.
 \section{Power and Actuator Module (PAM)}
-\subsection{Power Manager Board (1)}
-The power manager board is use to control charge and discharge of the on board main battery. It also have regulator to provide main rail power for the whole vehicle.
-\subsection{Sensor Power Board (2)}
-This board contain spcial k purpose voltage regulator and power manager chip. It will provide power for high sensitive sensors and isolate it from high power module.
-\subsection{Actuator Power Board (3)}
-This board will directly get power from the battery and retablize it for the high power actuator. It also try to provide jitter from high power device.
-\subsection{Actuator Board (4)}
-This board is to operating any high power device during the mission. It will directly get power from the power board and get commend from the COM.
+\subsection{Power Manager Unit (1)}
+The power manager unit is use to control charge and discharge of the on unit main battery. It also have regulator to provide main rail power for the whole vehicle. \textbf{This unit is require for all the OA-II VEH system.}
+\subsection{Pyrotechnic Power Unit (2)}
+This unit contain spcial purpose voltage regulator and pyrotechnic driver. It will use to control the pyrotechnic device in the ship base on the commend come from the COM. 
+\subsection{Actuator Power Unit (3)}
+This unit contain spcial purpose voltage regulator and actuator driver. It will use to control the actuator in the ship base on the commend come from the COM.
 \newpage
 \section{Naming Method}
 \begin{LARGE}
-OA2-[COM/PAM/TAM]-XX-YY-Z
+OA2-<COM/PAM/TAM>-XXX-[YY-Z]
 \end{LARGE}\\\\
-\subparagraph{XX}
-The first number indecate the require board for this board to function, zero for stand alone. The second number indecate the role for the board.
+\subparagraph{XXX}
+The first letter is indecate which kind of rocket it fit for. \textbf{H} for high power,\textbf{N} for general purpose, \textbf{S} for small scale. The number follow it is depend unit. The last number is what this unit belongs to. 
 \subparagraph{YY}
 Designer name.
 \subparagraph{Z}
 Revision number.\\\\
 example: 
 \begin{large}
-OA2-COM-01-JC-1
+OA2-COM-N01-[JC-1]
 \end{large}\\\\
-First generation Computing and Operation Module main board design by Jinzhi Cai.
+First generation Computing and Operation Module main unit design by Jinzhi Cai.
 \newpage
-\chapter{Revision History}
+\chapter{Revision History}% ; change PAM unit describtion
 \begin{table}[H]
 	\centering
 	\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize  & 2019-7-2\\ \hline
+		A01 & Jinzhi Cai & Initialize  & 2019-7-2\\
+		- & Jinzhi Cai & change name from "board" to "unit" & 2019-7-3\\
+		- & Jinzhi Cai & change naming method & 2019-7-3\\ \hline
+		A02 & Jinzhi Cai & change PAM unit describtion & 2019-7-3\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}
