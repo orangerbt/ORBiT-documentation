@@ -1,0 +1,195 @@
+
+\documentclass[12pt,article]{memoir}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{xpatch}
+\usepackage{hyperref}
+
+
+\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
+
+\renewcommand{\familydefault}{\sfdefault} % set font
+\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
+
+\renewcommand\contentsname{Table of Contents}
+
+\chapterstyle{section}
+\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
+\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
+
+\makeatletter 
+% define macro for itemcode
+\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
+\newcommand\@itemcode{}
+
+% define macro for rev number
+\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
+\newcommand\@revnumber{}
+\makeatother
+
+\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
+
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout 
+
+\setlength{\beforechapskip}{0cm} % reduce chapter spacing
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+%**********************************************************************
+%Document titles etc. defined here: (replace [] as well)
+\title{Project Goals}
+\author{Stephen Bergested}
+\itemcode{ER00001}
+\revnumber{A01}
+\date{\today}
+%end of document titles etc.
+%**********************************************************************
+
+\makeatletter
+\let\runtitle\@title
+\let\runitemcode\@itemcode
+\makeatother
+
+% set header style
+\pagestyle{fancy}
+{
+	\fancyheadoffset{0cm}
+
+	\lhead{\runtitle \ - \runitemcode}
+	\rhead{Page: \thepage }
+	%\chead{\leftmark} % section name
+}
+
+\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
+\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+    \coordinate (A) at ($(bl)+(0,3cm)$);
+    \coordinate (B) at ($(r)+(0,-2cm)$);
+    \coordinate (C) at (current page.south east);
+    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+    \fill[orbitOrange, fill opacity=0.2]
+    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+\end{tikzpicture}
+}
+
+\cfoot{\OrbitBackground}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+    \coordinate (A) at ($(bl)+(0,3cm)$);
+    \coordinate (B) at ($(r)+(0,-2cm)$);
+    \coordinate (C) at (current page.south east);
+    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+    \fill[orbitOrange]
+    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+\end{tikzpicture}
+
+\makeatletter
+	\includegraphics[width=\textwidth]{./logo.jpg}\\[4ex]
+	\begin{center}
+	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
+	{\LARGE  \@itemcode}\\
+	\end{center}
+	\begin{flushright}
+	\vspace*{\fill}
+	{\LARGE Rev: \@revnumber}\\[2ex]
+	{\large \@author}\\[2ex]
+	{\large \@date}\\[20ex]
+	\end{flushright}
+\makeatother
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents*
+\thispagestyle{fancy}
+\newpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line,
+
+\chapter{Introduction}
+\section{Scope}
+This document sets the overarching goal of the organization, subteams, as well as establishing baseline parameters for safety.
+
+\section{Purpose}
+The goal of the Orange Rocket Ballistics Team is to design, build, test and launch a hybrid rocket that will achieve an apogee of at least 10,000 feet. The team will focus on this goal while operating in a safe manner, ensuring the safety of all members first and foremost. 
+
+\newpage
+\chapter{Standard Operating Procedures}
+\section{Safety}
+All team members are to operate machinery, handle chemicals, and work on projects with their personal safety on the forefront. Rocketry involves essentially a controlled explosion, and team members can and will respect this fact that rocketry is inherently dangerous. With the proper safety precautions, no team member should be injured during their time working on the project.
+\\
+Proper Personal Protective Equipment (PPE) should be worn at all times when working with any hazardous material. Members should receive basic chemical handling training by the Environmental Health and Safety Services (EHSS) to understand the risks of chemical hazards. When operating machinery, members should have the required training from Student Machine Shop staff to ensure safe operation of any and all machinery. 
+\\
+Most importantly, \textit{if you do \textbf{not} know something}, \textit{ASK!} \textit{There are no stupid questions when it comes to safety.}
+
+\section{Organization Breakdown}
+
+The overall team will be broken down into 3 critical subteams: Avionics, Propulsion, and Structures. Each team has their own responsibilities and requirements for ensuring safe and successful tests and launches. Each subteam has their own Team Leader, who is responsible for the completion of their projects and the safety of their members. In addition to general body meetings, referred to as GBMs, each subteam will have their own meetings to discuss projects and plans.
+
+\section{Intercollegiate Rocket Engineering Competition}
+
+\clearpage
+\chapter{Subteam Requirements}
+This section describes the goals of each subteam. Each component of the rocket and any relative components will be Student Researched and Developed (SRAD). Components such as the engine will be designed and analyzed by students. 
+
+
+\section{Avionics}
+The goal of the Avionics subteam is to ensure the proper operation of all sensors and electronic equipment, both on the ground and on the rocket. This includes control over the ignition, oxidizer feed system, as well as control over any and all recovery systems. Furthermore, the collection of live data pertaining to altitude, engine performance, as well as vehicle dynamics is an essential task.
+\\
+There will be a dedicated ground station that will be operable for any and all testing and live flights. The purpose of this ground station is to communicate with the vehicle or test bed, as well as provide a storage location for recorded data. The ground station will use radio communication to 
+control the vehicle or test bed. During live flights, the ground station will be used to track the location and altitude of the rocket for safety and recovery purposes.
+
+\section{Propulsion}
+The goal of the Propulsion subteam is to design and develop the engine and oxidizer feed systems. The engine will consist of a combustion chamber, injector, as well as a fuel grain and nozzle. The combustion chamber must be rated for both the pressure and temperatures encountered while the engine is firing. The Propulsion subteam is tasked with ensuring engine performance data is recorded. Proper use of this data will be to evaluate in-flight performance and to validate design choices. 
+\\
+The oxidizer feed system must be designed to withstand operating pressures without any leaks. Pressure testing the entire propulsion system is key before any hot-fire testing or launches. Multiple hot fire tests must successfully occur before any launch is to be planned.
+
+\section{Structures}
+
+The goal of the Structures subteam is to design and validate the structural integrity of the rocket and ground test structures. This is including, but not limited to, launch towers and hot fire test stands. The airframe of the rocket must be strong enough to withstand aerodynamic forces, as well as thrust forces from the engine. Furthermore, the structure of the rocket must not break apart on impact during recovery. 
+\\
+The structures subteam handles the integration of the other subteams into a flight-ready rocket. The recovery system must be tested multiple times to ensure proper deployment for safe recovery. Additionally, analysis of the flight dynamics of the rocket must be analyzed to ensure a vertical, stable trajectory.
+
+
+\clearpage
+\chapter{Revision History}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[h]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|c|c|c}
+Revision & Date & Author & Approver \\ \hline
+A01 & 6/30/2019 & Stephen Bergested &  \\
+ &  &  &  \\
+ &  &  & 
+\end{tabular}%
+}
+\end{table}
+
+%end of document
+%**********************************************************************
+\end{document}
