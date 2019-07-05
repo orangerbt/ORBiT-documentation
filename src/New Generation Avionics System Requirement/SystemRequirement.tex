@@ -67,7 +67,7 @@
 \title{ORBiT Avionics System II Requirements}
 \author{Jinzhi Cai}
 \itemcode{Sys-Req}
-\revnumber{A02}
+\revnumber{A03}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -150,6 +150,8 @@ The ORBiT Avionics System II (OA-II) is the next generation avionics system for 
 The OA-II VEH is used to control the rocket's various subsystems, collect information about the rocket's performance, and communicate this with the BAS for remote control and monitoring. It also has autonomous software and onboard storage, to allow for continued operation in case of failure of the wireless link.
 \subsection{Base Station Electronics (BAS)}
 The OA-II BAS is used to communicate wirelessly with the VEH and perform basic realtime analysis on rocket status. The BAS provides live location and performance information, and data storage for further analysis. The BAS can also help to locate the rocket after landing.
+\subsection{Engine Testing System (ETS)}
+TBD
 \subsection{Backplane System (BPS)}
 The OA-II BPS is a unique, multi-level information exchange system that links modules in in the OA-II VEH and BAS. It provides different speed modes for different components.
 \subsection{Wireless System (WLS)}
@@ -190,6 +192,10 @@ The OA-II WLS is a wireless communication system which provides communication be
 \item Launch control
 \item Automatic system checking
 \end{itemize}
+\subsection{Engine Testing System (ETS)}
+\begin{itemize}
+\item TBD
+\end{itemize}
 \subsection{Backplane System (BPS)}
 \begin{itemize}
 \item Provide different speed modes with low latency
@@ -211,9 +217,10 @@ The OA-II WLS is a wireless communication system which provides communication be
 	\centering
 	\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
+		A01 & Jinzhi Cai & Initialize  & 2019-06-21 \\
+		-	& Jinzhi Cai & Add Radio requirement & 2019-06-24 \\ \hline
 		A02 & Gabriel Smolnycki & Edits for clarity & 2019-06-25\\ \hline
-		A01 & Jinzhi Cai & Initialize  & 2019-6-21 \\
-		-	& Jinzhi Cai & Add Radio requirement & 2019-6-24
+		A03 & JInzhi Cai & Add Engine Testing System & 2019-07-04\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}
