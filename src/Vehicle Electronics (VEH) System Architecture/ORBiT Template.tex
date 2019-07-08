@@ -56,8 +56,8 @@
 %Document titles etc. defined here: (replace [] as well)
 \title{Vehicle Electronics (VEH) System Architecture}
 \author{Jinzhi Cai}
-\itemcode{sys-veh}
-\revnumber{A02}
+\itemcode{ES000003}
+\revnumber{A03}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -181,21 +181,23 @@ The main control unit will execute all the critical process during the whole lau
 \subsection{Failure Recover Unit (2)}
 The failure recover unit will execute similar code as the main control unit and detect any error that send out from the main control unit. When main control unit have error, it will inquire the main unit and check the answer. If a failure scenario is fullfill, it will take over the commend line and try to fix the problem by the program storage inside.
 \subsection{Sensor Fusion Unit (3)}
-The sensor fusion unit will communicate with the TAM and analyze the data. It will provide to the main control unit for more information.
-
+The sensor fusion unit will communicate with the TAM and analyze the data. It will provide to the main control unit for more information.\\
+\textit{\textbf{This unit will be include in the improved version.}}
 \section{Telecommunication and Acquisition Module (TAM)}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{TAMdia.png}
  \caption{Telecommunication and Acquisition Module Diagram}	
 \end{figure}
 \subsection{Data Record Unit (1)}
-The data record unit is use to collecting data from the rest of the sensor unit in the module and provide to COM and telecommunication unit. It also will back up all the data to a storageto the media for recover after landing.
+The data record unit is use to record log and data which send from the COM control. It will also include additional protection for protect storage unit from heavy impact.
+%The data record unit is use to collecting data from the rest of the sensor unit in the module and provide to COM and telecommunication unit. It also will back up all the data to a storageto the media for recover after landing.
 \subsection{Telecommunication Unit (2)}
 The telecommunication unit is use to collect data from the record unit and send it down to the base station. It also will get commend that send from the base station and relay it to the COM.
 \subsection{Low Speed Sensor Unit (3)}
 The low speed sensor unit is use to contain sensors that have less then 100MB/s data rate. This unit will also have memory to buffering some of the data. The power supply for this unit will be a low voltage line from the PAM.
 \subsection{High Speed Sensor Unit (4)}
-The high speed sensor unit will use to contain sensors that have more than 100MB/s (ex: camera) It will have a special power line from the PAM and itself will have memory for buffing data.
+The high speed sensor unit will use to contain sensors that have more than 100MB/s (ex: camera) 
+%It will have a special power line from the PAM and itself will have memory for buffing data.
 \section{Power and Actuator Module (PAM)}
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{PAMdia.png}
@@ -233,6 +235,7 @@ First generation Computing and Operation Module main unit design by Jinzhi Cai.
 		- & Jinzhi Cai & change naming method & 2019-7-3\\ \hline
 		A02 & Jinzhi Cai & change PAM unit describtion & 2019-7-3\\
 		- & Jinzhi Cai & add diagram & 2019-7-3\\ \hline
+		A03 & Jinzhi Cai & change DRU & 2019-7-8\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}
