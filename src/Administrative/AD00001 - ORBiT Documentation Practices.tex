@@ -111,17 +111,17 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-		\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
-		\LARGE  \@itemcode
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
 \newpage
@@ -139,6 +139,18 @@ This document covers all documentation written for ORBiT at SU, the Orange Rocke
 
 \section{Purpose}
 This document sets standards for documentation of all ORBiT hardware, software, and practices. This will aid in the organization and subsequent location of any documented information regarding the ORBiT project.
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Gabriel Smolnycki & & Initial draft & 2019-06-29 \\
+		& Gabriel Smolnycki & & Formatting & 2019-07-08 \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
 
 \newpage
 
