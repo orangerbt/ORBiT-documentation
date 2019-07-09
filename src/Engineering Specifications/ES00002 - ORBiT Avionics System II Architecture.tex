@@ -13,6 +13,7 @@
 \usepackage{tabu}
 \usepackage{float}
 \usepackage[autostyle, english = american]{csquotes}
+\usepackage{gensymb}
 
 
 \usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
@@ -110,17 +111,17 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
 \newpage
@@ -131,8 +132,33 @@
 
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
-\chapter{General Software System Architecture}
-The software system for OA-II can be divided to three layers: data link layer, Transport layer, and application layer.
+
+\chapter{Introduction}
+\section{Scope}
+This document covers both software and hardware architectures for the ORBiT Avionics System II.
+
+\section{Purpose}
+The ORBiT Avionics System II (OA-II) includes multiple independent subsystems which must operate together. This includes hardware protocols and interconnects, and software APIs.
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A02 & Gabriel Smolnycki & & System architecture cleanup  & 2019-06-28\\ \hline
+		A03 & Jinzhi Cai & & Fix BAS naming  & 2019-06-29\\
+		- & Jinzhi Cai & & Fix VEH naming  & 2019-07-02\\ \hline
+		A04 & Jinzhi Cai & & Add Engine Testing System  & 2019-07-04\\ \hline
+		A05 & Gabriel Smolnycki & & \shortstack{Formatting and consistency\\with system architecture} & 2019-07-08\\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+
+\newpage
+
+\chapter{General Software Architecture}
+The software system for OA-II can be divided to three layers: data link layer, transport layer, and application layer.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{softarch.png}
 \caption{Software Architecture}	
@@ -176,11 +202,8 @@ The critical payload controls basic launch and recovery operations. It will atta
 \includegraphics[width=\textwidth]{payloadCata.png}
  \caption{Payload Diagram}	
 \end{figure}
-%*************************************************************************************
-%*************************************************************************************
-%*************************************************************************************
 
-\newpage
+\clearpage
 
 \chapter{Vehicle Electronics (VEH) System Architecture}
 \section{Description}
@@ -196,6 +219,23 @@ The Telecommunication and Acquisition Module (TAM) is an interface to both senso
 %*****************************************************************************
 \subsection{Power and Actuator Module (PAM)}%Use for landing?
 The Power and Actuator Module (PAM) is providing power and operating any mechanical component. It manage the main power source of the vehicle and allow CM to control high power electronic. The PAM also offer limited control for safety cutoff in case CM lost connection or power.
+
+
+\section{Backplane System (BPS)}
+The OA-II BPS is a unique, multi-level information exchange system that links modules in in the OA-II VEH and BAS. It provides different speed modes for different components. The BPS is a part of the PF.
+
+\begin{itemize}
+	\item Provide different speed modes with low latency
+	\begin{itemize}
+		\item Info level ($\leq 3MB/s$)
+		\item Data level ($\approx 50MB/s$)
+		\item Stream level ($\geq 100MB/s$)
+	\end{itemize}
+	\item Built-in self test (BIST)
+	\item Conformal coating
+	\item Operation over extended 0-85\degree C temperature range
+\end{itemize}
+
 %\subsection{Adaptable Rockets}
 %\section{PCB Layout Description}%\section{PCB Layout and Manufacture Description}
 %\subsection{PCB Layout}
@@ -218,7 +258,7 @@ The Vehicle Status Module performs basic analysis on the live telemetry data. Th
 \newpage
 %***************************************************************************
 %**********************************************************************s
-\chapter{Engine Testing (ETS) System Architecture}
+\chapter{Ground Testing System (GTS) Architecture}
 \section{General Description}
 TBD
 \newpage
@@ -238,28 +278,15 @@ The OA-II BPS is the main bus system for all the OA-II relative component. It wi
 
 \newpage
 
-\chapter{Wireless System (WLS) Architecture}
+\chapter{Radio Communication System (RCS) Architecture}
 \section{General Description}
-The ORBiT Avionics II Wireless System (OA-II WLS) is use to connect vehicle and base station. It is important part of OA-II STAM and OA-II "Demonstrator". The OA-II WLS provide two type of communication between the vehicle and base station, the high speed mode and low power mode.
-\section{High Speed Wireless Connection Protocal}
-The OA-II HSWLS is use mainly during the fly and allow to provide high speed communication to the base station. It will download live vehicle status and video stream to the base station.
-\section{Low Power Wireless Connection Protocal}
-The OA-II LPWLS is mainly use for landing and component recovery. It provide location tracing and boardcast system and also allow radio locating in range.
+The ORBiT Avionics II Wireless System (OA-II RCS) is use to connect vehicle and base station. It is important part of OA-II STAM and OA-II "Demonstrator". The OA-II RCS provides two type of communication between the vehicle and base station, high speed and low power modes.
+\section{High-speed Wireless Connection Protocol}
+The OA-II HRCS is use mainly during the fly and allow to provide high speed communication to the base station. It will download live vehicle status and video stream to the base station.
+\section{Low-speed Wireless Connection Protocol}
+The OA-II LRCS is mainly use for landing and component recovery. It provide location tracing and broadcast system and also allow radio locating in range.
 
-\chapter{Revision History}
-\begin{table}[H]
-	\centering
-	\begin{tabu}{r || c | c | c }
-		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize  & 2019-06-27\\ \hline
-		A02 & Gabriel Smolnycki & System architecture cleanup  & 2019-06-28\\ \hline
-		A03 & Jinzhi Cai & Fix BAS naming  & 2019-06-29\\
-		- & Jinzhi Cai & Fix VEH naming  & 2019-07-02\\ \hline
-		A04 & Jinzhi Cai & Add Engine Testing System  & 2019-07-04\\ \hline
-	\end{tabu}
-	\caption{Summary of Revision History}
-	\label{tab:edatools}
-\end{table}
+
 %\section{System Description}
 %\section{}
 %\section{}
