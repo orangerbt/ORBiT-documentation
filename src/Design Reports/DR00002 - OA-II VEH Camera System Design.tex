@@ -12,6 +12,8 @@
 \usepackage{hyperref}
 \usepackage{tabu}
 \usepackage{float}
+\usepackage{enumerate}
+
 \usepackage[autostyle, english = american]{csquotes}
 
 
@@ -177,6 +179,15 @@ The DVP interface is use the classic video interface to transmit data out from t
 \includegraphics[width=\textwidth]{DR00002_DVP.png}
  \caption{Physical Layer for DVP Interface}	
 \end{figure}
+\begin{description}
+	\item[\textbf{D OUT}]Data out put
+	\item[\textbf{VSYNC}]Lane Sync Signal
+	\item[\textbf{HSYNC}]Frame Sync Signal
+	\item[\textbf{PCLK}]Pixel Clock
+	\item[\textbf{CAM CLK}]Main Camera Clock
+	\item[\textbf{SDA}]I2C Data Line
+	\item[\textbf{SCK}]I2C Clock Line
+\end{description}
 \newpage
 \section{LVDS Interface}
 The LVDS camera interface is use LVDS technology to improve classic DVP interface. It use differential signal to transmitting data. It increase the lane it need to send data, but differential signal can prevent common mode interference which limit the DVP clock for increasing.
@@ -184,16 +195,40 @@ The LVDS camera interface is use LVDS technology to improve classic DVP interfac
 \includegraphics[width=\textwidth]{DR00002_LVDS.png}
  \caption{Physical Layer for LVDS Interface}	
 \end{figure}
+\begin{description}
+	\item[\textbf{DOUT n/p}]Differential Data Lane
+	\item[\textbf{VSYNC}]Lane Sync Signal
+	\item[\textbf{HSYNC}]Frame Sync Signal
+	\item[\textbf{PCLK}]Pixel Clock
+	\item[\textbf{CAM CLK}]Main Camera Clock
+	\item[\textbf{SDA}]I2C Data Line
+	\item[\textbf{SCK}]I2C Clock Line
+\end{description}
+\newpage
 \section{MIPI CSI-2 Interface}
+The MIPI CSI-2 camera inferface is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00002_MIPI.png}
  \caption{Physical Layer for 2 Lane MIPI Interface}	
 \end{figure}
+\begin{description}
+	\item[\textbf{MIPI D0n/p}]MIPI Data Lane 0
+	\item[\textbf{MIPI D1n/p}]MIPI Data Lane 1
+	\item[\textbf{MIPI CLKn/p}]MIPI Clock
+	\item[\textbf{CAM CLK}]Main Camera Clock
+	\item[\textbf{SDA}]I2C Data Line
+	\item[\textbf{SCK}]I2C Clock Line
+\end{description}
+\newpage
+\section{USB Interface}
 \newpage
 %**********************************************************************
 \chapter{H.264 Video Steam Encoding}
 \section{Introduction}
-\section{IP core Description}
+The H.264 Encoder is another important unit in the camera system. Due to the data flow of a camera sensor is too much for the backplane bus, compression is nessary.
+\section{IP Core Description}
+\subsection{SoC Technology}
+\subsection{A2E Technology}
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
