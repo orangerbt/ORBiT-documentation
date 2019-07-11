@@ -165,13 +165,21 @@ The most basic camera system have three part. The camera sensor is the device th
 %**********************************************************************
 \chapter{Camera Sensor and Relative Interface}
 \section{Introduction}
-The camera sensor is the most improtant part in the camera system. Modern camera sensor usually use one of those three camera interface.
+The camera sensor is the most improtant part in the camera system. The classic camera interface is use the same way to output the video signal as a monitor do. For each pixel clock, data of a pixel is been sended. After few clock(depend on the resolution), Line Sync rise to indecate one line data is finish transmission. The Frame Sync is indecate a frame of pixel data is sended. However, modern camera sensor usually use one of those three camera interface. Some of the is samiliar with the classic one, and other improve it.\\\\\
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{DR00002_Cam.png}
+ \caption{Classic Video Stream}	
+\end{figure}
+\newpage
 \section{DVP Interface} 
+The DVP interface is use the classic video interface to transmit data out from the sensor. The I2C bus(SCK, SDA) that inside the interface is use to config the camera. The main clock is use to provide a clock for the camera. The VSYNC, HSYNC, PCLK is the clock system that help processor to indecate the weight and height of frame. The D OUT is data that comming out from the camera. It have low requirement on the trace and sample interface design. However, it can not offer long distence transmission and high speed clock. It usually use at low end 240p camera.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00002_DVP.png}
  \caption{Physical Layer for DVP Interface}	
 \end{figure}
+\newpage
 \section{LVDS Interface}
+The LVDS camera interface is use LVDS technology to improve classic DVP interface. It use differential signal to transmitting data. It increase the lane it need to send data, but differential signal can prevent common mode interference which limit the DVP clock for increasing.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00002_LVDS.png}
  \caption{Physical Layer for LVDS Interface}	
@@ -179,7 +187,7 @@ The camera sensor is the most improtant part in the camera system. Modern camera
 \section{MIPI CSI-2 Interface}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00002_MIPI.png}
- \caption{Physical Layer for MIPI Interface}	
+ \caption{Physical Layer for 2 Lane MIPI Interface}	
 \end{figure}
 \newpage
 %**********************************************************************
@@ -189,6 +197,11 @@ The camera sensor is the most improtant part in the camera system. Modern camera
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
+\section{Introduction}
+\section{NVME Drive}
+\section{Flash (QSPI Mode)}
+\section{SD Cord(SPI Mode)}
+\section{SD Cord(SD Mode)}
 \newpage
 %**********************************************************************
 \chapter{System Diagram}
