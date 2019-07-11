@@ -206,7 +206,8 @@ The LVDS camera interface is use LVDS technology to improve classic DVP interfac
 \end{description}
 \newpage
 \section{MIPI CSI-2 Interface}
-The MIPI CSI-2 camera inferface is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.
+The MIPI CSI-2 camera inferface is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.  
+\textit{Might only avaliable in high-end chip.}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00002_MIPI.png}
  \caption{Physical Layer for 2 Lane MIPI Interface}	
@@ -220,7 +221,8 @@ The MIPI CSI-2 camera inferface is different from the old one. The goal for this
 	\item[\textbf{SCK}]I2C Clock Line
 \end{description}
 \newpage
-\section{USB Interface}
+\section{USB Interface (UVC)}
+The USB camera interface is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use but do not support 60fps.\textit{It do have success example by using ZYNQ SoC FPGA.}
 \newpage
 %**********************************************************************
 \chapter{H.264 Video Steam Encoding}
@@ -228,7 +230,19 @@ The MIPI CSI-2 camera inferface is different from the old one. The goal for this
 The H.264 Encoder is another important unit in the camera system. Due to the data flow of a camera sensor is too much for the backplane bus, compression is nessary.
 \section{IP Core Description}
 \subsection{SoC Technology}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{r || c | c | c }
+		Version & LUT use & Test Platform & Price for Platform\\ \hline
+		Standard Version & 110k & Zynq-7 Z7045 & \$1000\\
+		Slim Version & 50k & Artix-7 XC7A200T & \$300\\
+		I-Frame Version & 45k & Spartan-6 LX150 & \$200\\
+		\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:edatools}
+\end{table}
 \subsection{A2E Technology}
+TBD(Datasheet Needed)
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
