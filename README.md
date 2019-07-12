@@ -14,7 +14,7 @@
   - AD00002 - ORBiT Avionics Technology Roadmap
 - Datasheets
   - DS00001 - TELXX-YYWW_CE CONRAD
-  - DS00002 - Avionics System II
+  - DS00002 - ORBiT Avionics System I
   - DS00003 - BMUXX-YYWW_GS GRISSOM
 - Design Guides
   - DG00001 - Programming Design Guide
