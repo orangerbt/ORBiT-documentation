@@ -113,17 +113,17 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
 \newpage
@@ -137,7 +137,7 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document discuss the current camera technology and construct a design that will fullfill the need for OA-II VEH system.
+This document discuss the current camera technology and construct a design that will fulfill the need for OA-II VEH system.
 \section{Purpose}
 The goal for this document is come up with a design that will provide four 1080p 60Hz video steam and storage to a central storage media by research the current camera technology.
 \chapter{Revision History}
@@ -151,7 +151,7 @@ The goal for this document is come up with a design that will provide four 1080p
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
-	\label{tab:edatools}
+	\label{tab:rev}
 \end{table}
 
 \newpage
@@ -238,8 +238,8 @@ The H.264 Encoder is another important unit in the camera system. Due to the dat
 		Slim Version & 50k & Artix-7 XC7A200T & \$300\\
 		I-Frame Version & 45k & Spartan-6 LX150 & \$200\\
 		\end{tabu}
-	\caption{Summary of Revision History}
-	\label{tab:edatools}
+	\caption{SoC Summary}
+	\label{tab:socs}
 \end{table}
 \subsection{A2E Technology}
 TBD(Datasheet Needed)

@@ -1,15 +1,19 @@
+
 \documentclass[12pt,article]{memoir}
 
 \usepackage{fancyhdr}
 \usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
-
 \usepackage{fontspec}
 \setmainfont{Calibri}
 \usepackage{tikz}
 \usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{xpatch}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{tabu}
+
+
 \usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
 
 \renewcommand{\familydefault}{\sfdefault} % set font
@@ -49,10 +53,10 @@
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
-\title{[title]}
-\author{[author(s)]}
-\itemcode{[itemcode]}
-\revnumber{[revnumber]}
+\title{Avionics System I}
+\author{Gabriel Smolnycki}
+\itemcode{DS00002}
+\revnumber{A01}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -125,7 +129,7 @@
 \newpage
 
 %**********************************************************************
-% Everything after this is the main document. Edit below this line.
+% Everything after this is the main document. Edit below this line,
 
 \chapter{Introduction}
 \section{Scope}
@@ -144,6 +148,7 @@
 	\caption{Summary of Revision History}
 	\label{tab:rev}
 \end{table}
+
 
 %end of document
 %**********************************************************************

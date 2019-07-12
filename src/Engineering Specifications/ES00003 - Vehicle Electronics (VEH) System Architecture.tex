@@ -109,17 +109,17 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
 \newpage
@@ -168,12 +168,12 @@ Fourth generation payload frame test brench design by Jinzhi Cai which can conta
 \section{Discribtion}
 Payload Modules are specialized circuits which slot into the Payload Frame. They can be divided into three primary types: Computing and Operation Module (COM), Telecommunication and Acquisition Module (TAM), and Power and Actuator Module (PAM).
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{Globaldia.png}
+\includegraphics[width=\textwidth]{ES00003_Globaldia.png}
  \caption{System Diagram}	
 \end{figure}
 \section{Computing and Operation Module (COM)}
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{COMdia.png}
+\includegraphics[width=\textwidth]{ES00003_COMdia.png}
  \caption{Computing and Operation Module Diagram}	
 \end{figure}
 \subsection{Main Control Unit (1)}
@@ -185,7 +185,7 @@ The sensor fusion unit will communicate with the TAM and analyze the data. It wi
 \textit{\textbf{This unit will be include in the improved version.}}
 \section{Telecommunication and Acquisition Module (TAM)}
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{TAMdia.png}
+\includegraphics[width=\textwidth]{ES00003_TAMdia.png}
  \caption{Telecommunication and Acquisition Module Diagram}	
 \end{figure}
 \subsection{Data Record Unit (1)}
@@ -200,7 +200,7 @@ The high speed sensor unit will use to contain sensors that have more than 100MB
 %It will have a special power line from the PAM and itself will have memory for buffing data.
 \section{Power and Actuator Module (PAM)}
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{PAMdia.png}
+\includegraphics[width=\textwidth]{ES00003_PAMdia.png}
  \caption{Power and Actuator Module Diagram}	
 \end{figure}
 \subsection{Power Manager Unit (1)}

@@ -10,19 +10,11 @@
 \usepackage{xcolor}
 \usepackage{xpatch}
 \usepackage{hyperref}
-
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
+\usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
+\usepackage{hhline}
 \usepackage{tabu}
 \usepackage{float}
-\usepackage[autostyle, english = american]{csquotes}
 
 
 \usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
@@ -53,6 +45,7 @@
 \checkandfixthelayout 
 
 \setlength{\beforechapskip}{0cm} % reduce chapter spacing
+\raggedbottom % stop spreading paragraphs to fill pages
 
 \hypersetup{
     colorlinks,
@@ -64,9 +57,9 @@
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
-\title{ORBiT Avionics II Technology Roadmap}
-\author{Jinzhi Cai}
-\itemcode{Sys-Arch}
+\title{BMUXX-YYWW\_GS GRISSOM}
+\author{Gabriel Smolnycki}
+\itemcode{DS00003}
 \revnumber{A01}
 \date{\today}
 %end of document titles etc.
@@ -120,17 +113,17 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
 \newpage
@@ -141,31 +134,25 @@
 
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
-\chapter{ORBiT Avionics II Technology Roadmap}
 
-\section{Guide Line}
-This technology roadmap is use to guide following development of OA-II system. It will also help with next generation development in the future.
-\begin{figure}[htp]
-\includegraphics[width=\textwidth]{RP.png}
- \caption{Technology Roadmap}	
-\end{figure}
-%\section{System Description}
-%\section{}
-%\section{}
+\chapter{Introduction}
+\section{Scope}
+
+\section{Purpose}
+
+\section{Relevant Documents}
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & & & Initial draft & \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+
 %end of document
 %**********************************************************************
 \end{document}
-
-%\begin{table}[H]
-%	\centering
-%	\begin{tabu}{r || c | c  }
-%		Rocket Series & Part Number & Date\\ \hline
-%		 ?& ?& ?\\
-%		 & & \\
-%		 & & \\ 
-%		 & & \\
-%	\end{tabu}
-%	\caption{Adaptable Rockets}
-	%\label{tab:edatools}
-%\end{table}
-%

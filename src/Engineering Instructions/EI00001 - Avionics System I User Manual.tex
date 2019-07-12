@@ -75,10 +75,10 @@
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
-\title{User Guide}
+\title{Avionics System I User Manual}
 \author{Cem Eden}
-\itemcode{guide-gen}
-\revnumber{1}
+\itemcode{EI00001}
+\revnumber{A01}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -131,23 +131,21 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
 \newpage
 
-\setcounter{tocdepth}{2}
-\setcounter{secnumdepth}{2}
 \tableofcontents*
 \thispagestyle{fancy}
 \newpage

@@ -55,10 +55,10 @@
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
-\title{CONRAD}
+\title{TELXX-YYWW\_CE CONRAD}
 \author{Cem Eden}
-\itemcode{TELXX-YYWW\_CE}
-\revnumber{04}
+\itemcode{DS00001}
+\revnumber{A04}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -111,19 +111,23 @@
 \end{tikzpicture}
 
 \makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
+\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
+\begin{center}
+	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\LARGE  \@itemcode
+\end{center}
+\vfill
+\begin{flushright}
+	\LARGE Rev: \@revnumber\\
+	\large \@author\\
+	\large \@date\\[18ex]
+\end{flushright}
 \makeatother
 \thispagestyle{empty}
+\newpage
+
+\tableofcontents*
+\thispagestyle{fancy}
 \newpage
 
 \tableofcontents*
@@ -166,7 +170,7 @@ Due to limitations of the intended flight computer, communication busses are lim
 \end{tabularx}
 
 \section{Pin Layout}
-\includegraphics[width=\textwidth]{pinouts.pdf}
+\includegraphics[width=\textwidth]{DS00001_pinouts.pdf}
 \noindent
 \begin{tabularx}{\textwidth}{|l|m{4.7cm}|X|}
 	\hline
