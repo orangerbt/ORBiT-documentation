@@ -206,8 +206,7 @@ The LVDS camera interface is use LVDS technology to improve classic DVP interfac
 \end{description}
 \newpage
 \section{MIPI CSI-2 Interface}
-The MIPI CSI-2 camera inferface is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.  
-\textit{Might only avaliable in high-end chip.}
+The MIPI CSI-2 camera inferface$\footnote{Might only avaliable in high-end chip.}$ is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.  
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00002_MIPI.png}
  \caption{Physical Layer for 2 Lane MIPI Interface}	
@@ -220,9 +219,25 @@ The MIPI CSI-2 camera inferface is different from the old one. The goal for this
 	\item[\textbf{SDA}]I2C Data Line
 	\item[\textbf{SCK}]I2C Clock Line
 \end{description}
-\newpage
 \section{USB Interface (UVC)}
-The USB camera interface is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use but do not support 60fps.\textit{It do have success example by using ZYNQ SoC FPGA.}
+The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use but do not support 60fps.
+\newpage
+%**********************************************************************
+\chapter{Camera Interface Bridge Chip}
+\section{Lattice CrossLink}
+The CrossLink is Lattice made small scale MIPI bridge FPGA.$\footnote{Too small for hardware encoder}$ It include two MIPI D-PHY and up to 8 mipi data lane. It also support interface translation (MIPI CSI-2 -> DVP).
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{DR00002_CrossLink.png}
+ \caption{Block Diagram for CrossLink}	
+\end{figure}
+\section{Toshiba Camera Interface Bridge}
+The Toshiba Camera Interface Bridge is a stand alone chip that can converse MIPI CSI-2 bus to DVP bus. It also offer I2C bus to configure chip setting.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Toshiba.png}
+ \caption{Block Diagram for Toshiba}	
+ \end{center}
+\end{figure}
 \newpage
 %**********************************************************************
 \chapter{H.264 Video Steam Encoding}
@@ -230,6 +245,7 @@ The USB camera interface is different with the rest of the interface. In those c
 The H.264 Encoder is another important unit in the camera system. Due to the data flow of a camera sensor is too much for the backplane bus, compression is nessary.
 \section{IP Core Description}
 \subsection{SoC Technology}
+This IP core fit for both \textbf{Intel} and \textbf{Xilinx}
 \begin{table}[H]
 	\centering
 		\begin{tabu}{r || c | c | c }
@@ -242,7 +258,30 @@ The H.264 Encoder is another important unit in the camera system. Due to the dat
 	\label{tab:socs}
 \end{table}
 \subsection{A2E Technology}
-TBD(Datasheet Needed)
+\begin{table}[H]
+	\centering
+		\begin{tabu}{r || c | c | c }
+		Version & LUT use & Test Platform & Price for Platform\\ \hline
+		Xilinx(1080p 30Hz) & 11K & Zynq-7 Z7020 & \$300\\
+		Xilinx(1080p 60Hz) & 11K & Kintex-7 & \$500\\
+		Xilinx(1080p 180Hz) & 11K & Zynq UltraScale & \$1000\\\hline
+		%*************************************************************%
+		Intel(1080p 30Hz) & 8K & Cyclone V SoC & \$500\\
+		\end{tabu}
+	\caption{SoC Summary}
+	\label{tab:socs}
+\end{table}
+\newpage
+\section{Encoding SoC Chip}
+\subsection{HiSilicon Hi3559}
+Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding. It can output video via USB 2.0 bus.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Hi3559.png}
+ \caption{Block Diagram for Hi3559}	
+\end{center}
+\end{figure}
+\subsection{OmniVision OV798}
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
