@@ -274,22 +274,39 @@ This IP core fit for both \textbf{Intel} and \textbf{Xilinx}
 \newpage
 \section{Encoding SoC Chip}
 \subsection{HiSilicon Hi3559}
-Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding. It can output video via USB 2.0 bus.
+Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding up to 1080P 60Hz. It can output video via USB 2.0 bus.\\\\
 \begin{figure}[htp]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{DR00002_Hi3559.png}
+\includegraphics[width=\textwidth]{DR00002_Hi3559.png}
  \caption{Block Diagram for Hi3559}	
 \end{center}
 \end{figure}
+\newpage
 \subsection{OmniVision OV798}
+OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video encoding up to 720P 60Hz. It can output video via USB 2.0 bus.\\\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{DR00002_Omni.png}
+ \caption{Block Diagram for OV798}	
+\end{center}
+\end{figure}
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
 \section{Introduction}
-\section{NVME Drive}
-\section{Flash (QSPI Mode)}
-\section{SD Cord(SPI Mode)}
-\section{SD Cord(SD Mode)}
+\section{Comparsion}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{r || c | c | c | c }
+		Technology & Interface & Speed & Complexity & Price\\ \hline
+		SSD Drive & NVMe & 800MB/s & 9 &  \$1000/500GB\\
+		SSD Drive & SATA & 715MB/s & 9 & \$500/500GB \\
+		eMMC & eMMC & 45MB/s & 5 & \$10/128G \\
+		SD Card & SDIO & 80MB/s & 5 & \$15/64G \\
+		\end{tabu}
+	\caption{SoC Summary}
+	\label{tab:socs}
+\end{table}
 \newpage
 %**********************************************************************
 \chapter{System Diagram}
