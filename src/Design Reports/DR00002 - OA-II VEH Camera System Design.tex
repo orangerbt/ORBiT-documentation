@@ -147,7 +147,7 @@ The goal for this document is come up with a design that will provide four 1080p
 	\resizebox{0.8\textwidth}{!}{%
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize & 2019-7-10\\
+		A01 & Jinzhi Cai & Initialize & 2019-7-13\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -294,6 +294,7 @@ OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video e
 %**********************************************************************
 \chapter{File System and Video Storage}
 \section{Introduction}
+The processor core selection will be down by another document$\footnote{ES00005 - OA-II Payload Modules Architecture}$. In the camera system, the main focus in the storage media and the inferface it had to connect to the processor. The whole OA-II VEH system will base on the embedded linux.$\footnote{DR00003 - OA-II VEH COM System Design}$ So the main file system will be use ext4.
 \section{Comparsion}
 \begin{table}[H]
 	\centering
@@ -307,9 +308,94 @@ OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video e
 	\caption{SoC Summary}
 	\label{tab:socs}
 \end{table}
+\subparagraph{SSD Drive}
+The main problem for hte SSD drive is this device need more research in order to intergrade into the VEH system. However, linux system do have exiting driver for them. It also have very high speed interface which allow fast data transformation.\\\\
+\subparagraph{eMMC}
+The main problem for eMMC device is it is not removable from the board. It mean the recovery of this storge will be very difficult. However, it is a building interface for most of the SoC and it have no problem with vibration.\\\\
+\subparagraph{SD Card}
+The main problem for sd card is the disconnection due to the vibration. It is the top choose due to its price and mobilablity. In many mobile camera product, SD card is the storage media they use for multimedia.
 \newpage
 %**********************************************************************
 \chapter{System Diagram}
+\section{USB camera with SoC FPGA chip}
+This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chip. The chip will translate the data to backplane bus and send to the storage device.\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan1.png}
+ \caption{System Diagram for Plan A}	
+\end{center}
+\end{figure}
+\\
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Easy for implement & Can not be upgrade \\
+		Easy to find sensor & Low frame rate(30fps) \\
+		Come with video encoding &  \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{MIPI camera + CrossLink with FPGA chip}
+This plan will use a crosslink chip to translate the MIPI signal to LVDS signal. The FPGA chip will receive the LVDS signal and use internal encoding IP core to process the data and send it out via the backplane bus.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan2.png}
+ \caption{System Diagram for Plan B}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Can use any raspberry Pi Camera & Need Encoding Core \\
+		High Speed Sensor(Up to 180 FPS) & Hard in PCB design(100$\Omega$ impedance) \\
+		Allow futrue upgrade & Long development time \\
+		Prevent common mode interference  & Need Extra chip for translation \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{LVDS camera with FPGA chip}
+This plan will connect a lvds camera to a FPGA. The FPGA will encode the video and send it via the backplane.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan3.png}
+ \caption{System Diagram for Plan C}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Do not need Extra chip for translation & Need Encoding Core \\
+		Cheap sensor & Hard in PCB design(100$\Omega$ impedance) \\
+		Allow futrue upgrade & Long development time \\
+		Prevent common mode interference  &  \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{MIPI camera with Multimedia SoC chip}
+This plan will use the solution that company provide and add addtional chip for the data translation from the USB to backplane bus.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan4.png}
+ \caption{System Diagram for Plan D}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Do not need Extra chip for translation & Only support USB 2.0\\
+		Cheap sensor & Hard in PCB design(100$\Omega$ impedance) \\
+		Allow futrue upgrade & Long development time \\
+		Do not need Encoding Core  & \textbf{Need selecting chip} \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
 \newpage
 %end of document
 %**********************************************************************

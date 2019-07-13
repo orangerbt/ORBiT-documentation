@@ -30,6 +30,7 @@
   - ER00001 - Project Goals
   - ER00002 - ORBiT Avionics System II Requirements
 - Engineering Specifications 
+  - ES00001 - ORBiT Avionics System I Architecture
   - ES00002 - ORBiT Avionics System II Architecture
   - ES00003 - OA-II Vehicle Electronics (VEH) System Architecture
   - ES00004 - OA-II Base Station Electronics (BAS) System Architecture
@@ -43,6 +44,7 @@
   - DS00002 - ORBiT Avionics System I
   - DS00003 - BMUXX-YYWW_GS GRISSOM
   - EI00001 - Avionics System I User Manual
+  - ES00001 - ORBiT Avionics System I Architecture
 - ORBiT Avionics System II
   - DR00001 - OA-II Backplane Bus System
   - DR00002 - OA-II VEH Camera System Design
