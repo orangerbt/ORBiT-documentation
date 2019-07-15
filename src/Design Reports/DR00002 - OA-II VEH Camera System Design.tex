@@ -148,6 +148,7 @@ The goal for this document is come up with a design that will provide four 1080p
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize & 2019-7-13\\
+		- & Jinzhi Cai & Add detail & 2019-7-15\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -220,7 +221,7 @@ The MIPI CSI-2 camera inferface$\footnote{Might only avaliable in high-end chip.
 	\item[\textbf{SCK}]I2C Clock Line
 \end{description}
 \section{USB Interface (UVC)}
-The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use but do not support 60fps.
+The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use and support 60fps.$\footnote{With High End SoC chip	}$
 \newpage
 %**********************************************************************
 \chapter{Camera Interface Bridge Chip}
@@ -291,6 +292,28 @@ OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video e
 \end{center}
 \end{figure}
 \newpage
+\subsection{Ambarella H22}
+The Ambarella H22 SoC for consumer applications is a system-on-chip that integrates an advanced image sensor pipeline (ISP), H.265 (HEVC) and H.264 (AVC) encoders , and a powerful Quad core ARM® Cortex™-A53 CPU.$\footnote{H22 Video SoC for Consumer Applications}$\\\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{DR00002_Ambarella.png}
+ \caption{Block Diagram for Ambarella H22}	
+\end{center}
+\end{figure}
+
+\newpage
+\section{DSP Chip}
+\subsection{TMS320C6678 DSP}
+The TMS320C6678 DSP is a highest-performance fixed/floating-point DSP that is based on TI's KeyStone multicore
+architecture. Incorporating the new and innovative C66x DSP core, this device can run at a core speed of up to
+1.4 GHz.$\footnote{TMS320C6678 Multicore Fixed and Floating-Point Digital Signal Processor}$\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{DR00002_DSP.png}
+ \caption{Block Diagram for Ambarella H22}	
+\end{center}
+\end{figure}
+\newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
 \section{Introduction}
@@ -358,7 +381,7 @@ This plan will use a crosslink chip to translate the MIPI signal to LVDS signal.
 \end{table}
 \newpage
 \section{LVDS camera with FPGA chip}
-This plan will connect a lvds camera to a FPGA. The FPGA will encode the video and send it via the backplane.
+This plan will connect a lvds camera to a FPGA. The FPGA will encode the video and send it via the backplane. The video will be encoded in the FPGA IP core and pack it into the backplane bus packet. Because the camera sensor use the fpga support standard, it will reduce the problem of formate translation.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{DR00002_Plan3.png}
@@ -378,7 +401,7 @@ This plan will connect a lvds camera to a FPGA. The FPGA will encode the video a
 \end{table}
 \newpage
 \section{MIPI camera with Multimedia SoC chip}
-This plan will use the solution that company provide and add addtional chip for the data translation from the USB to backplane bus.
+This plan will use the solution that company provide and add addtional chip for the data translation from the USB to backplane bus. Because of the solution mostly will be provided by the company, it will be more stable. However, it lose the ability for upgrade.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{DR00002_Plan4.png}
@@ -393,6 +416,25 @@ This plan will use the solution that company provide and add addtional chip for 
 		Cheap sensor & Hard in PCB design(100$\Omega$ impedance) \\
 		Allow futrue upgrade & Long development time \\
 		Do not need Encoding Core  & \textbf{Need selecting chip} \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{MIPI camera with Multimedia DSP and FPGA chip}
+This plan use DSP chip as the encoder. However the dsp do not have any video interface, it will need FPGA to finish the formate translation and feed it into the DSP chip.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan5-2.png}
+ \caption{System Diagram for Plan F}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Allow futrue upgrade & Need extra chip for translation and encoding\\
+		Do not need Encoding Core & Hard in PCB design(100$\Omega$ impedance) \\
+		 & Long development time \\
 		\end{tabu}
 	\caption{The Pros and Cons Summary}
 \end{table}
