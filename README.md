@@ -36,6 +36,10 @@
   - ES00005 - OA-II Payload Modules Architecture
   - ES00006 - OA-II Payload Frame Specifications (TBD)
   - ES00007 - OA-II Payload Bus Specifications (TBD)
+- Templates
+  - LaTeX template
+  - Microsoft Word template
+
 ## Project Document Index
 
 - ORBiT Avionics System I

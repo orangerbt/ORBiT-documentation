@@ -1,0 +1,45 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{[title]}
+\author{[author(s)]}
+\itemcode{[itemcode]}
+\revnumber{[revnumber]}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+\chapter{Introduction}
+\section{Scope}
+
+\section{Purpose}
+
+\section{Relevant Documents}
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & & & Initial draft & \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+
+% End of document
+%**********************************************************************
+\end{document}

@@ -1,0 +1,54 @@
+\setsansfont{NeueHaasUnicaPro}
+\usetikzlibrary{calc}
+\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
+
+\renewcommand{\familydefault}{\sfdefault} % set font
+\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
+
+\renewcommand\contentsname{Table of Contents}
+
+\chapterstyle{section}
+\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
+\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
+
+\makeatletter 
+% define macro for itemcode
+\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
+\newcommand\@itemcode{}
+
+% define macro for rev number
+\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
+\newcommand\@revnumber{}
+\makeatother
+
+\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
+
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout 
+
+\setlength{\beforechapskip}{0cm} % reduce chapter spacing
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% Background swoosh
+\newcommand\OrbitBackground[1]{% For a logo drawn with TikZ
+	\begin{tikzpicture}[remember picture,overlay] % draw background
+	\coordinate (bl) at (current page.south west);
+	\coordinate (r) at (current page.east);
+	\coordinate (A) at ($(bl)+(0,3cm)$);
+	\coordinate (B) at ($(r)+(0,-2cm)$);
+	\coordinate (C) at (current page.south east);
+	\coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
+	\coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
+	\fill[orbitOrange, fill opacity={#1}]
+	(A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
+	\node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
+	\end{tikzpicture}
+}
