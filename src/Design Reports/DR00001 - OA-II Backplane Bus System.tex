@@ -160,11 +160,13 @@ The goal for the OA-II backplane bus system is constructure a high speed, high c
 \end{description}
 \section{Software Requirement}
 \begin{description}
-	\item[\textbf{Max Speed}]The bus need to suppport swappable module
-	\item[\textbf{Vribation-proof}]The bus need to have stronge support to the module on the frame.
-	\item[\textbf{Size}]The size need to fit into the rocket.
-	\item[\textbf{Topology}]The hardware structure need to support out-of-order locating.
+	\item[\textbf{Point to Point \& Broadcast}]The bus need to support broadcast.
+	\item[\textbf{Bandwidth}]The bus need to support the max bandwidth.
+	\item[\textbf{Topology}]The bus need to allow change in software topology.
+	\item[\textbf{Real Time}]The bus need to support message priority level.
+	\item[\textbf{Various Speed}]The bus need to allow low end device connect into the system.
 \end{description}
+
 \section{Bandwidth Calculation}
 
 \subparagraph{Low Speed Payload}
@@ -172,10 +174,10 @@ Each low speed payload it sensing in 10kHz 16bit
 \begin{itemize}
 \item 4 high pressure sensors for propulsion system
 \item 2 low pressure sensors for pitot tube
-\item 4 high temp sensors for propulsion system
-\item 4 low temp sensors for electronics
-\item 4 low temp sensors for batteries
-\item 2 low temp sensor for ambient
+\item 4 high temperature sensors for propulsion system
+\item 4 low temperature sensors for electronics
+\item 4 low temperature sensors for batteries
+\item 2 low temperature sensor for ambient
 \end{itemize}
 \begin{center}
 $4+2+4+4+4+2=20 chennals$\\
@@ -217,12 +219,28 @@ $(180Kbyte/s+4Mbyte/s+200byte/s+400Kbyte/s)\times2\approx10Mbyte/s$\\
 \newpage
 \chapter{Current Bus Analyze}
 \section{I2C}
+I2C is a serial protocol for two-wire interface to connect low-speed devices like microcontrollers, EEPROMs, A/D and D/A converters, I/O interfaces and other similar peripherals in embedded systems. It was invented by Philips and now it is used by almost all major IC manufacturers.\cite{Cite needed}\\\\
+I2C is a great low speed communication bus, however it do not support hardware priority level and change software topology.
 \section{SPI}
+Serial Peripheral Interface (SPI) is an interface bus commonly used to send data between microcontrollers and small peripherals such as shift registers, sensors, and SD cards.\cite{Cite needed}\\\\
+Serial Peripheral Interface allow device to increase the bandwidth by increase the data clock rate. However, it also not support hardware priority level and change software topology.
 \section{UART}
+A universal asynchronous receiver-transmitter is a computer hardware device for asynchronous serial communication in which the data format and transmission speeds are configurable.\cite{Cite needed}\\\\
+UART bus do not require clock line to transmit data. It also have different bitrate allow device to change. However it is a point to point communication, so it need switch for more than two devices. It also too low to meet the bandwidth requirement.
 \section{CAN}
-
+A Controller Area Network (CAN bus) is a robust vehicle bus standard designed to allow microcontrollers and devices to communicate with each other in applications without a host computer.\cite{Cite needed}\\\\
+The CAN bus have hardware priority level and support 500kbps$\footnote{About 62.5Kbyte/s}$ bandrate. It also allow group boardcast and point to point communication.
+\clearpage
+%**************************************%
 \section{PCIe}
+PCI Express, officially abbreviated as PCIe or PCI-e, is a high-speed serial computer expansion bus standard, designed to replace the older PCI, PCI-X and AGP bus standards. It is the common motherboard interface for personal computers' graphics cards, hard drives, SSDs, Wi-Fi and Ethernet hardware connections.\cite{Cite needed}\\\\
+The PCI Express is a common use buses in personal computer. However, the topology of this bus is mostly tree structure. It will increase difficulty when a second master need to add into the system.
 \section{RapidIO}
+The RapidIO architecture is a high-performance packet-switched interconnect technology. RapidIO supports messaging, read/write and cache coherency semantics.\cite{Cite needed}\\\\
+The RapidIO is a high speed connection that support up to 5Gbps$\footnote{About 625Mbyte/s}$ by a single lane. It also support multi-master structrue. By using RapidIO switch, it could change the software topology. However, the rapidIO is a new bus technology that mainly use in DSP, high speed FPGA, and SoC. It require heavy hardware resource compare with the other kind of buses.
+\section{SpaceWire}
+SpaceWire is defined in the European Cooperation for Space Standardization standard ECSS-E-ST-50-12C (replaces ECSS-E50-12A). The SpaceWire standard was authored by Steve Parkes, University of Dundee with contributions from many individuals within the SpaceWire Working Group from European Space Agency (ESA), European Space Industry, Academia and NASA.\cite{Cite needed}\\\\
+The SpaceWire is use LVDS voltage standard which is a commonly use voltage standard in FPGA. The PHY for SpaceWire is relativly simple and require less resource for constructe the PHY. The newest SpaceWire bus support 400Mbps for one lane$\footnote{About 50Mbyte/s}$. 
 \newpage
 \chapter{OA-II BUS Hardware Structure}
 \newpage
