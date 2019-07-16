@@ -152,7 +152,68 @@ The goal for the OA-II backplane bus system is constructure a high speed, high c
 \newpage
 \chapter{BUS System Requirement}
 \section{Hardware Requirement}
+\begin{description}
+	\item[\textbf{Backplane Bus}]The bus need to suppport swappable module
+	\item[\textbf{Vribation-proof}]The bus need to have stronge support to the module on the frame.
+	\item[\textbf{Size}]The size need to fit into the rocket.
+	\item[\textbf{Topology}]The hardware structure need to support out-of-order locating.
+\end{description}
 \section{Software Requirement}
+\begin{description}
+	\item[\textbf{Max Speed}]The bus need to suppport swappable module
+	\item[\textbf{Vribation-proof}]The bus need to have stronge support to the module on the frame.
+	\item[\textbf{Size}]The size need to fit into the rocket.
+	\item[\textbf{Topology}]The hardware structure need to support out-of-order locating.
+\end{description}
+\section{Bandwidth Calculation}
+
+\subparagraph{Low Speed Payload}
+Each low speed payload it sensing in 10kHz 16bit
+\begin{itemize}
+\item 4 high pressure sensors for propulsion system
+\item 2 low pressure sensors for pitot tube
+\item 4 high temp sensors for propulsion system
+\item 4 low temp sensors for electronics
+\item 4 low temp sensors for batteries
+\item 2 low temp sensor for ambient
+\end{itemize}
+\begin{center}
+$4+2+4+4+4+2=20 chennals$\\
+$10kHz=10000Hz$\\
+$16bit=2byte$\\
+$10000Hz\times2byte=20000byte/s=20Kbyte/s$\\
+$20Kbyte/s\times20=400Kbyte/s$
+\end{center}
+
+\subparagraph{High Speed Payload}
+\begin{itemize}
+\item 9 axis IMU
+\item GNSS
+\item 4x cameras
+\end{itemize}
+\begin{center}
+9 axis IMU in 10kHz is\\
+$9\times10000Hz\times2byte=180000byte/s=180Kbyte/s$
+\end{center}
+\begin{center}
+GNSS module$\footnote{Did not include any fixing factor}$\\
+UTC launch time 4byte\\
+Latitude 4byte\\
+Longitude 4byte\\
+Height 4byte\\
+Direction+Ground speed 4byte\\
+$4byte\times5=20byte$\\
+$10Hz\times20byte=200byte/s$
+\end{center}
+\begin{center}
+Camera, set the bitrate to 8Mbps$\footnote{High bitrate is nessary for high virbation environment}$\\
+$8Mbps=1Mbyte/s$\\
+$1Mbyte/s\times4=4Mbyte/s$
+\end{center}
+\subparagraph{Total bandwidth}
+\begin{center}
+$(180Kbyte/s+4Mbyte/s+200byte/s+400Kbyte/s)\times2\approx10Mbyte/s$\\
+\end{center}
 \newpage
 \chapter{Current Bus Analyze}
 \section{I2C}
