@@ -10,6 +10,9 @@
 \usepackage{xcolor}
 \usepackage{xpatch}
 \usepackage{hyperref}
+\usepackage{tabu}
+\usepackage{float}
+\usepackage{enumerate}
 
 
 \usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
@@ -134,6 +137,35 @@
 This document analyze the requirement for OA-II VEH system data transmission, and current bus technology in the field, come up with a system design to fullfill the need of OA-II VEH system.
 \section{Purpose}
 The goal for the OA-II backplane bus system is constructure a high speed, high compatibility, and high robustness backplane data transmission system.
+\chapter{Revision History}
+\begin{table}[H]
+	\centering
+	\resizebox{0.8\textwidth}{!}{%
+		\begin{tabu}{r || c | c | c }
+		Rev\# & Editor & Delta & Date\\ \hline
+		A01 & Jinzhi Cai & Initialize & 2019-7-15\\
+		\end{tabu}
+	}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+\newpage
+\chapter{BUS System Requirement}
+\section{Hardware Requirement}
+\section{Software Requirement}
+\newpage
+\chapter{Current Bus Analyze}
+\section{I2C}
+\section{SPI}
+\section{UART}
+\section{CAN}
+
+\section{PCIe}
+\section{RapidIO}
+\newpage
+\chapter{OA-II BUS Hardware Structure}
+\newpage
+\chapter{OA-II BUS Software Structure}
 \newpage
 %end of document
 %**********************************************************************
