@@ -27,15 +27,24 @@
 \setulmarginsandblock{2.5cm}{*}{1}
 \checkandfixthelayout 
 
-\setlength{\beforechapskip}{0cm} % reduce chapter spacing
+\setlength{\beforechapskip}{0pt} % reduce chapter spacing
+\setlength{\afterchapskip}{12pt} % reduce chapter spacing
+\setlength{\parindent}{0pt} % no paragraph indent
+\setlength{\parskip}{12pt} % 1 line paragraph skip
+\renewcommand{\arraystretch}{1.2} % table spacing
 
 \hypersetup{
     colorlinks,
     citecolor=black,
     filecolor=black,
     linkcolor=black,
-    urlcolor=black
+    urlcolor=black,
+    linktoc=all
 }
+
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
 
 % Background swoosh
 \newcommand\OrbitBackground[1]{% For a logo drawn with TikZ
