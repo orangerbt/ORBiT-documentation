@@ -1,135 +1,35 @@
-
+% This document must be compiled with LuaLaTeX
 \documentclass[12pt,article]{memoir}
 
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
-
-
-\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
-
-\renewcommand{\familydefault}{\sfdefault} % set font
-\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
-
-\renewcommand\contentsname{Table of Contents}
-
-\chapterstyle{section}
-\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
-\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
-
-\makeatletter 
-% define macro for itemcode
-\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
-\newcommand\@itemcode{}
-
-% define macro for rev number
-\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
-\newcommand\@revnumber{}
-\makeatother
-
-\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
-
-\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{*}{1}
-\checkandfixthelayout 
-
-\setlength{\beforechapskip}{0cm} % reduce chapter spacing
-
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
 
 %**********************************************************************
-%Document titles etc. defined here: (replace [] as well)
+% Document titles etc. defined here: (replace [] as well)
 \title{Base Station Electronics (BAS) System Architecture}
 \author{Jinzhi Cai}
 \itemcode{ES00004}
 \revnumber{A01}
 \date{\today}
-%end of document titles etc.
+% End of document titles etc.
 %**********************************************************************
 
-\makeatletter
-\let\runtitle\@title
-\let\runitemcode\@itemcode
-\makeatother
-
-% set header style
-\pagestyle{fancy}
-{
-	\fancyheadoffset{0cm}
-
-	\lhead{\runtitle \ - \runitemcode}
-	\rhead{Page: \thepage }
-	%\chead{\leftmark} % section name
-}
-
-\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange, fill opacity=0.2]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-}
-
-\cfoot{\OrbitBackground}
+\input{../Templates/postsetup.tex}
 
 \begin{document}
-
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-
-\makeatletter
-\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-\begin{center}
-	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
-	\LARGE  \@itemcode
-\end{center}
-\vfill
-\begin{flushright}
-	\LARGE Rev: \@revnumber\\
-	\large \@author\\
-	\large \@date\\[18ex]
-\end{flushright}
-\makeatother
-\thispagestyle{empty}
-\newpage
+	
+\input{../Templates/cover.tex}
 
 \tableofcontents*
-\thispagestyle{fancy}
-\newpage
+\clearpage
 
 %**********************************************************************
-% Everything after this is the main document. Edit below this line,
+% Everything after this is the main document. Edit below this line.
 
 \chapter{General Setting}
+
+\newpage
+
 \chapter{Launch Control Module (LCM)}
 \section{Architecture Discription}
 The Launch Control Module (LCM) is providing three feature. First, LCM will help to control the support structure for the rocket, and release it when the rocket ready to launch. LCM also will control the injection of the rocket fuel and provide connection to let VSM monitor rocket status.
@@ -143,7 +43,9 @@ Project Code.
 Designer name.
 \subparagraph{Z}
 Revision number. It is greek numerals.
-\\\\
+
+\newpage
+
 \chapter{Live Data Module (LDM)}
 \section{Architecture Discription}
 The Live Data Module (LDM) allow flight control personnel to access the rocket status during the flight. It has OA-II WLS system for communication with the rocket. It also allow flight control personnel to profrom some critical action before and during the flight.
@@ -157,7 +59,9 @@ Project Code.
 Designer name.
 \subparagraph{Z}
 Revision number. It is greek numerals.
-\\\\
+
+\newpage
+
 \chapter{Vehicle Status Module (VSM)}
 \section{Architecture Discription}
 The Vehicle Status Module (VSM) have two part. The pre-flight part is connect to the LCM and access the internal electronics. It will work with the COM in OA-II VEH to proform critical action in any failure scenario. The post-flight part is connect to the LDM. It will get data from the
@@ -171,7 +75,6 @@ Project Code.
 Designer name.
 \subparagraph{Z}
 Revision number. It is greek numerals.
-\\\\
-%end of document
+% End of document.
 %**********************************************************************
 \end{document}

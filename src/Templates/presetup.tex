@@ -5,11 +5,15 @@
 \renewcommand{\familydefault}{\sfdefault} % set font
 \renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
 
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\nameref*{#1}, \autoref*{#1}}} % section reference command
+
 \renewcommand\contentsname{Table of Contents}
 
 \chapterstyle{section}
 \renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
 \renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 \makeatletter 
 % define macro for itemcode
