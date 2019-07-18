@@ -57,7 +57,7 @@
 \title{Vehicle Electronics (VEH) System Architecture}
 \author{Jinzhi Cai}
 \itemcode{ES00003}
-\revnumber{A03}
+\revnumber{A04}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -142,7 +142,7 @@ For a functioning OA-II VEH, it only require the basic unit in COM and PAM. For 
 \chapter{Payload Frame (PF)}
 \section{Discribtion}
 In the Payload Frame, most of the signal and power will run throught it and arrive to the target unit. The payload frame will have different sector for different module. In general, it will at least provide three power line, more than one commend line, and four high speed data lane.
-\section{Naming Method}
+\section{Product Code}
 \begin{LARGE}
 OA2-PF-XXX-YY-Z
 \end{LARGE}\\
@@ -171,6 +171,42 @@ Payload Modules are specialized circuits which slot into the Payload Frame. They
 \includegraphics[width=\textwidth]{ES00003_Globaldia.png}
  \caption{System Diagram}	
 \end{figure}
+\clearpage
+\section{Payload Catalog}
+
+\subparagraph{Critical Payload}
+All the critical payload will be in the assigning unit.
+\begin{itemize}
+\item 4 low temp sensors for electronics \textbf{In each unit}
+\item 4 low temp sensors for batteries \textbf{In power manager unit}
+\item 4 current sensors for pyros \textbf{In actuator power unit}
+\item 4 current sensors for batteries \textbf{In power manager unit}
+\item 4 deployment sensors \textbf{In actuator power unit}
+\item 4 actuator sensors \textbf{In actuator power unit}
+\item 3 axis IMU \textbf{In main control unit and failure recovery unit}
+\item 1 barometer  \textbf{In main control unit and failure recovery unit}
+\end{itemize}
+
+\subparagraph{Low Speed Payload}
+All the low speed payload will be in the low speed sensor unit.
+\begin{itemize}
+\item 4 high pressure sensors for propulsion system
+\item 2 low pressure sensors for pitot tube
+\item 4 high temp sensors for propulsion system
+\item 4 low temp sensors for electronics
+\item 4 low temp sensors for batteries
+\item 2 low temp sensor for ambient
+\end{itemize}
+
+\subparagraph{High Speed Payload}
+All the high speed payload will be in the high speed sensor unit.
+\begin{itemize}
+\item 9 axis IMU
+\item GNSS
+\item 4x cameras
+\end{itemize}
+
+\clearpage
 \section{Computing and Operation Module (COM)}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{ES00003_COMdia.png}
@@ -183,6 +219,7 @@ The failure recover unit will execute similar code as the main control unit and 
 \subsection{Sensor Fusion Unit (3)}
 The sensor fusion unit will communicate with the TAM and analyze the data. It will provide to the main control unit for more information.\\
 \textit{\textbf{This unit will be include in the improved version.}}
+\clearpage
 \section{Telecommunication and Acquisition Module (TAM)}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{ES00003_TAMdia.png}
@@ -198,6 +235,7 @@ The low speed sensor unit is use to contain sensors that have less then 100MB/s 
 \subsection{High Speed Sensor Unit (4)}
 The high speed sensor unit will use to contain sensors that have more than 100MB/s (ex: camera) 
 %It will have a special power line from the PAM and itself will have memory for buffing data.
+\clearpage
 \section{Power and Actuator Module (PAM)}
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{ES00003_PAMdia.png}
@@ -209,7 +247,7 @@ The power manager unit is use to control charge and discharge of the on unit mai
 This unit contain spcial purpose voltage regulator and pyrotechnic driver. It will use to control the pyrotechnic device in the ship base on the commend come from the COM. 
 \subsection{Actuator Power Unit (3)}
 This unit contain spcial purpose voltage regulator and actuator driver. It will use to control the actuator in the ship base on the commend come from the COM.
-\section{Naming Method}
+\section{Product Code}
 \begin{LARGE}
 OA2-<COM/PAM/TAM>-XXX-[YY-Z]
 \end{LARGE}\\\\
@@ -232,10 +270,11 @@ First generation Computing and Operation Module main unit design by Jinzhi Cai.
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize  & 2019-7-2\\
 		- & Jinzhi Cai & change name from "board" to "unit" & 2019-7-3\\
-		- & Jinzhi Cai & change naming method & 2019-7-3\\ \hline
+		- & Jinzhi Cai & change product code & 2019-7-3\\ \hline
 		A02 & Jinzhi Cai & change PAM unit describtion & 2019-7-3\\
 		- & Jinzhi Cai & add diagram & 2019-7-3\\ \hline
 		A03 & Jinzhi Cai & change DRU & 2019-7-8\\ \hline
+		A04 & Jinzhi Cai & add sensors & 2019-7-16\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}

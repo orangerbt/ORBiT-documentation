@@ -60,7 +60,7 @@
 \title{OA-II VEH Camera System Design}
 \author{Jinzhi Cai}
 \itemcode{DR00002}
-\revnumber{A01}
+\revnumber{A02}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -147,7 +147,8 @@ The goal for this document is come up with a design that will provide four 1080p
 	\resizebox{0.8\textwidth}{!}{%
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize & 2019-7-10\\
+		A01 & Jinzhi Cai & Initialize & 2019-7-13\\ \hline
+		A02 & Jinzhi Cai & Add detail & 2019-7-15\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -220,7 +221,7 @@ The MIPI CSI-2 camera inferface$\footnote{Might only avaliable in high-end chip.
 	\item[\textbf{SCK}]I2C Clock Line
 \end{description}
 \section{USB Interface (UVC)}
-The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use but do not support 60fps.
+The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression. It is easy to use and support 60fps.$\footnote{With High End SoC chip	}$
 \newpage
 %**********************************************************************
 \chapter{Camera Interface Bridge Chip}
@@ -274,25 +275,169 @@ This IP core fit for both \textbf{Intel} and \textbf{Xilinx}
 \newpage
 \section{Encoding SoC Chip}
 \subsection{HiSilicon Hi3559}
-Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding. It can output video via USB 2.0 bus.
+Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding up to 1080P 60Hz. It can output video via USB 2.0 bus.\\\\
 \begin{figure}[htp]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{DR00002_Hi3559.png}
+\includegraphics[width=\textwidth]{DR00002_Hi3559.png}
  \caption{Block Diagram for Hi3559}	
 \end{center}
 \end{figure}
+\newpage
 \subsection{OmniVision OV798}
+OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video encoding up to 720P 60Hz. It can output video via USB 2.0 bus.\\\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{DR00002_Omni.png}
+ \caption{Block Diagram for OV798}	
+\end{center}
+\end{figure}
+\newpage
+\subsection{Ambarella H22}
+The Ambarella H22 SoC for consumer applications is a system-on-chip that integrates an advanced image sensor pipeline (ISP), H.265 (HEVC) and H.264 (AVC) encoders , and a powerful Quad core ARM® Cortex™-A53 CPU.$\footnote{H22 Video SoC for Consumer Applications}$\\\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{DR00002_Ambarella.png}
+ \caption{Block Diagram for Ambarella H22}	
+\end{center}
+\end{figure}
+
+\newpage
+\section{DSP Chip}
+\subsection{TMS320C6678 DSP}
+The TMS320C6678 DSP is a highest-performance fixed/floating-point DSP that is based on TI's KeyStone multicore
+architecture. Incorporating the new and innovative C66x DSP core, this device can run at a core speed of up to
+1.4 GHz.$\footnote{TMS320C6678 Multicore Fixed and Floating-Point Digital Signal Processor}$\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{DR00002_DSP.png}
+ \caption{Block Diagram for Ambarella H22}	
+\end{center}
+\end{figure}
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
 \section{Introduction}
-\section{NVME Drive}
-\section{Flash (QSPI Mode)}
-\section{SD Cord(SPI Mode)}
-\section{SD Cord(SD Mode)}
+The processor core selection will be down by another document$\footnote{ES00005 - OA-II Payload Modules Architecture}$. In the camera system, the main focus in the storage media and the inferface it had to connect to the processor. The whole OA-II VEH system will base on the embedded linux.$\footnote{DR00003 - OA-II VEH COM System Design}$ So the main file system will be use ext4.
+\section{Comparsion}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{r || c | c | c | c }
+		Technology & Interface & Speed & Complexity & Price\\ \hline
+		SSD Drive & NVMe & 800MB/s & 9 &  \$100/500GB\\
+		SSD Drive & SATA & 715MB/s & 9 & \$100/500GB \\
+		eMMC & eMMC & 45MB/s & 5 & \$10/128G \\
+		SD Card & SDIO & 80MB/s & 5 & \$15/64G \\
+		\end{tabu}
+	\caption{SoC Summary}
+	\label{tab:socs}
+\end{table}
+\subparagraph{SSD Drive}
+The main problem for the SSD drive is this device need more research in order to intergrade into the VEH system. However, linux system do have exiting driver for them. It also have very high speed interface which allow fast data transformation.\\\\
+\subparagraph{eMMC}
+The main problem for eMMC device is it is not removable from the board. It mean the recovery of this storge will be very difficult. However, it is a building interface for most of the SoC and it have no problem with vibration.\\\\
+\subparagraph{SD Card}
+The main problem for sd card is the disconnection due to the vibration. It is the top choose due to its price and mobilablity. In many mobile camera product, SD card is the storage media they use for multimedia.
 \newpage
 %**********************************************************************
 \chapter{System Diagram}
+\section{USB camera with SoC FPGA chip}
+This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chip. The chip will translate the data to backplane bus and send to the storage device. It can use the buildin USB controller and system driver, which reduce the development time. It could up grade to better camera set by using self developped module. But the buildin USB interface will limited the bitrate encoding use and migth cause blur when the sensor meet frequenly virbation.\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan1.png}
+ \caption{System Diagram for Plan A}	
+\end{center}
+\end{figure}
+\\
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Easy for implement & Low Bitrate \\
+		Easy to find sensor &  \\
+		Come with video encoding &  \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{MIPI camera + CrossLink with FPGA chip}
+This plan will use a crosslink chip to translate the MIPI signal to LVDS signal. The FPGA chip will receive the LVDS signal and use internal encoding IP core to process the data and send it out via the backplane bus. The CrossLink and the main chip are both FPGAs. It mean this system can easily increase the number of the camera. Four lane MIPI support up to 4K 180fps frame rate. It also allow future upgrade without change the hardware design due to the flexiblity of FPGA chip.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan2.png}
+ \caption{System Diagram for Plan B}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Can use any raspberry Pi Camera & Need Encoding Core \\
+		High Speed Sensor(Up to 180 FPS) & Hard in PCB design(100$\Omega$ impedance) \\
+		Allow futrue upgrade & Long development time \\
+		Prevent common mode interference  & Need Extra chip for translation \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{LVDS camera with FPGA chip}
+This plan will connect a lvds camera to a FPGA. The FPGA will encode the video and send it via the backplane. The video will be encoded in the FPGA IP core and pack it into the backplane bus packet. Because the camera sensor use the fpga support standard, it will reduce the problem of formate translation. It also allow future upgrade without change the hardware design due to the flexiblity of FPGA chip.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan3.png}
+ \caption{System Diagram for Plan C}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Do not need Extra chip for translation & Need Encoding Core \\
+		Cheap sensor & Hard in PCB design(100$\Omega$ impedance) \\
+		Allow futrue upgrade & Long development time \\
+		Prevent common mode interference  &  \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{MIPI camera with Multimedia SoC chip}
+This plan will use the solution that company provide and add addtional chip for the data translation from the USB to backplane bus. Because of the solution mostly will be provided by the company, it will be more stable. However, it lose the ability for upgrade. Also, because it use the MIPI bus, it require the PCB manifacture to use 100$\Omega$ impedance trace to keep the differential pairs stable.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan4.png}
+ \caption{System Diagram for Plan D}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Do not need Extra chip for translation & Only support USB 2.0\\
+		Cheap sensor & Hard in PCB design(100$\Omega$ impedance) \\
+		Do not need Encoding Core & Long development time \\
+		Use existing resolution  & \textbf{Need selecting chip} \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
+\newpage
+\section{MIPI camera with Multimedia DSP and FPGA chip}
+This plan use DSP chip as the encoder. However the dsp do not have any video interface, it will need FPGA to finish the formate translation and feed it into the DSP chip. Also, because it use the MIPI bus, it require the PCB manifacture to use 100$\Omega$ impedance trace to keep the differential pairs stable. The DSP itself also have a set of SDK need to be take care off. It might require additional time to constructure the program.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00002_Plan5-2.png}
+ \caption{System Diagram for Plan F}	
+\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+		\begin{tabu}{c | c }
+		Pro & Con \\ \hline
+		Do not need Encoding Core & Need extra chip for translation and encoding\\
+		Use existing resolution & Hard in PCB design(100$\Omega$ impedance) \\
+		 & Long development time \\
+		\end{tabu}
+	\caption{The Pros and Cons Summary}
+\end{table}
 \newpage
 %end of document
 %**********************************************************************
