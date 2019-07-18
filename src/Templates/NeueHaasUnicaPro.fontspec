@@ -1,0 +1,8 @@
+\defaultfontfeatures[NeueHaasUnicaPro]
+{
+	Path			= ../Templates/Fonts/,
+	UprightFont		= *-Regular.ttf,
+	BoldFont		= *-Bold.ttf,
+	ItalicFont		= *-Italic.ttf,
+	BoldItalicFont	= *-BoldItalic.ttf
+}
