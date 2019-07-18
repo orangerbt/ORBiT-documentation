@@ -5,11 +5,15 @@
 \renewcommand{\familydefault}{\sfdefault} % set font
 \renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
 
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\nameref*{#1}, \autoref*{#1}}} % section reference command
+
 \renewcommand\contentsname{Table of Contents}
 
 \chapterstyle{section}
 \renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
 \renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 \makeatletter 
 % define macro for itemcode
@@ -27,15 +31,24 @@
 \setulmarginsandblock{2.5cm}{*}{1}
 \checkandfixthelayout 
 
-\setlength{\beforechapskip}{0cm} % reduce chapter spacing
+\setlength{\beforechapskip}{0pt} % reduce chapter spacing
+\setlength{\afterchapskip}{12pt} % reduce chapter spacing
+\setlength{\parindent}{0pt} % no paragraph indent
+\setlength{\parskip}{12pt} % 1 line paragraph skip
+\renewcommand{\arraystretch}{1.2} % table spacing
 
 \hypersetup{
     colorlinks,
     citecolor=black,
     filecolor=black,
     linkcolor=black,
-    urlcolor=black
+    urlcolor=black,
+    linktoc=all
 }
+
+\makeatletter
+\let\ps@plain\ps@fancy
+\makeatother
 
 % Background swoosh
 \newcommand\OrbitBackground[1]{% For a logo drawn with TikZ

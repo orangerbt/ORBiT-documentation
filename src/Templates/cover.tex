@@ -1,9 +1,11 @@
+\pagenumbering{gobble}
 \OrbitBackground{1}
+\thispagestyle{empty}
 
 \makeatletter
 \includegraphics[width=\textwidth]{../Templates/logo.jpg}\\[4ex]
 \begin{center}
-	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
+	\bfseries \fontsize{36}{36}\selectfont  \@title \\[2ex]
 	\LARGE  \@itemcode
 \end{center}
 \vfill
@@ -13,9 +15,6 @@
 	\large \@date\\[18ex]
 \end{flushright}
 \makeatother
-\thispagestyle{empty}
-\newpage
+\clearpage
 
-\tableofcontents*
-\thispagestyle{fancy}
-\newpage
+\pagenumbering{arabic}

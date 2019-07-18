@@ -1,141 +1,34 @@
+% This document must be compiled with LuaLaTeX
 \documentclass[12pt,article]{memoir}
 
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
-\usepackage{tabu}
-\usepackage{float}
-\usepackage[autostyle, english = american]{csquotes}
-
-
-\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
-
-\renewcommand{\familydefault}{\sfdefault} % set font
-\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
-
-\renewcommand\contentsname{Table of Contents}
-
-\chapterstyle{section}
-\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
-\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
-
-\makeatletter 
-% define macro for itemcode
-\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
-\newcommand\@itemcode{}
-
-% define macro for rev number
-\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
-\newcommand\@revnumber{}
-\makeatother
-
-\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
-
-\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{*}{1}
-\checkandfixthelayout 
-
-\setlength{\beforechapskip}{0cm} % reduce chapter spacing
-
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
 
 %**********************************************************************
-%Document titles etc. defined here: (replace [] as well)
+% Document titles etc. defined here: (replace [] as well)
 \title{ORBiT Documentation Practices}
 \author{Gabriel Smolnycki}
 \itemcode{AD00001}
-\revnumber{-}
+\revnumber{A01}
 \date{\today}
-%end of document titles etc.
+% End of document titles etc.
 %**********************************************************************
 
-\makeatletter
-\let\runtitle\@title
-\let\runitemcode\@itemcode
-\makeatother
-
-% set header style
-\pagestyle{fancy}
-{
-	\fancyheadoffset{0cm}
-
-	\lhead{\runtitle \ - \runitemcode}
-	\rhead{Page: \thepage }
-	%\chead{\leftmark} % section name
-}
-
-\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange, fill opacity=0.2]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-}
-
-\cfoot{\OrbitBackground}
-
-\MakeOuterQuote{"}
+\input{../Templates/postsetup.tex}
 
 \begin{document}
 
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-
-\makeatletter
-\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-\begin{center}
-	\bfseries \fontsize{50}{50}\selectfont  \@title \\[2ex]
-	\LARGE  \@itemcode
-\end{center}
-\vfill
-\begin{flushright}
-	\LARGE Rev: \@revnumber\\
-	\large \@author\\
-	\large \@date\\[18ex]
-\end{flushright}
-\makeatother
-\thispagestyle{empty}
-\newpage
+\input{../Templates/cover.tex}
 
 \tableofcontents*
-\thispagestyle{fancy}
-\newpage
+\clearpage
 
 %**********************************************************************
-% Everything after this is the main document. Edit below this line,
+% Everything after this is the main document. Edit below this line.
 
 \chapter{Introduction}
 \section{Scope}
-This document covers all documentation written for ORBiT at SU, the Orange Rocket Ballistics Team at Syracuse Univeristy.
+This document covers all documentation written for ORBiT at SU, the Orange Rocket Ballistics Team at Syracuse University.
 
 \section{Purpose}
 This document sets standards for documentation of all ORBiT hardware, software, and practices. This will aid in the organization and subsequent location of any documented information regarding the ORBiT project.
@@ -157,29 +50,29 @@ This document sets standards for documentation of all ORBiT hardware, software, 
 \chapter{Document Classes}
 
 \begin{itemize}
-\item AD: Administrative documents\\
+\item \textit{AD: Administrative Documents}\\
 Administrative documents, such as this one, pertain to ORBiT practices and procedures related to team organization and management. Technical documents do not belong in this category.
-\item BI: Build Instructions\\
+\item \textit{BI: Build Instructions}\\
 Build instructions are used to document the procedure for fabricating or assembling ORBiT hardware. This may include mechanical components, such as fuel grains, electronic components, such as circuit boards, assemblies of those components. Build instructions may have an accompanying build report
-\item BR: Build Reports\\
+\item \textit{BR: Build Reports}\\
 Build reports detail any important information, such as mechanical or electrical measurements, chemical composition, images, or serial numbers of a built component or assembly. In general, a build report should contain enough information to reconstruct a component or assembly if necessary. All build reports accompany a build instruction, although not all build instructions require an accompanying build report.
-\item DG: Design Guides\\
+\item \textit{DG: Design Guides}\\
 Design guides detail the engineering decisions and processes involved in the design process. Guides should be written so as to educate and enable future engineers to understand how and why the relevant components are designed as they are. This is a primary method of information transfer, and graduating members should write or update a design guide if they have unique knowledge of a topic.
-\item DR: Design Reports\\
+\item \textit{DR: Design Reports}\\
 Design reports are used for analysis, calculations, and justifications of a design prior to fabrication or testing. This includes FEA, CFD, or any manual analysis, as well as design decisions and the reasoning behind them. Design reports also include predictions such as performance calculations or FMEA.
-\item DS: Datasheets\\
+\item \textit{DS: Datasheets}\\
 Datasheets should be written to document the actual performance or functionality for major components or systems. Datasheets are written after design, fabrication, and testing is complete.
-\item EI: Engineering Instructions\\
+\item \textit{EI: Engineering Instructions}\\
 Engineering instructions detail information such as software usage, interpretation of test results, or procedures not covered in other document classes. These are generally short and limited to a very specific scope.
-\item EP: Engineering Proposals\\
+\item \textit{EP: Engineering Proposals}\\
 Engineering proposals are the first document written when designing a new system or process. This should include the reasons why the system or process is necessary, basic information on intended functionality, estimated cost of implementation, and any pertinent studies or research papers.
-\item ER: Engineering Requirements\\
+\item \textit{ER: Engineering Requirements}\\
 Engineering requirements define the goals of a system. Requirements detail what the system must do, but do not specify any details of the implementation of that system. In general, requirements should be written so as to give as much leeway as possible in design while still accomplishing the specific system goals. Requirements should not change after they are approved unless absolutely necessary.
-\item ES: Engineering Specifications\\
+\item \textit{ES: Engineering Specifications}\\
 Engineer specifications define implementation details of a system. These always reference a requirements document, as they detail how the requirements are met. Specifications should be detailed and include concrete information, such as materials, component selections, or performance figures. Specifications may change over the course of a design, while staying within the accompanying requirements.
-\item TI: Test Instructions\\
+\item \textit{TI: Test Instructions}\\
 Test instructions should be written before any tests to document the purpose and test methodology. This includes both one-time experiments and recurring tests. Experiments are typically performed as part of the design process, whereas recurring tests include both qualification and acceptance test procedures (QTP and ATP). QTP must be satisfied once for any given design, whereas ATP must be satisfied on all produced components. All test instructions must have an accompanying test report.
-\item TR: Test Reports\\
+\item \textit{TR: Test Reports}\\
 Test reports detail the results of a test instruction. These should be detailed enough to recreate the test if necessary. All results, both expected and unexpected, should be included in test reports, as well as images, analysis, and other media if relevant.
 \end{itemize}
 
@@ -187,19 +80,19 @@ Test reports detail the results of a test instruction. These should be detailed 
 
 \chapter{Parts and Manufacturing}
 \begin{itemize}
-\item A: Assembly\\
+\item \textit{A: Assembly}\\
 Assemblies are created from multiple components. Assembly drawings require a BOM.
-\item E: Electronics\\
+\item \textit{E: Electronics}\\
 Electronics includes all electrical components, passive or active, as well as bare and populated PCBs.
-\item F: Fabricated\\
+\item \textit{F: Fabricated}\\
 Fabricated components are any finished component built by ORBiT.
-\item M: Manufacturing Intermediate\\
+\item \textit{M: Manufacturing Intermediate}\\
 Manufacturing intermediates are components which are not yet finished, but must include a detailed step. Examples include components of a weldment, or additive manufactured parts which require postprocessing.
-\item P: Purchased\\
+\item \textit{P: Purchased}\\
 Purchased parts are components delivered in a finished state, which are not designed by ORBiT.
-\item S: Software\\
+\item \textit{S: Software}\\
 All custom software distributions.
-\item T: Tooling\\
+\item \textit{T: Tooling}\\
 Tooling includes any specialized tooling which is used to build other parts. Examples include jigs, fixtures, and molds.
 \end{itemize}
 
@@ -212,8 +105,8 @@ Tooling includes any specialized tooling which is used to build other parts. Exa
 \newpage
 
 \chapter{When and What to Document}
-It is always better to overdocument than to underdocument. A significant amount of knowledge may be lost as a result of lack of documentation, leading to frustration and confusion for future members. While a particular process may seem obvious, often it is not so obvious for everyone.\\
-In general, everything required to create or recreate a component, assembly, or system should be documented. The process used to arrive at that final product should be documented as well. A working product is of little use academically if it cannot be recreated.\\
+It is always better to overdocument than to underdocument. A significant amount of knowledge may be lost as a result of lack of documentation, leading to frustration and confusion for future members. While a particular process may seem obvious, often it is not so obvious for everyone.\par
+In general, everything required to create or recreate a component, assembly, or system should be documented. The process used to arrive at that final product should be documented as well. A working product is of little use academically if it cannot be recreated.\par
 It should be noted that the documentation guidelines in this document need not be always strictly follow, but that they represent best practices in industry. Adherence to these guidelines is beneficial to all members of ORBiT, past, present, and future.
 
 %end of document
