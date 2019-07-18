@@ -1,59 +1,20 @@
-
+% This document must be compiled with LuaLaTeX
 \documentclass[12pt,article]{memoir}
 
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
+\input{../Templates/packages.tex}
 \usepackage{listings}
+\input{../Templates/presetup.tex}
 
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
 
-\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
-
-\renewcommand{\familydefault}{\sfdefault} % set font
-\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
-
-\newcommand*{\fullref}[1]{\hyperref[{#1}]{\nameref*{#1}, \autoref*{#1}}} % section reference command
-
-\renewcommand\contentsname{Table of Contents}
-
-\chapterstyle{section}
-\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
-\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
- 
-
-\makeatletter 
-% define macro for itemcode
-\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
-\newcommand\@itemcode{}
-
-% define macro for rev number
-\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
-\newcommand\@revnumber{}
-\makeatother
-
-\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
-
-\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{*}{1}
-\checkandfixthelayout 
-
-\setlength{\beforechapskip}{0cm} % reduce chapter spacing
-
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
+\title{Programming Design Guide}
+\author{Cem Eden}
+\itemcode{DG00001}
+\revnumber{A01}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
 
 % code style setup
 \definecolor{preprocessorColor}{RGB}{0,180,255}
@@ -63,109 +24,32 @@
 \lstset{
 	language=C++,
 	backgroundcolor=\color{black!5}, % set backgroundcolor
-	%basicstyle=\footnotesize,% basic font setting
+	basicstyle=\footnotesize\ttfamily,% basic font setting
 	keywordstyle=\color{preprocessorColor}\bfseries,
 	commentstyle=\color{commentColor},
 	stringstyle=\color{defineColor}
 }
 
-%**********************************************************************
-%Document titles etc. defined here: (replace [] as well)
-\title{Programming Design Guide}
-\author{Cem Eden}
-\itemcode{DG00001}
-\revnumber{1}
-\date{\today}
-%end of document titles etc.
-%**********************************************************************
-
-\makeatletter
-\let\runtitle\@title
-\let\runitemcode\@itemcode
-\makeatother
-
-% set header style
-\pagestyle{fancy}
-{
-	\fancyheadoffset{0cm}
-
-	\lhead{\runtitle \ - \runitemcode}
-	\rhead{Page: \thepage }
-	%\chead{\leftmark} % section name
-}
-
-\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange, fill opacity=0.2]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-}
-
-\cfoot{\OrbitBackground}
+\input{../Templates/postsetup.tex}
 
 \begin{document}
-
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-
-\makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
-\makeatother
-\thispagestyle{empty}
-\newpage
+	
+\input{../Templates/cover.tex}
 
 \tableofcontents*
-\thispagestyle{fancy}
-\newpage
+\clearpage
 
 %**********************************************************************
-% Everything after this is the main document. Edit below this line,
+% Everything after this is the main document. Edit below this line.
 
 \chapter{C++}
 \section{General Formatting}
 \subsection{Preprocessor Directives}
 \label{subsec:preprocessorDirectives}
-
-Preprocessor directives are commands executed at compile time. They can be identified by a '\#' sign, followed by command name and any arguments.\\\\
-
-\noindent
-Preprocessor directives should be formatted so that the commands are aligned  to the left most side of the page with no leading tabs or spaces.\\
-
-\noindent
-The command itself should be typed in all lowercase.\\
-
-\noindent
-Define arguments should be typed in all uppercase and any spaces should be substituted with underscores.\\
-
-\noindent
+Preprocessor directives are commands executed at compile time. They can be identified by a '\#' sign, followed by command name and any arguments.\par
+Preprocessor directives should be formatted so that the commands are aligned  to the left most side of the page with no leading tabs or spaces.\par
+The command itself should be typed in all lowercase.\par
+Define arguments should be typed in all uppercase and any spaces should be substituted with underscores.\par
 Example:
 \begin{lstlisting}
 #define FOO_BAR
@@ -176,14 +60,8 @@ Example:
 
 \newpage
 \subsection{Tabs And Spaces}
-
-\noindent
-When formatting code, alignment is an important factor for readability.\\\\
-
-\noindent
-When aligning code, the tabs should be used for the line of code. If a command is too long, or is better readable when separated into multiple lines, subsequent lines should be aligned with spaces.\\
-
-\noindent
+When formatting code, alignment is an important factor for readability.\par
+When aligning code, the tabs should be used for the line of code. If a command is too long, or is better readable when separated into multiple lines, subsequent lines should be aligned with spaces.\par
 Example:
 \begin{lstlisting}
 void exampleFunction()
@@ -203,19 +81,10 @@ void exampleFunction()
 
 \newpage
 \subsection{Brace Style}
-\noindent
-In cases where braces are used, they should be laid out in a way where it is easy to tell where a scope starts and ends.\\\\
-
-\noindent
-A starting brace should always be placed on the next line, aligned with the statement that requires it.\\
-
-\noindent
-For statements such as else statements, the ending brace as well as the starting brace should be on separate lines.\\
-
-\noindent
-The only exception to the rule is for statements following an end brace, which do not have a starting brace. For example, a do-while loop.\\
-
-\noindent
+In cases where braces are used, they should be laid out in a way where it is easy to tell where a scope starts and ends.\par
+A starting brace should always be placed on the next line, aligned with the statement that requires it.\par
+For statements such as else statements, the ending brace as well as the starting brace should be on separate lines.\par
+The only exception to the rule is for statements following an end brace, which do not have a starting brace. For example, a do-while loop.\par
 Example:
 \begin{lstlisting}
 void exampleFunction()
@@ -243,19 +112,10 @@ void exampleFunction()
 
 \newpage
 \subsection{Switch-Case Statements}
-\noindent
-Switch-Case statements are special in their way of using a separate keyword, namely case, which is placed within its scope. Due to this they have their own syntax.\\\\
-
-\noindent
-The Switch statement should be treated as any other conditional along with its brace style. However the Case statements have some special rules:\\
-
-\noindent
-The Case statements should be aligned with the indentation of the Switch statement, and not the current scope. Values that a case statement stands for, should be placed in parentheses.\\
-
-\noindent
-The statements such as break or return however, should be aligned with the current scope.\\
-
-\noindent
+Switch-Case statements are special in their way of using a separate keyword, namely case, which is placed within its scope. Due to this they have their own syntax.\par
+The Switch statement should be treated as any other conditional along with its brace style. However the Case statements have some special rules:\par
+The Case statements should be aligned with the indentation of the Switch statement, and not the current scope. Values that a case statement stands for, should be placed in parentheses.\par
+The statements such as break or return however, should be aligned with the current scope.\par
 Example:
 \begin{lstlisting}
 switch(enumerable)
@@ -275,10 +135,7 @@ default:
 
 
 \subsection{Return Statements}
-\noindent
-Return statements that should return a value, should have their return value in prentheses.\\
-
-\noindent
+Return statements that should return a value, should have their return value in prentheses.\par
 Example:
 \begin{lstlisting}
 int main()
@@ -290,20 +147,11 @@ int main()
 \newpage
 \section{Header Files}
 \subsection{Guards}
-\noindent
-To make sure that code can be included easily, each header file should include a \#define guard.\\\\
-
-\noindent
-This is to ensure that if other files include the header, that no double definition errors occur.\\
-
-\noindent
-The \#define guard should be placed immediately at the beginning of the file, or if any comments are added, on the first non-commented line.\\
-The guard itself consists of a \#ifndef statement followed immediately by a \#define statement where both have a defined constant adhering to the formatting rules (\fullref{subsec:preprocessorDirectives}). On the last line of the file, the \#ifndef statement is then completed with a \#endif statement.\\
-
-\noindent
-The name of the constant should be given to be descriptive of the contents of the header file but should not coincide with other \#define definitions. In this case a longer variable name may be better than a shorter one.\\
-
-\noindent
+To make sure that code can be included easily, each header file should include a \#define guard.\par
+This is to ensure that if other files include the header, that no double definition errors occur.\par
+The \#define guard should be placed immediately at the beginning of the file, or if any comments are added, on the first non-commented line.\par
+The guard itself consists of a \#ifndef statement followed immediately by a \#define statement where both have a defined constant adhering to the formatting rules (\fullref{subsec:preprocessorDirectives}). On the last line of the file, the \#ifndef statement is then completed with a \#endif statement.\par
+The name of the constant should be given to be descriptive of the contents of the header file but should not coincide with other \#define definitions. In this case a longer variable name may be better than a shorter one.\par
 Example:
 \begin{lstlisting}
 // some comment
@@ -317,49 +165,27 @@ Example:
 
 \newpage
 \subsection{Class Definitions}
-\noindent
-Only one main class should be defined per header file. Only small complimentary classes or data structures should be included alongside the main class.\\\\
-
-\noindent
-The main class should closely match the header file name but does not have to be exactly the same. The name should however be descriptive.\\
-
-\noindent
-Access modifiers should be aligned with the scope of the class, and not the current scope. In general, this means that access modifiers should not have any leading tabs or spaces.\\
-
-\noindent
-Any functions defined in a class should be as protected as possible. This means that if a function should only be accessible within a class, it should be set to private.\\
-
-\noindent
-Where possible, classes should start with its public members, and should be seperated with as little duplicate sections as possible.\\
-
-\noindent
-All variables within a class should ALWAYS be set to private. If these variables are to be modified from outside of the class, this has to be done using getter and setter functions.\\
-
-\noindent
-Friend inheritance should be avoided as much as possible. If a friend relationship is sufficiently justified, then they must be sufficiently documented using comments at the declaration and definition. This documentation must include what other functions use this relationship.\\
-
-\noindent
-Constructors and destructors should be placed as close to the start of the class declaration as possible. Constructors should be group together.\\
-
-\noindent
-Overloaded functions should be placed within the same access block and should be grouped together. They should be sequenced such that functions with the least arguments are at the top of the group, and functions with the most arguments should be at the bottom of that group.\\
-
-\noindent
-New lines should be used to signify grouping.\\
-
-\noindent
-Function declarations should have the same name and type of arguments as their definitions. The only exceptions to this are default values and namespaces.\\
+Only one main class should be defined per header file. Only small complimentary classes or data structures should be included alongside the main class.\par
+The main class should closely match the header file name but does not have to be exactly the same. The name should however be descriptive.\par
+Access modifiers should be aligned with the scope of the class, and not the current scope. In general, this means that access modifiers should not have any leading tabs or spaces.\par
+Any functions defined in a class should be as protected as possible. This means that if a function should only be accessible within a class, it should be set to private.\par
+Where possible, classes should start with its public members, and should be separated with as little duplicate sections as possible.\par
+All variables within a class should ALWAYS be set to private. If these variables are to be modified from outside of the class, this has to be done using getter and setter functions.\par
+Friend inheritance should be avoided as much as possible. If a friend relationship is sufficiently justified, then they must be sufficiently documented using comments at the declaration and definition. This documentation must include what other functions use this relationship.\par
+Constructors and destructors should be placed as close to the start of the class declaration as possible. Constructors should be group together.\par
+Overloaded functions should be placed within the same access block and should be grouped together. They should be sequenced such that functions with the least arguments are at the top of the group, and functions with the most arguments should be at the bottom of that group.\par
+New lines should be used to signify grouping.\par
+Function declarations should have the same name and type of arguments as their definitions. The only exceptions to this are default values and namespaces.\par
 
 \newpage
-\noindent
-Example:
 
+Example:
 \begin{lstlisting}
 class someClass
 {
 public:
 	someClass();
-	~someClasss();
+	~someClass();
 	
 	int someFunc(int arg1);
 	
@@ -374,16 +200,11 @@ private:
 };
 \end{lstlisting}
 
-
-
 \newpage
+
 \subsection{What belongs in the Header}
-The headers focus should be to tell what functions are contained within it. It should let a programmer know of any \#define constants that are to be used with given public functions and should serve as an overview on what functions can be used.\\
-
-\noindent
-The header should however not contain any complex implementations. This means, unless the header defines a very simple class, like for instance a linked list class, only minimal definitions should be included.\\
-
-\noindent
+The headers focus should be to tell what functions are contained within it. It should let a programmer know of any \#define constants that are to be used with given public functions and should serve as an overview on what functions can be used.\par
+The header should however not contain any complex implementations. This means, unless the header defines a very simple class, like for instance a linked list class, only minimal definitions should be included.\par
 Example:
 \begin{lstlisting}
 #ifndef HEADER_GUARD
@@ -398,10 +219,7 @@ private:
 #endif
 \end{lstlisting}
 
-\noindent
-If, however the class defined is very simple, definitions can be placed into the header. However, doing so should be considered carefully, as header implemented classes can be difficult to read.\\
-
-\noindent
+If, however the class defined is very simple, definitions can be placed into the header. However, doing so should be considered carefully, as header implemented classes can be difficult to read.\par
 Example:
 \begin{lstlisting}
 // overcomplicated isOdd class 
@@ -419,15 +237,10 @@ public:
 
 \newpage
 \subsection{Structs and Classes}
-In C++ structs and classes are very similar, however they should be used for specific tasks.\\
-
-Structs should be predominantly for data structures, and contain little to no functions.\\
-
-Structs do not necessarily  need any access modifiers as most members will be public.\\
-
-Classes should be used for almost every other case.\\
-
-\noindent
+In C++ structs and classes are very similar, however they should be used for specific tasks.\par
+Structs should be predominantly for data structures, and contain little to no functions.\par
+Structs do not necessarily  need any access modifiers as most members will be public.\par
+Classes should be used for almost every other case.\par
 Example:
 \begin{lstlisting}
 struct someDatastructure
@@ -449,22 +262,16 @@ private:
 \end{lstlisting}
 
 \newpage
+
 \section{Source Files}
 \subsection{Include Directives}
-Include directives should be placed in the source file whenever possible. This is to ensure that headers are not needlessly included when trying to use a specific class.\\\\
-
-\noindent
-The only time that Include directives can be places in the header, is if a function definition requires.\\
+Include directives should be placed in the source file whenever possible. This is to ensure that headers are not needlessly included when trying to use a specific class.\par
+The only time that Include directives can be places in the header, is if a function definition requires.\par
 
 \subsection{Using Namespace Directives}
-The using namespace directive is a great convenience tool, but at the same time it may cause issues.\\\\
-
-\noindent
-To avoid ambiguity with identically named functions, it is vital to place the using namespace directives within source files ONLY. This is to ensure that when another class uses a header file, that they have no namespaces already defined.\\
-
-\noindent
-Example:\\
-Header File:
+The using namespace directive is a great convenience tool, but at the same time it may cause issues.\par
+To avoid ambiguity with identically named functions, it is vital to place the using namespace directives within source files ONLY. This is to ensure that when another class uses a header file, that they have no namespaces already defined.\par
+Example Header File:
 \begin{lstlisting}
 #include <string>
 
@@ -475,8 +282,7 @@ public:
 }
 \end{lstlisting}
 
-\noindent
-Source File:
+Example Source File:
 \begin{lstlisting}
 using namespace std;
 
@@ -487,17 +293,12 @@ string someClass::stringStuff(string stringArg)
 \end{lstlisting}
 
 \newpage
+
 \subsection{Class Definitions}
-Classes should be declared in their corresponding header files. An exception to this rule is if a data structure is used, and is only relevant internally.\\\\
+Classes should be declared in their corresponding header files. An exception to this rule is if a data structure is used, and is only relevant internally.\par
+When defining a class function, everything up to the opening brace should be in a single line. If a new line should be added in between, then this should be done between arguments.\par
+The order in which class functions should be defined should match the order in which they were declared.
 
-\noindent
-When defining a class function, everything up to the opening brace should be in a single line. If a new line should be added in between, then this should be done between arguments.\\
-
-\noindent
-The order in which class functions should be defined should match the order in which they were declared.\\
-
-
-
-%end of document
+% End of document.
 %**********************************************************************
 \end{document}
