@@ -1,56 +1,8 @@
-
+% This document must be compiled with LuaLaTeX
 \documentclass[12pt,article]{memoir}
 
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\setmainfont{Calibri}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{xcolor}
-\usepackage{xpatch}
-\usepackage{hyperref}
-\usepackage{tabu}
-\usepackage{float}
-\usepackage{enumerate}
-
-
-\usepackage[yyyymmdd]{datetime} % change date format to yyyy/mm/dd to fit ISO8601
-
-\renewcommand{\familydefault}{\sfdefault} % set font
-\renewcommand{\dateseparator}{--} % change date-seperators to - to fit ISO8601
-
-\renewcommand\contentsname{Table of Contents}
-
-\chapterstyle{section}
-\renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\sffamily}
-\renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\sffamily}
-
-\makeatletter 
-% define macro for itemcode
-\newcommand\itemcode[1]{\renewcommand\@itemcode{#1}}
-\newcommand\@itemcode{}
-
-% define macro for rev number
-\newcommand\revnumber[1]{\renewcommand\@revnumber{#1}}
-\newcommand\@revnumber{}
-\makeatother
-
-\definecolor{orbitOrange}{RGB}{250,62,0} % the ORBiT orange
-
-\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-\setulmarginsandblock{2.5cm}{*}{1}
-\checkandfixthelayout 
-
-\setlength{\beforechapskip}{0cm} % reduce chapter spacing
-
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
 
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
@@ -61,73 +13,15 @@
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
-
-\makeatletter
-\let\runtitle\@title
-\let\runitemcode\@itemcode
-\makeatother
-
-% set header style
-\pagestyle{fancy}
-{
-	\fancyheadoffset{0cm}
-
-	\lhead{\runtitle \ - \runitemcode}
-	\rhead{Page: \thepage }
-	%\chead{\leftmark} % section name
-}
-
-\newcommand{\OrbitBackground}{% For a logo drawn with TikZ
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange, fill opacity=0.2]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-}
-
-\cfoot{\OrbitBackground}
+\input{../Templates/postsetup.tex}
 
 \begin{document}
-
-\begin{tikzpicture}[remember picture,overlay] % draw background
-	\coordinate (bl) at (current page.south west);
-	\coordinate (r) at (current page.east);
-    \coordinate (A) at ($(bl)+(0,3cm)$);
-    \coordinate (B) at ($(r)+(0,-2cm)$);
-    \coordinate (C) at (current page.south east);
-    \coordinate (ctrlNode) at ($(current page.south) + (0cm,1cm)$);
-    \coordinate (ctrlNode2) at ($(current page.south east) + (-1cm,1cm)$);
-    \fill[orbitOrange]
-    (A) .. controls (ctrlNode) and (ctrlNode2) .. (B) -- (C) -- (bl);
-    \node [white] at ($(C) + (-3cm,1cm)$) {2015-\the\year \ ORBiT@SU};
-\end{tikzpicture}
-
-\makeatletter
-	\includegraphics[width=\textwidth]{../logo.jpg}\\[4ex]
-	\begin{center}
-	{\fontsize{50}{60}\selectfont \bfseries  \@title }\\[2ex] 
-	{\LARGE  \@itemcode}\\
-	\end{center}
-	\begin{flushright}
-	\vspace*{\fill}
-	{\LARGE Rev: \@revnumber}\\[2ex]
-	{\large \@author}\\[2ex]
-	{\large \@date}\\[20ex]
-	\end{flushright}
-\makeatother
-\thispagestyle{empty}
-\newpage
+	
+\input{../Templates/cover.tex}
 
 \tableofcontents*
-\thispagestyle{fancy}
-\newpage
+\clearpage
+
 
 %**********************************************************************
 % Everything after this is the main document. Edit below this line,
@@ -243,12 +137,29 @@ SpaceWire is defined in the European Cooperation for Space Standardization stand
 The SpaceWire is use LVDS voltage standard which is a commonly use voltage standard in FPGA. The PHY for SpaceWire is relativly simple and require less resource for constructe the PHY. The newest SpaceWire bus support 400Mbps for one lane$\footnote{About 50Mbyte/s}$. 
 \section{Interlaken}
 Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology.\cite{Cite needed}\\\\
-Interlaken is a bus deisgn for the replace the ethernet. It also support port division and flow control. However, the
+Interlaken is a bus deisgn for the replace the ethernet. It also support port division and flow control. However, the Interlaken PHY do not support in most of the FPGA. It mean it will require extra chip for PHY. It have the similar speed with RapidIO$\footnote{About 625Mbyte/s}$.
 \newpage
-\chapter{OA-II BUS Hardware Structure}
+\chapter{OA-II Bus Structure}
+Base on the requirement of the bus, the OA-II Bus System will include two part, the command bus which incharge of the initialization of another bus and the prioritize data transmission, the data bus which incharge the transmission of large amout of data and program.
+\section{CAN + SpaceWire}
+\subparagraph{Command Bus}CAN
+\subparagraph{Data Bus}SpaceWire\\\\
+In this plan, the command bus is using CAN. It provide prioritize data transmission for small amount data transmission. Up to 500kbps bandwidth provide enough bandwidth for command data transmission. The data bus is using the SpaceWire which provide enough bandwidth for high speed data transmission. It also include timestamp feature that will help for the future sensor fusion. The whole system is build base on two router, one is the main router that will use for the major data transmission and the other is backup router which can take over when the main router fail.
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{DR00001_SpaceWire_1.png}
+ \caption{Physical Layer for DVP Interface}	
+\end{figure}
+\clearpage
+\section{CAN + RapidIO}
+\subparagraph{Command Bus}CAN
+\subparagraph{Data Bus}RapidIO\\
+\begin{figure}[htp]
+\includegraphics[width=\textwidth]{DR00001_RapidIO.png}
+ \caption{Physical Layer for DVP Interface}	
+\end{figure}
 \newpage
-\chapter{OA-II BUS Software Structure}
-\newpage
+%\chapter{OA-II BUS Software Structure}
+%\newpage
 %end of document
 %**********************************************************************
 \end{document}
