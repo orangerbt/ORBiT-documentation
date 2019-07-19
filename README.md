@@ -24,6 +24,8 @@
   - DR00001 - OA-II Backplane Bus System
   - DR00002 - OA-II VEH Camera System Design
   - DR00003 - OA-II VEH COM System Design
+  - DR00004 - OA-II VEH TAM System Design (TBD)
+  - DR00005 - OA-II VEH PAM System Design (TBD)
 - Engineering Instructions
   - EI00001 - Avionics System I User Manual
 - Engineering Requirements
@@ -34,9 +36,9 @@
   - ES00002 - ORBiT Avionics System II Architecture
   - ES00003 - OA-II Vehicle Electronics (VEH) System Architecture
   - ES00004 - OA-II Base Station Electronics (BAS) System Architecture
-  - ES00005 - OA-II Payload Modules Architecture
-  - ES00006 - OA-II Payload Frame Specifications (TBD)
-  - ES00007 - OA-II Payload Bus Specifications (TBD)
+  - ES00005 - OA-II VEH Payload Modules Architecture
+  - ES00006 - OA-II VEH Payload Frame Specifications (TBD)
+  - ES00007 - OA-II VEH Payload Bus Specifications (TBD)
 - Templates
   - LaTeX template
   - Microsoft Word template

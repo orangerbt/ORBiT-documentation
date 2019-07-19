@@ -37,7 +37,7 @@ The goal for the OA-II backplane bus system is constructure a high speed, high c
 	\resizebox{0.8\textwidth}{!}{%
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize & 2019-7-15\\
+		A01 & Jinzhi Cai & Initialize & 2019-7-19\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -139,7 +139,7 @@ The SpaceWire is use LVDS voltage standard which is a commonly use voltage stand
 Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology.\cite{Cite needed}\\\\
 Interlaken is a bus deisgn for the replace the ethernet. It also support port division and flow control. However, the Interlaken PHY do not support in most of the FPGA. It mean it will require extra chip for PHY. It have the similar speed with RapidIO$\footnote{About 625Mbyte/s}$.
 \newpage
-\chapter{OA-II Bus Structure}
+\chapter{Recommend System Design}
 \section{General Structure}
 Base on the requirement of the bus, the OA-II Bus System will include two part, the command bus which incharge of the initialization of another bus and the prioritize data transmission, the data bus which incharge the transmission of large amout of data and program. The job for those two bus will be different during each stage.$\footnote{More detail in this section at ES00007 OA-II Payload Bus Specifications}$
 \subsection{Initialization}
