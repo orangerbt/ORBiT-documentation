@@ -48,14 +48,26 @@ The goal for the design is to build a system that allow real time operation and 
 \newpage
 \chapter{Requirement Analysis}
 \section{Failure Recovery}
+In the OA-II VEH system requirement,failure recovery is always the most important part. The main requirement for failure recovery is in below.
+\subparagraph{Backup}For all the mission critical system, it mast have at least have one backup unit.
+\subparagraph{Fast Switch} When emergent scenario has been detected, the system will switch to backup unit within limited time and functioning.
+\subparagraph{Hierarchy Failure Recovery System} For different emergent scenario, failure recovery system have different plan to deal with to protect device and data.
 \section{Realtime Operating System}
-\section{Additional Sensor Fusion}
+In the OA-II VEH system requirement, realtime operating system is the key to proform all the critical procedure.
+\subparagraph{Predictable Execution Time}All the procedure will need to execute on time with limited of error.
+\subparagraph{Interface with the Main System}The RTOS will need to be have to receive command from other system.
+\subparagraph{Execution Feedback}When a procedure is executed, it have to be comfirm with sensor.
+%\section{Additional Sensor Fusion}
 \newpage
 \chapter{Current Controller Analysis}
 \section{Arduino}
+Arduino is a common use in DIY electronics. It have an abundant library for different IC. It also friandly for the beginner. However, most of the arduino library is not effection and the interface choose is limited. Its main clock is running at 16MHz which is not enough for support a functional linux system.
 \section{STM32 Serise}
+STM32 Serise is a common use microcontroller and it support up to 400MHz main clock. This kind of microcontroller also support to running a operating system. However, as the arduino, it lack the freedom to choose the the interface. 
 \section{Market SoC System}
+In the market, it have a lot of different SoC system, such as raspberry Pi and BeagleBone. It do come with a lot of different interface. However, it do not have a high speed interface what can use to connect between different system.
 \section{FPGA Soft Core Processor}
+A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".
 \section{SoC FPGA}
 \newpage
 \chapter{Recommend System Design}
