@@ -39,7 +39,7 @@ The goal for the design is to build a system that allow real time operation and 
 	\resizebox{0.8\textwidth}{!}{%
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize & 2019-7-19\\
+		A01 & Jinzhi Cai & Initialize & 2019-7-20\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -72,10 +72,34 @@ A field-programmable gate array (FPGA) is an integrated circuit designed to be c
 The SoC FPGA basicly also is a kind of FPGA. The only different it embedded a powerful processor as know as hard core processor. It help fuse the benefit between the SoC chip and FPGA chip. On one hand, it allow big system running in the powerful hard core processor. In the same time, the flexibility of FPGA chip allow costume interface and upgrade ability. However, SoC FPGA have less logic resource compare with the classic FPGA and weak proessing power compare with SoC which in the same price.
 \newpage
 \chapter{Recommend System Design}
+\section{SoC FPGA}
+In this design, the main processor will be a SoC FPGA that have about 70K LUT logic resource and dual core 800MHz - 1GHz hard core processor.
+\begin{table}[H]
+	\centering
+	\resizebox{0.5\textwidth}{!}{%
+		\begin{tabu}{ c | c }
+		IP core or Logic & Resource Cost\\ \hline
+		Blackbone Bus Controller & 50K(Max)\\
+		Low Speed Sensor Controller & 10K\\
+		Soft Core Processor & 9K\\
+		Debug JTAG Core & 1K\\ \hline
+		Summery & 70K
+		\end{tabu}
+	}
+	\caption{Table of Logic Resource}
+	\label{tab:rev}
+\end{table}
+The hard core processor will be collecting data from the bus and sensor controller. It will storage those data and use it to resolve the rocket attitude and location. The result will transfer to command and send to the realtime soft core processor to control the PAM.\\
+The FRU will have the same hardware structure as the MCU, but constantly get data from the MCU for error checking.
+\begin{center}
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{DR00003_Plan1.png}
- \caption{Physical Layer for DVP Interface}	
+\begin{center}
+\includegraphics[width=0.6\textwidth]{DR00003_Plan1.png}
+ \caption{Block Diagram For COM System}	
+\end{center}
 \end{figure}
+\end{center}
+
 %end of document
 %**********************************************************************
 \end{document}
