@@ -24,8 +24,8 @@
   - DR00001 - OA-II Backplane Bus System
   - DR00002 - OA-II VEH Camera System Design
   - DR00003 - OA-II VEH COM System Design
-  - DR00004 - OA-II VEH TAM System Design (TBD)
-  - DR00005 - OA-II VEH PAM System Design (TBD)
+  - DR00004 - OA-II VEH TAM System Design
+  - DR00005 - OA-II VEH PAM System Design
 - Engineering Instructions
   - EI00001 - Avionics System I User Manual
 - Engineering Requirements
