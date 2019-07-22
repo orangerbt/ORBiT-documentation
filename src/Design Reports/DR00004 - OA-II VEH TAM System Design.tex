@@ -6,10 +6,10 @@
 
 %**********************************************************************
 % Document titles etc. defined here: (replace [] as well)
-\title{[title]}
-\author{[author(s)]}
-\itemcode{[itemcode]}
-\revnumber{[revnumber]}
+\title{OA-II VEH TAM System Design}
+\author{Jinzhi Cai}
+\itemcode{DR00004}
+\revnumber{A01}
 \date{\today}
 % End of document titles etc.
 %**********************************************************************
@@ -28,22 +28,51 @@
 
 \chapter{Introduction}
 \section{Scope}
-
+This document analyze the requirement of ORBiT Avionics System II Vehicle Electronics Telecommunication and Acquisition Module(OA-II VEH TAM) and come up with recommand design for it.
 \section{Purpose}
-
+The goal of this document is use to analyze the current sensor technology and come up with a recommand design.
 \section{Relevant Documents}
-
+\begin{description}
+	\item[\textbf{ER00002}]ORBiT Avionics System II Requirements
+	\item[\textbf{ES00002}]ORBiT Avionics System II Architecture
+	\item[\textbf{ES00003}]OA-II Vehicle Electronics (VEH) System Architecture
+	\item[\textbf{DR00001}]OA-II Backplane Bus System
+	\item[\textbf{DR00002}]OA-II VEH Camera System Design
+\end{description}
 \section{Revision History}
 \begin{table}[H]
 	\centering
 	\begin{tabu}{r || c | c | c | c }
 		Rev & Author & Approver & Changes & Date\\ \hline
-		A01 & & & Initial draft & \\
+		A01 & Jinzhi Cai & Jinzhi Cai & Initial draft & 2019-7-22 \\
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:rev}
 \end{table}
-
+\newpage
+\chapter{Requirement Analysis}
+\section{General Requirement Analysis}
+The TAM system requirement mainly can be divide to two part. The first part is bridge which is transfer data from low speed parallel sensor connection to high speed serial backplane. The second part is control which configure all the sensor connect to the board and execute basic unit transformation.
+\section{Bridge Requirement Analysis}
+The TAM sensor unit need to be have to bridge different data bus to the backplane data bus. The TAM sensor unit need to support: 
+\section{Control Requirement Analysis}
+The TAM sensor unit need to be able to configure the sensor to correct status and execute basic data transformation to transfer data to real physical value. The delay should not more than 100ms and should support up to 32 channel.
+\newpage
+\chapter{Current Controller Analysis}
+\section{Microcontroller}
+It do come with a lot of different interface. However, it do not have a high speed interface what can use to connect between different system. It usually have a lot of different interface in a few number. It is different with the requirement that need a few kind of interface with high speed.
+\section{FPGA Soft Core Processor}
+A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{Cite Needed} Almost every FPGA company will have it own soft core processor. Those processor existing in code form and allow user to rebuild them in the FPGA chip as long as the chip have enough resource. Even the soft core processor allow user to costume the structure, the speed of soft core processor will not as fast as the SoC processor. However, it is fairly easy to interface to other system.
+\section{SoC FPGA}
+The SoC FPGA basicly also is a kind of FPGA. The only different it embedded a powerful processor as know as hard core processor. It help fuse the benefit between the SoC chip and FPGA chip. On one hand, it allow big system running in the powerful hard core processor. In the same time, the flexibility of FPGA chip allow costume interface and upgrade ability. However, SoC FPGA have less logic resource compare with the classic FPGA and weak proessing power compare with SoC which in the same price. In the TAM system, the computing power is not nessary.
+\newpage
+\chapter{Recommand Design}
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=\textwidth]{img/DR00004_FPGA.png}
+ \caption{Block Diagram For TAM System}	
+\end{center}
+\end{figure}
 % End of document
 %**********************************************************************
 \end{document}
