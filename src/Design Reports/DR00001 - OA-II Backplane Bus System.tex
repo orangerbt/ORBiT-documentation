@@ -9,7 +9,7 @@
 \title{OA-II Backplane Bus System Design}
 \author{Jinzhi Cai}
 \itemcode{DR00001}
-\revnumber{A01}
+\revnumber{A02}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -37,7 +37,8 @@ The goal for the OA-II backplane bus system is constructure a high speed, high c
 	\resizebox{0.8\textwidth}{!}{%
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
-		A01 & Jinzhi Cai & Initialize & 2019-7-19\\
+		A01 & Jinzhi Cai & Initialize & 2019-7-19\\\hline
+		A02 & Jinzhi Cai & Add detail Ethernet & 2019-7-22\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -110,6 +111,24 @@ $1Mbyte/s\times4=4Mbyte/s$
 \begin{center}
 $(180Kbyte/s+4Mbyte/s+200byte/s+400Kbyte/s)\times2\approx10Mbyte/s$\\
 \end{center}
+\begin{table}[H]
+	\centering
+	\resizebox{0.8\textwidth}{!}{%
+		\begin{tabu}{r || c | c | c }
+		Device & Number & Bandwidth per Device & Total Bandwidth\\ \hline
+		High Pressure Sensor & 4 & 20KB/s & 80KB/s\\
+		Low Pressure sensors & 2 & 20KB/s & 40KB/s\\
+		High Temperature Sensors & 4 & 20KB/s & 80KB/s\\
+		Low Temperature Sensors & 10 & 20KB/s & 200KB/s\\
+		9 axis IMU & 1 & 180KB/s & 180KB/s\\
+		GNSS & 1 & 200B/s & 200KB/s\\
+		Cameras & 4 & 1MB/s & 4MB/s\\ \hline
+		Estimate Bandwidth & - & - & 10MB/s\\
+		\end{tabu}
+	}
+	\caption{Summary of Estimate Bandwidth}
+	\label{tab:rev}
+\end{table}
 \newpage
 \chapter{Current Bus Analyze}
 \section{I2C}
@@ -138,6 +157,9 @@ The SpaceWire is use LVDS voltage standard which is a commonly use voltage stand
 \section{Interlaken}
 Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology.\cite{Cite needed}\\\\
 Interlaken is a bus deisgn for the replace the ethernet. It also support port division and flow control. However, the Interlaken PHY do not support in most of the FPGA. It mean it will require extra chip for PHY. It have the similar speed with RapidIO$\footnote{About 625Mbyte/s}$.
+\section{Ethernet}
+Ethernet as a widly use buses have many benefit on the data bus system. Its standard is implement in many device and driver is commonly use. The router fo r ethernet is very easy to develop. Most of modern operating system can easily using ethernet. It also can go up to 10MB/s with correct PCB design. However, it do not have real time clock as the SpaceWire and not as fast as the RapidIO or PCIe. The transmission of Ethernet is not design for realtime application.
+
 \newpage
 \chapter{Recommend System Design}
 \section{General Structure}
@@ -171,7 +193,7 @@ After landing, the MCU will do a final checking to all existing units via the Co
 When COM FRU detect a command bus failure, it will cutoff the control of the COM MCU and use data bus send out a Failure Alert to all the existing unit. From this moment, the data bus will only transmiting critical data and command. Other data will be power off or save to unti internal storage.
 \subparagraph{Scenario 2 }Data Bus Failure \\
 When COM FRU detect a data bus failure, it will use command bus to communicate with MCU and checking the MCU status. The mission will continue and all unit will try to switch to secondary data bus which will running in the lower speed. 
-
+ext
 \subsection{Bus Data Summery}
 \begin{table}[H]
 	\centering
@@ -197,13 +219,24 @@ When COM FRU detect a data bus failure, it will use command bus to communicate w
 	\label{tab:socs}
 \end{table}
 \clearpage
+\section{System Redundancy}
+The command bus redundancy is done by a adding a additional bus. The primary and secondary command will send the same command in the same time and each device will only receive the one that reach them first and use the second one as error checking.\\\\
+Each unit will have a two lane connection to each data bus router. Those two buses will send and receive the same information each device will only receive the one that reach them first and use the second one as error checking.\\\
+During the Initialization, the primary data router will synchronize configuration with the second data route core. When the configuration is finish, this link will be disable.
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{DR00001_SpaceWire_2.png}
+ \caption{Data Router Structure}
+\end{center}
+\end{figure}
+\clearpage
 \section{CAN + SpaceWire}
 \subparagraph{Command Bus}CAN
 \subparagraph{Data Bus}SpaceWire\\\\
 In this plan, the command bus is using CAN. It provide prioritize data transmission for small amount data transmission. Up to 500kbps bandwidth provide enough bandwidth for command data transmission. The data bus is using the SpaceWire which provide enough bandwidth for high speed data transmission. It also include timestamp feature that will help for the future sensor fusion. The whole system is build base on two router, one is the main router that will use for the major data transmission and the other is backup router which can take over when the main router fail.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00001_SpaceWire_1.png}
- \caption{Physical Layer for DVP Interface}	
+ \caption{Recommand Design A}	
 \end{figure}
 \clearpage
 \section{CAN + RapidIO}
@@ -212,7 +245,7 @@ In this plan, the command bus is using CAN. It provide prioritize data transmiss
 In this plan, CAN bus still is the main command bus due to its prioritize data transmission. In the data bus, RapidIO each lane can carry 10 times data rate compare with the SpaceWire. It can handle most future advance mission without any hardware upgrade. Some company also providing ASIC for rapidIO bus router.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{DR00001_RapidIO.png}
- \caption{Physical Layer for DVP Interface}	
+ \caption{Recommand Design B}	
 \end{figure}
 \newpage
 %\chapter{OA-II BUS Software Structure}
