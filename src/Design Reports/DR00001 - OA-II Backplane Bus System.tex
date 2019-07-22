@@ -225,7 +225,7 @@ Each unit will have a two lane connection to each data bus router. Those two bus
 During the Initialization, the primary data router will synchronize configuration with the second data route core. When the configuration is finish, this link will be disable.
 \begin{figure}[htp]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{DR00001_SpaceWire_2.png}
+\includegraphics[width=0.7\textwidth]{img/DR00001_SpaceWire_2.png}
  \caption{Data Router Structure}
 \end{center}
 \end{figure}
@@ -235,7 +235,7 @@ During the Initialization, the primary data router will synchronize configuratio
 \subparagraph{Data Bus}SpaceWire\\\\
 In this plan, the command bus is using CAN. It provide prioritize data transmission for small amount data transmission. Up to 500kbps bandwidth provide enough bandwidth for command data transmission. The data bus is using the SpaceWire which provide enough bandwidth for high speed data transmission. It also include timestamp feature that will help for the future sensor fusion. The whole system is build base on two router, one is the main router that will use for the major data transmission and the other is backup router which can take over when the main router fail.
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{DR00001_SpaceWire_1.png}
+\includegraphics[width=\textwidth]{img/DR00001_SpaceWire_1.png}
  \caption{Recommand Design A}	
 \end{figure}
 \clearpage
@@ -244,7 +244,7 @@ In this plan, the command bus is using CAN. It provide prioritize data transmiss
 \subparagraph{Data Bus}RapidIO\\\\
 In this plan, CAN bus still is the main command bus due to its prioritize data transmission. In the data bus, RapidIO each lane can carry 10 times data rate compare with the SpaceWire. It can handle most future advance mission without any hardware upgrade. Some company also providing ASIC for rapidIO bus router.
 \begin{figure}[htp]
-\includegraphics[width=\textwidth]{DR00001_RapidIO.png}
+\includegraphics[width=\textwidth]{img/DR00001_RapidIO.png}
  \caption{Recommand Design B}	
 \end{figure}
 \newpage
