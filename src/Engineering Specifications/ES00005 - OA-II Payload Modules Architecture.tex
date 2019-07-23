@@ -9,7 +9,7 @@
 \title{OA-II Payload Modules Architecture}
 \author{Jinzhi Cai}
 \itemcode{ES00005}
-\revnumber{[revnumber]}
+\revnumber{A01}
 \date{\today}
 % End of document titles etc.
 %**********************************************************************
@@ -27,13 +27,63 @@
 % Everything after this is the main document. Edit below this line.
 
 \chapter{Introduction}
-\section{Section}
-test
-\subsection{Subsection}
-test2
-\section{Section2}
-test3
+\section{Scope}
+This document include the design detail of ORBiT Avionics System II Vehicle Electronics Payload Modules such as software and hardware structure and block diagram.
+\section{Purpose}
+The goal for this document is to come up a big picture for the OA-II system building.
+\section{Relevant Documents}
+\begin{description}
+	\item[\textbf{ER00002}]ORBiT Avionics System II Requirements
+	\item[\textbf{ES00002}]ORBiT Avionics System II Architecture
+	\item[\textbf{ES00003}]OA-II Vehicle Electronics (VEH) System Architecture
+	\item[\textbf{DR00001}]OA-II Backplane Bus System
+	\item[\textbf{DR00002}]OA-II VEH Camera System Design
+	\item[\textbf{DR00003}]OA-II VEH COM System Design
+	\item[\textbf{DR00004}]OA-II VEH TAM System Design
+	\item[\textbf{DR00005}]OA-II VEH PAM System Design
+\end{description}
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Jinzhi Cai & Jinzhi Cai & Initial draft & 2019-7-22 \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+\newpage
+\chapter{Computing and Operation Module}
+\section{Main Control Unit}
+\subparagraph{Main Control Unit contain:}
+\begin{itemize}
+	\item SoC FPGA that contain 80K LUT and 800MHz to 1GHz processor
+	\item Power manager chip that convert 48V main power to the processor required standard
+	\item Four low temperture sensors for electronics
+	\item Three axis IMU for Spare
+	\item Barometer for Spare
+	\item 2Gbit DRAM for SoC
+	\item 64GB Storage Media(SD card)
+	\item Diagnosis Connector
+\end{itemize}
+The SoC FPGA will be use as the main processor and come with few sensor attach with it. Those sensor is monitor the status of the SoC FPGA and spare for the critical sensors.\\
 
+\section{Failure Recovery Unit}
+\subparagraph{Failure Recovery Unit contain:}$\footnote{The same with the MCU}$
+\begin{itemize}
+	\item SoC FPGA that contain 80K LUT and 800MHz to 1GHz processor
+	\item Power manager chip that convert 48V main power to the processor required standard
+	\item Four low temperture sensors for electronics
+	\item Three axis IMU for Spare
+	\item Barometer for Spare
+	\item 2Gbit DRAM for SoC
+	\item 64GB Storage Media(SD card)
+	\item Diagnosis Connector
+\end{itemize}
+\section{Sensor Fusion Unit}
+TBD
+\chapter{Telecommunication and Acquisition Module}
+\chapter{Power and Actuator Module}
 
 % End of document.
 %**********************************************************************
