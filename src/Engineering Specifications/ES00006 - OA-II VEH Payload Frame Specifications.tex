@@ -1,0 +1,70 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{[title]}
+\author{[author(s)]}
+\itemcode{[itemcode]}
+\revnumber{[revnumber]}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+\tableofcontents*
+\clearpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+
+\chapter{Introduction}
+\section{Scope}
+
+\section{Purpose}
+
+\section{Relevant Documents}
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & & & Initial draft & \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+
+\section{Product Code}
+\begin{LARGE}
+OA2-PF-XXX-YY-Z
+\end{LARGE}\\
+\subparagraph{XXX}
+indecate how much unit it can fit for each module. The first number is for COM, then TAM and PAM.
+\subparagraph{YY}
+Designer name.
+\subparagraph{Z}
+Revision number. If it is greek numerals, it mean this unit is a test brench.
+\\\\
+example: 
+\begin{large}
+OA2-PF-333-[JC-1]
+\end{large}\\\\
+First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM units.\\\\
+example: 
+\begin{large}
+OA2-PF-111-[JC-IV]
+\end{large}\\\\
+Fourth generation payload frame test brench design by Jinzhi Cai which can contain one COM,TAM,PAM units.
+% End of document
+%**********************************************************************
+\end{document}

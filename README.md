@@ -36,8 +36,8 @@
   - ES00002 - ORBiT Avionics System II Architecture
   - ES00003 - OA-II Vehicle Electronics (VEH) System Architecture
   - ES00004 - OA-II Base Station Electronics (BAS) System Architecture
-  - ES00005 - OA-II VEH Payload Modules Architecture
-  - ES00006 - OA-II VEH Payload Frame Specifications (TBD)
+  - ES00005 - OA-II VEH Payload Modules General Architecture
+  - ES00006 - OA-II VEH Payload Frame Specifications
   - ES00007 - OA-II VEH Payload Bus Specifications (TBD)
 - Templates
   - LaTeX template

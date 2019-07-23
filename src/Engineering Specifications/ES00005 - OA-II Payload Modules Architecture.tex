@@ -6,7 +6,7 @@
 
 %**********************************************************************
 % Document titles etc. defined here: (replace [] as well)
-\title{OA-II Payload Modules Architecture}
+\title{OA-II Payload Modules General Architecture}
 \author{Jinzhi Cai}
 \itemcode{ES00005}
 \revnumber{A01}
@@ -28,9 +28,9 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document include the design detail of ORBiT Avionics System II Vehicle Electronics Payload Modules such as software and hardware structure and block diagram.
+All the hardware and software structure in this document is the fundamental across all version of OA-II VEH Payload Modules. \textbf{Each version might have modification above this version, please review relevant document.}
 \section{Purpose}
-The goal for this document is to come up a big picture for the OA-II system building.
+This document include the design general detail of ORBiT Avionics System II Vehicle Electronics Payload Modules such as software and hardware structure and block diagram.
 \section{Relevant Documents}
 \begin{description}
 	\item[\textbf{ER00002}]ORBiT Avionics System II Requirements
@@ -53,38 +53,169 @@ The goal for this document is to come up a big picture for the OA-II system buil
 	\label{tab:rev}
 \end{table}
 \newpage
+\chapter{System State Machine}
+\subsection{Initialization}
+In the initialization stage, OA-II VEH COM MCU(Main Control Unit) will sense all the on board device and running a check to exam all the device is functioning correctly. During this stage, all the command and the reply will happen in the Command bus, and each device will start to configuring the data bus interface. The final checking message will send from the MCU via the command bus and reply by each device via data bus.
+\subsection{Launch-Ready}
+After the initialization stage, the whole vehicle will be into launch ready stage. In this stage, all the ignition process will download to all the unit via command bus and waiting for synchronize ignition signal. All the sensor will running in full speed and deliver data into MCU to monitor vehicle status via the data bus.
+\subsection{Mid-Flight}
+After the ignition, all the sensor will running in full speed and deliver data into MCU to monitor vehicle status and recording via the data bus. Command Bus will be in the standby mode to be ready to emergent messege to passby.
+\subsection{Post-Flight}
+After landing, the MCU will do a final checking to all existing units via the Command bus before turn all the sensor unit power off. The data bus will be off during the whole landing process.
+\subsection{Failure-Safe}
+\newpage
 \chapter{Computing and Operation Module}
 \section{Main Control Unit}
 \subparagraph{Main Control Unit contain:}
 \begin{itemize}
 	\item SoC FPGA that contain 80K LUT and 800MHz to 1GHz processor
-	\item Power manager chip that convert 48V main power to the processor required standard
+	\item Power manager chip 
 	\item Four low temperture sensors for electronics
 	\item Three axis IMU for Spare
 	\item Barometer for Spare
 	\item 2Gbit DRAM for SoC
 	\item 64GB Storage Media(SD card)
+	\item Low Power Radio
+	\item RTC
 	\item Diagnosis Connector
 \end{itemize}
-The SoC FPGA will be use as the main processor and come with few sensor attach with it. Those sensor is monitor the status of the SoC FPGA and spare for the critical sensors.\\
+The SoC FPGA will be use as the main processor and come with few sensor attach with it. Those sensor is monitor the status of the SoC FPGA and spare for the critical sensors.\\\\
+The power manger IC will be able to convert 28V main power to the processor required standard. The main power rail will contain two main power line. Each line will need a power manager IC and a IC that can switch between those two power supply.\\\\
+All the onboard analog sensor will connect to an 10KHz 16bit AD on the MCU and connect to the main processor. All the sensor will be up and running before \textbf{Launch Ready} status.\\\\
+The RTC and Diagnosis Connection should be always on during the flight and if any of them lost the connection. The FRU will active and cutoff the MCU.\\\\
+Each second, one Vehicle Status Report will be create and save to the storage media. It include all the sensor data during this time and a brief status exam.
 
 \section{Failure Recovery Unit}
 \subparagraph{Failure Recovery Unit contain:}$\footnote{The same with the MCU}$
 \begin{itemize}
 	\item SoC FPGA that contain 80K LUT and 800MHz to 1GHz processor
-	\item Power manager chip that convert 48V main power to the processor required standard
+	\item Power manager chip
 	\item Four low temperture sensors for electronics
 	\item Three axis IMU for Spare
 	\item Barometer for Spare
 	\item 2Gbit DRAM for SoC
 	\item 64GB Storage Media(SD card)
+	\item Low Power Radio
 	\item Diagnosis Connector
 \end{itemize}
+The FRU will have the same hardware structure compare with the MCU. It mainly have two jobs. The first job is execute the same command with MCU but not send it out, those command will only use for check the MCU is sending the same command as the plan. The second job is get the MCU information from the Diagnosis Connection to exam the main controller status and detect failure scenario for execute emergent cutoff.
 \section{Sensor Fusion Unit}
-TBD
+TBD $\footnote{This unit will not be avaliable in the first version.}$
+\newpage
+\section{Module Chip Selection}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{ c | c | c | c }
+		Chip Name & Price & Feature/Description & Unit Belongs\\ \hline
+		 XC7Z030 & \$331.5 & Processor & MCU/FRU \\
+		 TLV62130RGT & \$2 & Processor Power & MCU/FRU \\
+		 TPS51200 & \$1 & Processor Power & MCU/FRU \\
+		 SPX3819M5-3-3 & \$0.6 & Processor Power & MCU/FRU \\
+		 DDR3 16bit& \$13 & Memory & MCU/FRU \\
+		 SDcard Slot & \$1 & SDcard Slot & MCU/FRU \\
+		 &  & Three axis IMU & MCU/FRU \\
+		 &  & Barometer & MCU/FRU \\
+		 &  & Low Power Radio & MCU/FRU \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:slc}
+\end{table}
+\section{Product Code}
+\begin{LARGE}
+OA2-COM-XXX-[YY-Z]
+\end{LARGE}\\\\
+\subparagraph{XXX}
+The version number. More detail please see relevant document.
+\subparagraph{YY}
+Designer name.
+\subparagraph{Z}
+Revision number.\\\\
+example: 
+\begin{large}
+OA2-COM-N01-[JC-I]
+\end{large}\\\\
+First generation Computing and Operation Module Main Control Unit design by Jinzhi Cai.
+\newpage
 \chapter{Telecommunication and Acquisition Module}
+\section{Data Record Unit}
+\subparagraph{Data Record Unit:}
+\begin{itemize}
+	\item SoC FPGA that contain 20kLUT and running in 700MHz
+	\item Duel SDcard
+\end{itemize}
+TBD $\footnote{This unit will not be avaliable in the first version.}$
+\section{Telecommunication Unit}
+\subparagraph{Telecommunication Unit:}
+\begin{itemize}
+	\item FPGA that contain 20K LUT
+	\item Radio Module
+\end{itemize}
+The FPGA in the unit will translate data that send form the COM units to the standard that the radio module able to receive. When this unit failure before \textbf{Mid-Flight} status, the launch will terminate.
+\section{Low Speed Sensor Unit}
+\subparagraph{Low Speed Sensor Unit:}
+\begin{itemize}
+	\item FPGA that contain 20K LUT
+	\item AD IC with 10kHz 16bit
+	\item Relative sensor
+\end{itemize}
+\section{High Speed Sensor Unit}
+\subparagraph{High Speed Sensor Unit:}
+\begin{itemize}
+	\item FPGA that contain 20K LUT
+	\item AD IC with 10MHz 16bit
+	\item Relative sensor
+\end{itemize}
+\section{Product Code}
+\begin{LARGE}
+OA2-TAM-XXX-[YY-Z]
+\end{LARGE}\\\\
+\subparagraph{XXX}
+The version number. More detail please see relevant document.
+\subparagraph{YY}
+Designer name.
+\subparagraph{Z}
+Revision number.\\\\
+example: 
+\begin{large}
+OA2-TAM-N01-[JC-I]
+\end{large}\\\\
+First generation Telecommunication and Acquisition Module Data Record Unit design by Jinzhi Cai.
+\newpage
+\newpage
 \chapter{Power and Actuator Module}
-
+\section{Power Manager Unit}
+\section{Pyrotechnic Power Unit}
+\section{Actuator Power Unit}
+\section{Product Code}
+\begin{LARGE}
+OA2-PAM-XXX-[YY-Z]
+\end{LARGE}\\\\
+\subparagraph{XXX}
+The version number. More detail please see relevant document.
+\subparagraph{YY}
+Designer name.
+\subparagraph{Z}
+Revision number.\\\\
+example: 
+\begin{large}
+OA2-PAM-N01-[JC-I]
+\end{large}\\\\
+First generation Power and Actuator Module Power Manager Unit design by Jinzhi Cai.
+\newpage
 % End of document.
 %**********************************************************************
 \end{document}
+\section{Product Code}
+
+
+
+
+
+
+
+
+
+
+
+
+

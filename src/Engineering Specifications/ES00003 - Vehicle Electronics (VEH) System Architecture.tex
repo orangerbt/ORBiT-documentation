@@ -37,27 +37,6 @@ For a functioning OA-II VEH, it only require the basic unit in COM and PAM. For 
 \chapter{Payload Frame (PF)}
 \section{Discribtion}
 In the Payload Frame, most of the signal and power will run throught it and arrive to the target unit. The payload frame will have different sector for different module. In general, it will at least provide three power line, more than one commend line, and four high speed data lane.
-\section{Product Code}
-\begin{LARGE}
-OA2-PF-XXX-YY-Z
-\end{LARGE}\\
-\subparagraph{XXX}
-indecate how much unit it can fit for each module. The first number is for COM, then TAM and PAM.
-\subparagraph{YY}
-Designer name.
-\subparagraph{Z}
-Revision number. If it is greek numerals, it mean this unit is a test brench.
-\\\\
-example: 
-\begin{large}
-OA2-PF-333-[JC-1]
-\end{large}\\\\
-First generation payload frame design by Jinzhi Cai which can contain three COM,TAM,PAM units.\\\\
-example: 
-\begin{large}
-OA2-PF-111-[JC-IV]
-\end{large}\\\\
-Fourth generation payload frame test brench design by Jinzhi Cai which can contain one COM,TAM,PAM units.
 \newpage
 \chapter{Payload Modules (PM)}
 \section{Discribtion}
@@ -142,21 +121,6 @@ The power manager unit is use to control charge and discharge of the on unit mai
 This unit contain spcial purpose voltage regulator and pyrotechnic driver. It will use to control the pyrotechnic device in the ship base on the commend come from the COM. 
 \subsection{Actuator Power Unit (3)}
 This unit contain spcial purpose voltage regulator and actuator driver. It will use to control the actuator in the ship base on the commend come from the COM.
-\section{Product Code}
-\begin{LARGE}
-OA2-<COM/PAM/TAM>-XXX-[YY-Z]
-\end{LARGE}\\\\
-\subparagraph{XXX}
-The first letter is indecate which kind of rocket it fit for. \textbf{H} for high power,\textbf{N} for general purpose, \textbf{S} for small scale. The number follow it is depend unit. The last number is what this unit belongs to. 
-\subparagraph{YY}
-Designer name.
-\subparagraph{Z}
-Revision number.\\\\
-example: 
-\begin{large}
-OA2-COM-N01-[JC-1]
-\end{large}\\\\
-First generation Computing and Operation Module main unit design by Jinzhi Cai.
 \newpage
 \chapter{Revision History}% ; change PAM unit describtion
 \begin{table}[H]
@@ -170,6 +134,7 @@ First generation Computing and Operation Module main unit design by Jinzhi Cai.
 		- & Jinzhi Cai & add diagram & 2019-7-3\\ \hline
 		A03 & Jinzhi Cai & change DRU & 2019-7-8\\ \hline
 		A04 & Jinzhi Cai & add sensors & 2019-7-16\\ \hline
+		A05 & Jinzhi Cai & remove product code & 2019-7-23\\ \hline
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:edatools}
