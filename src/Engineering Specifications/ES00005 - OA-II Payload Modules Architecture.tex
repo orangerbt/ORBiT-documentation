@@ -74,6 +74,7 @@ After landing, the MCU will do a final checking to all existing units via the Co
 	\item Three axis IMU for Spare
 	\item Barometer for Spare
 	\item 2Gbit DRAM for SoC
+	\item 4GB Storage Media(flash)
 	\item 64GB Storage Media(SD card)
 	\item Low Power Radio
 	\item RTC
@@ -83,7 +84,7 @@ The SoC FPGA will be use as the main processor and come with few sensor attach w
 The power manger IC will be able to convert 28V main power to the processor required standard. The main power rail will contain two main power line. Each line will need a power manager IC and a IC that can switch between those two power supply.\\\\
 All the onboard analog sensor will connect to an 10KHz 16bit AD on the MCU and connect to the main processor. All the sensor will be up and running before \textbf{Launch Ready} status.\\\\
 The RTC and Diagnosis Connection should be always on during the flight and if any of them lost the connection. The FRU will active and cutoff the MCU.\\\\
-Each second, one Vehicle Status Report will be create and save to the storage media. It include all the sensor data during this time and a brief status exam.
+Each second, one Vehicle Status Report will be create and save to the storage media. It include all the sensor data during this time and a brief status exam. Main program file will stoage in the flash because the SD card might disconnect during the flight because of the vibration. The SD card is majorly for data logging.
 
 \section{Failure Recovery Unit}
 \subparagraph{Failure Recovery Unit contain:}$\footnote{The same with the MCU}$
@@ -94,6 +95,7 @@ Each second, one Vehicle Status Report will be create and save to the storage me
 	\item Three axis IMU for Spare
 	\item Barometer for Spare
 	\item 2Gbit DRAM for SoC
+	\item 4GB Storage Media(flash)
 	\item 64GB Storage Media(SD card)
 	\item Low Power Radio
 	\item Diagnosis Connector
@@ -112,6 +114,7 @@ TBD $\footnote{This unit will not be avaliable in the first version.}$
 		 TPS51200 & \$1 & Processor Power & MCU/FRU \\
 		 SPX3819M5-3-3 & \$0.6 & Processor Power & MCU/FRU \\
 		 DDR3 16bit& \$13 & Memory & MCU/FRU \\
+		  & \$20 & Flash Memory & MCU/FRU \\
 		 SDcard Slot & \$1 & SDcard Slot & MCU/FRU \\
 		 &  & Three axis IMU & MCU/FRU \\
 		 &  & Barometer & MCU/FRU \\
