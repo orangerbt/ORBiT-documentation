@@ -141,6 +141,7 @@ First generation Computing and Operation Module Main Control Unit design by Jinz
 \subparagraph{Data Record Unit contain:}
 \begin{itemize}
 	\item SoC FPGA that contain 20kLUT and running in 700MHz
+	\item SoC power
 	\item Duel SDcard
 \end{itemize}
 TBD $\footnote{This unit will not be avaliable in the first version.}$
@@ -148,23 +149,19 @@ TBD $\footnote{This unit will not be avaliable in the first version.}$
 \subparagraph{Telecommunication Unit contain:}
 \begin{itemize}
 	\item FPGA that contain 20K LUT
+	\item QSPI flash
+	\item FPGA power
 	\item Radio Module
 \end{itemize}
 The FPGA in the unit will translate data that send form the COM units to the standard that the radio module able to receive. When this unit failure before \textbf{Mid-Flight} status, the launch will terminate.
-\section{Low Speed Sensor Unit}
-\subparagraph{Low Speed Sensor Unit:}
+\section{Data Acquisition Unit}
+\subparagraph{Data Acquisition Unit:}
 \begin{itemize}
-	\item FPGA that contain 20k LUT
-	\item AD IC with 10kHz 16bit
-	\item Relative sensor
+	\item FPGA that contain 200k-300k LUT
+	\item 2Gbit DRAM for FPGA
+	\item Multi-purpose Extension Interface
 \end{itemize}
-\section{High Speed Sensor Unit}
-\subparagraph{High Speed Sensor Unit:}
-\begin{itemize}
-	\item FPGA that contain 20k LUT
-	\item AD IC with 10MHz 16bit
-	\item Relative sensor
-\end{itemize}
+
 \section{Product Code}
 \begin{LARGE}
 OA2-TAM-XXX-[YY-Z]
@@ -191,7 +188,6 @@ First generation Telecommunication and Acquisition Module Data Record Unit desig
 	\item NTC temperture sensors \times 4 (batteries)
 	\item Current sensors \times 4 (batteries)
 \end{itemize}
-
 \section{Pyrotechnic Power Unit}
 \subparagraph{Pyrotechnic Power Unit contain:}
 \begin{itemize}
