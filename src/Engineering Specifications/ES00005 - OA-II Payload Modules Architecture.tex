@@ -63,6 +63,7 @@ After the ignition, all the sensor will running in full speed and deliver data i
 \subsection{Post-Flight}
 After landing, the MCU will do a final checking to all existing units via the Command bus before turn all the sensor unit power off. The data bus will be off during the whole landing process.
 \subsection{Failure-Safe}
+This stage will be control by the Failure Recovery Unit. When MCU lost control or any failure scenario has been detected, The FRU will boardcast \textbf{Failure-Safe} signal to any existing bus. When a unit receive this signl, it will load the failure countermeasure that solidify in the core memory. The whole vehicle will try it best for saft landing recovery. Any additional feature will turn off to prevent further damage.
 \newpage
 \chapter{Computing and Operation Module}
 \section{Main Control Unit}
@@ -164,7 +165,16 @@ The FPGA in the unit will translate data that send form the COM units to the sta
 	\item 2Gbit DRAM for FPGA
 	\item Multi-purpose Extension Interface
 \end{itemize}
-
+\section{Module Chip Selection}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{ c | c | c | c }
+		Chip Name & Price & Feature/Description & Unit Belongs\\ \hline
+		 XC7Z030 & \$331.5 & Processor & MCU/FRU \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:slc}
+\end{table}
 \section{Product Code}
 \begin{LARGE}
 OA2-TAM-XXX-[YY-Z]
@@ -181,7 +191,6 @@ OA2-TAM-N01-[JC-I]
 \end{large}\\\\
 First generation Telecommunication and Acquisition Module Data Record Unit design by Jinzhi Cai.
 \newpage
-\newpage
 \chapter{Power and Actuator Module}
 \section{Power Manager Unit}
 \subparagraph{Power Manager Unit contain:}
@@ -190,7 +199,11 @@ First generation Telecommunication and Acquisition Module Data Record Unit desig
 	\item 10kHz 16bit AD
 	\item NTC temperture sensors \times 4 (batteries)
 	\item Current sensors \times 4 (batteries)
+	\item Current sensors \times 4 (output)
+	\item Power convertor up to 28V 500W
+	\item 10C battery monitor
 \end{itemize}
+The power manage unit contain two part. The battery part will need to monitor the status of batteries and able to change the batteries via the launch pad. It also need to report the batteries to the MCU when it needed. The output part is convert batteries power to the backplane. It also monitor the whole VEH power usage.
 \section{Pyrotechnic Power Unit}
 \subparagraph{Pyrotechnic Power Unit contain:}
 \begin{itemize}
@@ -204,8 +217,19 @@ First generation Telecommunication and Acquisition Module Data Record Unit desig
 	\item FPGA that contain 20k LUT
 	\item 10kHz 16bit AD
 	\item Deployment sensors \times 4
+	\item 20kHz PWM Crystal
 	\item Motor driver 5-10 channel
 \end{itemize}
+\section{Module Chip Selection}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{ c | c | c | c }
+		Chip Name & Price & Feature/Description & Unit Belongs\\ \hline
+		 XC7Z030 & \$331.5 & Processor & MCU/FRU \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:slc}
+\end{table}
 \section{Product Code}
 \begin{LARGE}
 OA2-PAM-XXX-[YY-Z]
