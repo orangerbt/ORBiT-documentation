@@ -115,7 +115,7 @@ TBD $\footnote{This unit will not be avaliable in the first version.}$
 		 TPS51200 & \$1 & Processor Power & MCU/FRU \\
 		 SPX3819M5-3-3 & \$0.6 & Processor Power & MCU/FRU \\
 		 DDR3 16bit& \$13 & Memory & MCU/FRU \\
-		  & \$20 & Flash Memory & MCU/FRU \\
+		 QSPI flash & \$20 & Flash Memory & MCU/FRU \\
 		 SDcard Slot & \$1 & SDcard Slot & MCU/FRU \\
 		 &  & Three axis IMU & MCU/FRU \\
 		 &  & Barometer & MCU/FRU \\
@@ -152,7 +152,7 @@ TBD $\footnote{This unit will not be avaliable in the first version.}$
 \section{Telecommunication Unit}
 \subparagraph{Telecommunication Unit contain:}
 \begin{itemize}
-	\item FPGA that contain 20K LUT
+	\item Spartan-7 FPGA that contain 20K LUT
 	\item QSPI flash
 	\item FPGA power
 	\item Radio Module
@@ -170,7 +170,7 @@ The FPGA in the unit will translate data that send form the COM units to the sta
 	\centering
 	\begin{tabu}{ c | c | c | c }
 		Chip Name & Price & Feature/Description & Unit Belongs\\ \hline
-		 XC7Z030 & \$331.5 & Processor & MCU/FRU \\
+		 & & & \\
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:slc}
@@ -195,26 +195,39 @@ First generation Telecommunication and Acquisition Module Data Record Unit desig
 \section{Power Manager Unit}
 \subparagraph{Power Manager Unit contain:}
 \begin{itemize}
-	\item FPGA that contain 20k LUT
+	\item Spartan-7 FPGA that contain 20k LUT
 	\item 10kHz 16bit AD
 	\item NTC temperture sensors \times 4 (batteries)
 	\item Current sensors \times 4 (batteries)
 	\item Current sensors \times 4 (output)
-	\item Power convertor up to 28V 500W
+	\item Power convertor up to 28V 300W
 	\item 10C battery monitor
 \end{itemize}
 The power manage unit contain two part. The battery part will need to monitor the status of batteries and able to change the batteries via the launch pad. It also need to report the batteries to the MCU when it needed. The output part is convert batteries power to the backplane. It also monitor the whole VEH power usage.
+\begin{table}[H]
+	\centering
+	\begin{tabu}{ c | c | c }
+		Module Unit & Processor & Power\\ \hline
+		 COM MCU & Zynq 7030 & 30W\\
+		 COM FRU & Zynq 7030 & 30W\\
+		 TAM TCU & Spartan-7 & 20W\\
+		 TAM DAU & Spartan-7 & 20W \times 10(MAX)\\ \hline
+		 Summary &   & 280W\\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:slc}
+\end{table}
 \section{Pyrotechnic Power Unit}
 \subparagraph{Pyrotechnic Power Unit contain:}
 \begin{itemize}
-	\item FPGA that contain 20k LUT
+	\item Spartan-7 FPGA that contain 20k LUT
 	\item 10kHz 16bit AD
 	\item Current sensors \times 4 (pyros)
 \end{itemize}
 \section{Actuator Power Unit}
 \subparagraph{Actuator Power Unit contain:}
 \begin{itemize}
-	\item FPGA that contain 20k LUT
+	\item Spartan-7 FPGA that contain 20k LUT
 	\item 10kHz 16bit AD
 	\item Deployment sensors \times 4
 	\item 20kHz PWM Crystal
@@ -225,7 +238,7 @@ The power manage unit contain two part. The battery part will need to monitor th
 	\centering
 	\begin{tabu}{ c | c | c | c }
 		Chip Name & Price & Feature/Description & Unit Belongs\\ \hline
-		 XC7Z030 & \$331.5 & Processor & MCU/FRU \\
+		 & & & \\
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:slc}
@@ -246,6 +259,7 @@ OA2-PAM-N01-[JC-I]
 \end{large}\\\\
 First generation Power and Actuator Module Power Manager Unit design by Jinzhi Cai.
 \newpage
+
 % End of document.
 %**********************************************************************
 \end{document}
