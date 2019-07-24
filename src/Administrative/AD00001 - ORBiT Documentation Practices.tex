@@ -39,7 +39,8 @@ This document sets standards for documentation of all ORBiT hardware, software, 
 	\begin{tabu}{r || c | c | c | c }
 		Rev & Author & Approver & Changes & Date\\ \hline
 		A01 & Gabriel Smolnycki & & Initial draft & 2019-06-29 \\
-		& Gabriel Smolnycki & & Formatting & 2019-07-08 \\
+		A02 & Gabriel Smolnycki & & Formatting & 2019-07-08 \\
+		A03 & Gabriel Smolnycki & & Finished draft & 2019-07-23 
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:rev}
@@ -80,19 +81,24 @@ Test reports detail the results of a test instruction. These should be detailed 
 
 \chapter{Parts and Manufacturing}
 \begin{itemize}
-\item \textit{A: Assembly}\\
-Assemblies are created from multiple components. Assembly drawings require a BOM.
-\item \textit{E: Electronics}\\
+\item \textbf{A: Assembly}\\
+Assemblies are created from multiple components. Assembly drawings require a BOM. There are three different types of assemblies:
+\begin{itemize}
+	\item \textit{AE: Electrical Assembly}
+	\item \textit{AM: Mechanical Assembly}
+	\item \textit{AT: Tooling Assembly}
+\end{itemize}
+\item \textbf{E: Electronics}\\
 Electronics includes all electrical components, passive or active, as well as bare and populated PCBs.
-\item \textit{F: Fabricated}\\
+\item \textbf{F: Fabricated}\\
 Fabricated components are any finished component built by ORBiT.
-\item \textit{M: Manufacturing Intermediate}\\
+\item \textbf{M: Manufacturing Intermediate}\\
 Manufacturing intermediates are components which are not yet finished, but must include a detailed step. Examples include components of a weldment, or additive manufactured parts which require postprocessing.
-\item \textit{P: Purchased}\\
+\item \textbf{P: Purchased}\\
 Purchased parts are components delivered in a finished state, which are not designed by ORBiT.
-\item \textit{S: Software}\\
+\item \textbf{S: Software}\\
 All custom software distributions.
-\item \textit{T: Tooling}\\
+\item \textbf{T: Tooling}\\
 Tooling includes any specialized tooling which is used to build other parts. Examples include jigs, fixtures, and molds.
 \end{itemize}
 
@@ -100,7 +106,44 @@ Tooling includes any specialized tooling which is used to build other parts. Exa
 
 \chapter{Numbering and Revisions}
 
+\section{Drawing Numbering}
+Drawing numbering consists of a prefix for the drawing type, and a drawing number which is sequential within the type.
+\begin{table}[h]
+	\centering
+	\definecolor{shadecolor1}{RGB}{210,210,210}
+	\definecolor{shadecolor2}{RGB}{170,170,170}
+	\begin{tabu}{|c|}
+		\hline\\
+		\huge \colorbox{shadecolor1}{A}\colorbox{shadecolor2}{12345}\\
+		\colorbox{shadecolor1}{A} - Drawing Type | \colorbox{shadecolor2}{12345} - Drawing Number\\ \hline
+	\end{tabu}
+\end{table}\par
 
+\section{Document Numbering}
+Document numbering consists of a prefix for the document type, and a document number which is sequential within the type.
+\begin{table}[h]
+	\centering
+	\definecolor{shadecolor1}{RGB}{210,210,210}
+	\definecolor{shadecolor2}{RGB}{170,170,170}
+	\begin{tabu}{|c|}
+		\hline\\
+		\huge \colorbox{shadecolor1}{AD}\colorbox{shadecolor2}{12345}\\
+		\colorbox{shadecolor1}{AD} - Document Type | \colorbox{shadecolor2}{12345} - Document Number\\ \hline
+	\end{tabu}
+\end{table}\par
+
+\section{Revisions}
+Revisions start at A01. Both major and minor revisions increase monotonically. Major revisions are any changes of form, fit, or function. Minor revisions are clarifications, fixes to typos, or other changes which do not affect form, fit, or function.
+\begin{table}[h]
+	\centering
+	\definecolor{shadecolor1}{RGB}{210,210,210}
+	\definecolor{shadecolor2}{RGB}{170,170,170}
+	\begin{tabu}{|c|}
+		\hline\\
+		\huge \colorbox{shadecolor1}{A}\colorbox{shadecolor2}{12}\\
+		\colorbox{shadecolor1}{A} - Major Revision | \colorbox{shadecolor2}{12} - Minor Revision\\ \hline
+	\end{tabu}
+\end{table}
 
 \newpage
 
