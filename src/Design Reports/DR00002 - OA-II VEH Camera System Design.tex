@@ -9,7 +9,7 @@
 \title{OA-II VEH Camera System Design}
 \author{Jinzhi Cai}
 \itemcode{DR00002}
-\revnumber{A02}
+\revnumber{A03}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -39,6 +39,7 @@ The goal for this document is come up with a design that will provide four 1080p
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize & 2019-7-13\\ \hline
 		A02 & Jinzhi Cai & Add detail & 2019-7-15\\
+		A03 & Jinzhi Cai & Add Jetson Nano & 2019-7-24\\
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -203,6 +204,11 @@ architecture. Incorporating the new and innovative C66x DSP core, this device ca
  \caption{Block Diagram for Ambarella H22}	
 \end{center}
 \end{figure}
+\newpage
+\section{GPU Module}
+\subsection{Jetson Nano}
+The Jetson Nano is a GPU computing module what NVIDIA produce for GPU AI computer. It come with 6 MIPI CSI-2 interface and able to handle about 4K 60fps encoding. In the output option, it support PCIe output which can use as the interface. The only problem is it will require extra thermo solution due to the heat it produce and FPGA adoption program to translate the data to backplane bus.
+
 \newpage
 %**********************************************************************
 \chapter{File System and Video Storage}
