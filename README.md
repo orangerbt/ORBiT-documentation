@@ -40,7 +40,8 @@
   - ES00006 - OA-II VEH Payload Frame General Specifications
   - ES00007 - OA-II VEH Payload Bus Specifications (TBD)
   - ES00008 - OA2-COM-MCU-N01 Description (TBD)
-  - ES00008 - OA2-COM-FRU-N01 Description (TBD)
+  - ES00009 - OA2-COM-FRU-N01 Description (TBD)
+  - ES00010 - OA2-PAM-PMU-N01 Description (TBD)
 - Templates
   - LaTeX template
   - Microsoft Word template
