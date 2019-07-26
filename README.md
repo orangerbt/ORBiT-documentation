@@ -26,6 +26,7 @@
   - DR00003 - OA-II VEH COM System Design
   - DR00004 - OA-II VEH TAM System Design
   - DR00005 - OA-II VEH PAM System Design
+  - DR00006 - OA-II VEH Storage System Design
 - Engineering Instructions
   - EI00001 - Avionics System I User Manual
 - Engineering Requirements

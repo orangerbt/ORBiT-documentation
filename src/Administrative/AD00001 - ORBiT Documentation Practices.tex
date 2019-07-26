@@ -9,7 +9,7 @@
 \title{ORBiT Documentation Practices}
 \author{Gabriel Smolnycki}
 \itemcode{AD00001}
-\revnumber{A01}
+\revnumber{A04}
 \date{\today}
 % End of document titles etc.
 %**********************************************************************
@@ -40,7 +40,8 @@ This document sets standards for documentation of all ORBiT hardware, software, 
 		Rev & Author & Approver & Changes & Date\\ \hline
 		A01 & Gabriel Smolnycki & & Initial draft & 2019-06-29 \\
 		A02 & Gabriel Smolnycki & & Formatting & 2019-07-08 \\
-		A03 & Gabriel Smolnycki & & Finished draft & 2019-07-23 
+		A03 & Gabriel Smolnycki & & Finished draft & 2019-07-23 \\
+		A04 & Gabriel Smolnycki & & Variants & 2019-07-25
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:rev}
@@ -107,15 +108,16 @@ Tooling includes any specialized tooling which is used to build other parts. Exa
 \chapter{Numbering and Revisions}
 
 \section{Drawing Numbering}
-Drawing numbering consists of a prefix for the drawing type, and a drawing number which is sequential within the type.
+Drawing numbering consists of a prefix for the drawing type, and a drawing number which is sequential within the type. There is also an optional variant suffix, used when multiple similar versions of a part such as a shim or bearing are included in one drawing. If there are no variants, the variant suffix should not be included.
 \begin{table}[h]
 	\centering
-	\definecolor{shadecolor1}{RGB}{210,210,210}
-	\definecolor{shadecolor2}{RGB}{170,170,170}
+	\definecolor{shadecolor1}{RGB}{230,230,230}
+	\definecolor{shadecolor2}{RGB}{200,200,200}
+	\definecolor{shadecolor3}{RGB}{170,170,170}
 	\begin{tabu}{|c|}
 		\hline\\
-		\huge \colorbox{shadecolor1}{A}\colorbox{shadecolor2}{12345}\\
-		\colorbox{shadecolor1}{A} - Drawing Type | \colorbox{shadecolor2}{12345} - Drawing Number\\ \hline
+		\huge \colorbox{shadecolor1}{A}\colorbox{shadecolor2}{12345}\colorbox{shadecolor3}{-001}\\
+		\colorbox{shadecolor1}{A} - Drawing Type | \colorbox{shadecolor2}{12345} - Drawing Number | \colorbox{shadecolor3}{-001} - Variant\\ \hline
 	\end{tabu}
 \end{table}\par
 
@@ -123,12 +125,12 @@ Drawing numbering consists of a prefix for the drawing type, and a drawing numbe
 Document numbering consists of a prefix for the document type, and a document number which is sequential within the type.
 \begin{table}[h]
 	\centering
-	\definecolor{shadecolor1}{RGB}{210,210,210}
-	\definecolor{shadecolor2}{RGB}{170,170,170}
+	\definecolor{shadecolor1}{RGB}{230,230,230}
+	\definecolor{shadecolor2}{RGB}{200,200,200}
 	\begin{tabu}{|c|}
 		\hline\\
-		\huge \colorbox{shadecolor1}{AD}\colorbox{shadecolor2}{12345}\\
-		\colorbox{shadecolor1}{AD} - Document Type | \colorbox{shadecolor2}{12345} - Document Number\\ \hline
+		\huge \colorbox{shadecolor1}{AB}\colorbox{shadecolor2}{12345}\\
+		\colorbox{shadecolor1}{AB} - Document Type | \colorbox{shadecolor2}{12345} - Document Number\\ \hline
 	\end{tabu}
 \end{table}\par
 
@@ -136,8 +138,8 @@ Document numbering consists of a prefix for the document type, and a document nu
 Revisions start at A01. Both major and minor revisions increase monotonically. Major revisions are any changes of form, fit, or function. Minor revisions are clarifications, fixes to typos, or other changes which do not affect form, fit, or function.
 \begin{table}[h]
 	\centering
-	\definecolor{shadecolor1}{RGB}{210,210,210}
-	\definecolor{shadecolor2}{RGB}{170,170,170}
+	\definecolor{shadecolor1}{RGB}{230,230,230}
+	\definecolor{shadecolor2}{RGB}{200,200,200}
 	\begin{tabu}{|c|}
 		\hline\\
 		\huge \colorbox{shadecolor1}{A}\colorbox{shadecolor2}{12}\\
