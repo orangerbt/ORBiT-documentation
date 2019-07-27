@@ -41,6 +41,7 @@ This document include the design general detail of ORBiT Avionics System II Vehi
 	\item[\textbf{DR00003}]OA-II VEH COM System Design
 	\item[\textbf{DR00004}]OA-II VEH TAM System Design
 	\item[\textbf{DR00005}]OA-II VEH PAM System Design
+	\item[\textbf{ES00007}OA-II VEH Payload Bus Specifications
 \end{description}
 \section{Revision History}
 \begin{table}[H]
@@ -65,11 +66,20 @@ After landing, the MCU will do a final checking to all existing units via the Co
 \subsection{Failure-Safe}
 This stage will be control by the Failure Recovery Unit. When MCU lost control or any failure scenario has been detected, The FRU will boardcast \textbf{Failure-Safe} signal to any existing bus. When a unit receive this signl, it will load the failure countermeasure that solidify in the core memory. The whole vehicle will try it best for saft landing recovery. Any additional feature will turn off to prevent further damage.
 \newpage
+\chapter{Payload Modules General Setting}
+\section{Interface}
+In each unit, it will always contain some interface with the other unit or the OA-II BAS system.
+\subparagraph{Debug Interface} each unit will contain one universial debug interface that contain one set of JTAG and a UART connection. This interface will use for device update and on field status monitoring.
+\subparagraph{Backplane Interface} each unit will contain one universial backplane which contain two 2-lane SpaceWire bus, two CANbus, and two power rail.$\footnote{More information please read ES00007 - OA-II VEH Payload Bus Specifications}$
+\section{Power}
+\
+\section{Storage}
+\newpage
 \chapter{Computing and Operation Module}
 \section{Main Control Unit}
 \subparagraph{Main Control Unit contain:}
 \begin{itemize}
-	\item SoC FPGA that contain 80kLUT and 800MHz to 1GHz processor
+	\item SoC FPGA that contain estimated 80kLUT and 800MHz to 1GHz processor
 	\item Power manager chip 
 	\item Four low temperture sensors for electronics
 	\item Three axis IMU for Spare
@@ -90,7 +100,7 @@ Each second, one Vehicle Status Report will be create and save to the storage me
 \section{Failure Recovery Unit}
 \subparagraph{Failure Recovery Unit contain:}$\footnote{The same with the MCU}$
 \begin{itemize}
-	\item SoC FPGA that contain 80k LUT and 800MHz to 1GHz processor
+	\item SoC FPGA that contain estimated 80k LUT and 800MHz to 1GHz processor
 	\item Power manager chip
 	\item Four low temperture sensors for electronics
 	\item Three axis IMU for Spare
@@ -103,7 +113,17 @@ Each second, one Vehicle Status Report will be create and save to the storage me
 \end{itemize}
 The FRU will have the same hardware structure compare with the MCU. It mainly have two jobs. The first job is execute the same command with MCU but not send it out, those command will only use for check the MCU is sending the same command as the plan. The second job is get the MCU information from the Diagnosis Connection to exam the main controller status and detect failure scenario for execute emergent cutoff.
 \section{Sensor Fusion Unit}
-TBD $\footnote{This unit will not be avaliable in the first version.}$
+\begin{itemize}
+	\item SoC FPGA that contain Cortex - A53 or same level processor
+	\item Special DSP chip for data analysis
+	\item Power manager chip
+	\item Four low temperture sensors for electronics
+	\item Three axis IMU for Spare
+	\item Barometer for Spare
+	\item 4GB Storage Media(flash)
+	\item Minimum 4Gbit DDR3 or DDR4 memory
+\end{itemize}
+The Sensor Fusion Unit is use as a co-processor that will help MCU analyze the raw data from the DAU. It will have a SoC for the control and communicational processor and a special DSP for the data analysis. It will have software define direct connection with the MCU and will take over the communicaiton COM with the TAM DAUs.$\footnote{This unit will not be avaliable in the first version.}$
 \newpage
 \section{Module Chip Selection}
 \begin{table}[H]
@@ -154,7 +174,7 @@ TBD $\footnote{This unit will not be avaliable in the first version.}$
 \section{Telecommunication Unit}
 \subparagraph{Telecommunication Unit contain:}
 \begin{itemize}
-	\item Spartan-7 FPGA that contain 20K LUT
+	\item Spartan-7 FPGA that estimated contain estimated 20K LUT
 	\item QSPI flash
 	\item FPGA power
 	\item Radio Module
@@ -199,7 +219,7 @@ First generation Telecommunication and Acquisition Module Data Acquisition Unit 
 \section{Power Manager Unit}
 \subparagraph{Power Manager Unit contain:}
 \begin{itemize}
-	\item Spartan-7 FPGA that contain 20k LUT
+	\item Spartan-7 FPGA that estimated contain estimated 20k LUT
 	\item 10kHz 16bit AD
 	\item NTC temperture sensors \times 4 (batteries)
 	\item Current sensors \times 4 (batteries)
@@ -224,14 +244,14 @@ The power manage unit contain two part. The battery part will need to monitor th
 \section{Pyrotechnic Power Unit}
 \subparagraph{Pyrotechnic Power Unit contain:}
 \begin{itemize}
-	\item Spartan-7 FPGA that contain 20k LUT
+	\item Spartan-7 FPGA that contain estimated 20k LUT
 	\item 10kHz 16bit AD
 	\item Current sensors \times 4 (pyros)
 \end{itemize}
 \section{Actuator Power Unit}
 \subparagraph{Actuator Power Unit contain:}
 \begin{itemize}
-	\item Spartan-7 FPGA that contain 20k LUT
+	\item Spartan-7 FPGA that estimated contain 20k LUT
 	\item 10kHz 16bit AD
 	\item Deployment sensors \times 4
 	\item 20kHz PWM Crystal
