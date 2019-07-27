@@ -41,7 +41,7 @@ This document include the design general detail of ORBiT Avionics System II Vehi
 	\item[\textbf{DR00003}]OA-II VEH COM System Design
 	\item[\textbf{DR00004}]OA-II VEH TAM System Design
 	\item[\textbf{DR00005}]OA-II VEH PAM System Design
-	\item[\textbf{ES00007}OA-II VEH Payload Bus Specifications
+	\item[\textbf{ES00007}]OA-II VEH Payload Bus Specifications
 \end{description}
 \section{Revision History}
 \begin{table}[H]
@@ -72,8 +72,9 @@ In each unit, it will always contain some interface with the other unit or the O
 \subparagraph{Debug Interface} each unit will contain one universial debug interface that contain one set of JTAG and a UART connection. This interface will use for device update and on field status monitoring.
 \subparagraph{Backplane Interface} each unit will contain one universial backplane which contain two 2-lane SpaceWire bus, two CANbus, and two power rail.$\footnote{More information please read ES00007 - OA-II VEH Payload Bus Specifications}$
 \section{Power}
-\
+\subparagraph{Redundancy Power Distribution} Each unit will contain at least two individuel power supply that get the power from the main power rail and to supply the board. If any of the power rail is failing, it will switch to another within 10ms.
 \section{Storage}
+
 \newpage
 \chapter{Computing and Operation Module}
 \section{Main Control Unit}
@@ -224,7 +225,7 @@ First generation Telecommunication and Acquisition Module Data Acquisition Unit 
 	\item NTC temperture sensors \times 4 (batteries)
 	\item Current sensors \times 4 (batteries)
 	\item Current sensors \times 4 (output)
-	\item Power convertor up to 28V 300W
+	\item Power convertor up to 28V 500W
 	\item 10C battery monitor
 \end{itemize}
 The power manage unit contain two part. The battery part will need to monitor the status of batteries and able to change the batteries via the launch pad. It also need to report the batteries to the MCU when it needed. The output part is convert batteries power to the backplane. It also monitor the whole VEH power usage.
@@ -232,13 +233,13 @@ The power manage unit contain two part. The battery part will need to monitor th
 	\centering
 	\begin{tabu}{ c | c | c }
 		Module Unit & Processor & Power\\ \hline
-		 COM MCU & Zynq 7030 & 30W\\
-		 COM FRU & Zynq 7030 & 30W\\
-		 TAM TCU & Spartan-7 & 20W\\
-		 TAM DAU & Spartan-7 & 20W \times 10(MAX)\\ \hline
-		 Summary &   & 280W\\
+		 COM MCU & Zynq 7030 & 40W\\
+		 COM FRU & Zynq 7030 & 40W\\
+		 TAM TCU & Spartan-7 & 30W\\
+		 TAM DAU & Spartan-7 & 30W \times 10(MAX)\\ \hline
+		 Summary &   & 450W\\
 	\end{tabu}
-	\caption{Summary of Revision History}
+	\caption{Summary of Power Consumption}
 	\label{tab:slc}
 \end{table}
 \section{Pyrotechnic Power Unit}
