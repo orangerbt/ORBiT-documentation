@@ -10,7 +10,7 @@
 \title{ORBiT Avionics System II Architecture}
 \author{Jinzhi Cai}
 \itemcode{ES00002}
-\revnumber{A03}
+\revnumber{A06}
 \date{\today}
 % End of document titles etc.
 %**********************************************************************
@@ -43,7 +43,8 @@ The ORBiT Avionics System II (OA-II) includes multiple independent subsystems wh
 		A03 & Jinzhi Cai & & Fix BAS naming  & 2019-06-29\\
 		- & Jinzhi Cai & & Fix VEH naming  & 2019-07-02\\ \hline
 		A04 & Jinzhi Cai & & Add Engine Testing System  & 2019-07-04\\ \hline
-		A05 & Gabriel Smolnycki & & \shortstack{Formatting and consistency\\with system architecture} & 2019-07-08\\
+		A05 & Gabriel Smolnycki & & \shortstack{Formatting and consistency\\with system architecture} & 2019-07-08\\\hline
+		A06 & Jinzhi Cai & & change BAS structrue & 2019-07-28\\
 	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:rev}
@@ -142,19 +143,17 @@ The OA-II BPS is a unique, multi-level information exchange system that links mo
 \chapter{Base Station Electronics (BAS) System Architecture}
 \section{General Description}
 The OA-II BAS is a modular launch pad and flight control center. It performs three major functions: launch control operations, live data analysis and display, and vehicle status indication.
-\section{Launch Control Module (LCM)}
-The Launch Control Module monitors and controls the vehicle before, during, and after flight. This includes ignition and oxidizer control, parameter tuning, and launch abort functionality.
-\section{Live Data Module (LDM)}
-The Live Data Module shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data.
-\section{Vehicle Status Module (VSM)}
-The Vehicle Status Module performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.
+\section{Main Control Facility (MCF)}
+The Main Control Facility shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data. It also will be able to connect to computer to allow analysis. A Main Control Facility will connect to different station, such as  Launch Control Station(LCS), Terrestrial Telemetric Station(TTS), Ground Testing Station(GTS).
+\section{Launch Control Station (LCS)}
+The Launch Control Station is majorly use to performs a launch sequence. It will take care all the need of the rocket and report the rocket status before launch. It also offer emergent cutoff. 
+\section{Terrestrial Telemetric Station (TTS)}
+The Terrestrial Telemetric Station performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.
+\section{Ground Testing Station(GTS)}
+The Ground Testing Station is majorly for the engine testing. It will help Main Control Facility to record and report testing engine thrust and thermo condition. It also will offer control on the rocket engine such as increase or cutoff fuel and oxidizer supply.
 \newpage
 %***************************************************************************
-%**********************************************************************s
-\chapter{Ground Testing System (GTS) Architecture}
-\section{General Description}
-TBD
-\newpage
+
 
 \chapter{Backplane System (BPS) Architecture}
 \section{General Description}

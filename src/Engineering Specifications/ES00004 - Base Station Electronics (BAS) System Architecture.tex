@@ -26,55 +26,48 @@
 %**********************************************************************
 % Everything after this is the main document. Edit below this line.
 
-\chapter{General Setting}
+\chapter{Introduction}
+\section{Scope}
 
+\section{Purpose}
+
+\section{Relevant Documents}
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Jinzhi Cai & & Initial draft & 2019-7-28\\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
 \newpage
-
-\chapter{Launch Control Module (LCM)}
-\section{Architecture Discription}
-The Launch Control Module (LCM) is providing three feature. First, LCM will help to control the support structure for the rocket, and release it when the rocket ready to launch. LCM also will control the injection of the rocket fuel and provide connection to let VSM monitor rocket status.
-\section{Naming Method}
-\begin{LARGE}
-OA2-LCM-XXXX-[YY-Z]
-\end{LARGE}
-\subparagraph{XXXX}
-Project Code.
-\subparagraph{YY}
-Designer name.
-\subparagraph{Z}
-Revision number. It is greek numerals.
-
+\chapter{Main Control Facility (MCF)}
+The Main Control Facility shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data. It also will be able to connect to computer to allow analysis. A Main Control Facility will connect to different station, such as  Launch Control Station(LCS), Terrestrial Telemetric Station(TTS), Ground Testing Station(GTS).\\\\
+The Main Control Facility include three part.
+\subparagraph{Upstream Router}
+The upstream router is performing communication between each station and the computer in the Main Control Facility. It also is the master in the whole Base Station Electronics System.
+\subparagraph{Remote Switch}
+The Remote Switch will alow to separate one link to differernt link.
+\subparagraph{Power Station} The power station is use to power all the Base Station Electronics System.
+\\
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=0.58\textwidth]{img/ES00004_MCF.png}
+ \caption{Block Diagram For Main Control Facility}	
+\end{center}
+\end{figure}
 \newpage
-
-\chapter{Live Data Module (LDM)}
-\section{Architecture Discription}
-The Live Data Module (LDM) allow flight control personnel to access the rocket status during the flight. It has OA-II WLS system for communication with the rocket. It also allow flight control personnel to profrom some critical action before and during the flight.
-\section{Naming Method}
-\begin{LARGE}
-OA2-LDM-XXXX-[YY-Z]
-\end{LARGE}
-\subparagraph{XXXX}
-Project Code.
-\subparagraph{YY}
-Designer name.
-\subparagraph{Z}
-Revision number. It is greek numerals.
-
+\chapter{Launch Control Station (LCS)}
+The Launch Control Station is majorly use to performs a launch sequence. It will take care all the need of the rocket and report the rocket status before launch. It also offer emergent cutoff. 
 \newpage
-
-\chapter{Vehicle Status Module (VSM)}
-\section{Architecture Discription}
-The Vehicle Status Module (VSM) have two part. The pre-flight part is connect to the LCM and access the internal electronics. It will work with the COM in OA-II VEH to proform critical action in any failure scenario. The post-flight part is connect to the LDM. It will get data from the
-\section{Naming Method} 
-\begin{LARGE}
-OA2-VSM-XXXX-[YY-Z]
-\end{LARGE}
-\subparagraph{XXXX}
-Project Code.
-\subparagraph{YY}
-Designer name.
-\subparagraph{Z}
-Revision number. It is greek numerals.
+\chapter{Terrestrial Telemetric Station (TTS)}
+The Terrestrial Telemetric Station performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.
+\newpage
+\chapter{Ground Testing Station(GTS)}
+The Ground Testing Station is majorly for the engine testing. It will help Main Control Facility to record and report testing engine thrust and thermo condition. It also will offer control on the rocket engine such as increase or cutoff fuel and oxidizer supply.
 % End of document.
 %**********************************************************************
 \end{document}
