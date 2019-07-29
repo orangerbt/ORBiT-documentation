@@ -1,0 +1,61 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{OA-II BAS Bus System Design}
+\author{Jinzhi Cai}
+\itemcode{DR00007}
+\revnumber{A01}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+\tableofcontents*
+\clearpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+
+\chapter{Introduction}
+\section{Scope}
+This document is discuss connection media that will use in the OA-II BAS system.
+\section{Purpose}
+The document is try to analyze the current communication media and find out the fittest one for the OA-II BAS system.
+\section{Relevant Documents}
+ES00002 - ORBiT Avionics System II Architecture
+ES00004 - OA-II Base Station Electronics (BAS) System Architecture
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Jinzhi Cai & & Initial draft & 2019-7-29 \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+\newpage
+\chapter{Requirement Analysis}
+\newpage
+\chapter{Communication Media}
+\section{Copper Cable}
+The copper cable is a widly use connection choose. It is very easy to use and cheap in price. However it also come with some problem. For long distence, the resistence of the wire will decrease the signal pass though it. In the same time, when the signal reach a very high speed, it will cast many problem such as the signal lose and interfere. It effect the signal quility when the distence increase.
+\section{Wireless Connection}
+The wireless connection is also a widly choose for communication. It is very easy to deploy and do not require extra compone to connect between two location. However, it do not have a static delay time and some time it will lose the connection. It could be up to 1~2MB/s(Wifi) with limited range. By improve the antenna, it might improve the performent.
+\section{Optical Fiber}
+The Optical Fiber is use to two fix point long range high speed connection. It will not have interfere over long distence and have fix delay time and no loss of packet over long distence. However, it require much more money and maintain to apply it to real life. It also require extra copper wire for power deliviery.
+\newpage
+\chapter{Recommand Design}
+% End of document
+%**********************************************************************
+\end{document}
