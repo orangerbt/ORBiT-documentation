@@ -28,11 +28,15 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document covers a variety of s
+This document covers a variety of storage technologies for use in the OA-II VEH system.
 
 \section{Purpose}
+The OA-II system design has a variety of sensors which must be recorded, camera feeds, and software logging information. This information is very important for future reports, analysis, and debugging. There must be a reliable system for storing this information onboard the flight vehicle, as it is not possible to transmit all of this information back to the base station reliably.
 
 \section{Relevant Documents}
+\begin{itemize}
+	\item DR00001 - OA-II Backplane Bus System Design
+\end{itemize}
 
 \section{Revision History}
 \begin{table}[H]
@@ -48,17 +52,25 @@ This document covers a variety of s
 \newpage
 
 \chapter{Bandwidth and Total Storage Requirements}
-
+From DR00001, total bus requirements are \textasciitilde 10MB/s. This does not include software logging information, or any live calculations which must also be logged, or filesystem and file format overhead. Applying a conservative factor of safety of 4, assume that the total bandwidth requirements are $10MB/s \times 4 = 40MB/s$.\par
+Total storage is more difficult to calculate, as the length of a given mission or test run is highly variable. However, it is unlikely that any run will have a data logging period greater than 60 minutes. This gives a total storage requirement of $40MB/s \times 60s/min \times 60min = 144GB$.
 \newpage
 
 \chapter{Available Protocols}
 \section{SD}
+SD (Secure Digital) cards are a common method of data storage in embedded systems. A microSD card can store up to 1TB, with exterior dimensions of only 15x11x1mm. Additionally, using the latest SD Express standard, interface speeds can go up to 985MB/s. However, SD cards are primarily a consumer standard, and do not contain features such as ECC, encryption, increased redundancy or wear leveling. The connector is also not easily physically secured against vibration and shock, or available in ruggedized variants.
 \section{USB}
+USB (Universal Serial Bus) is a very common external bus, which is often used for consumer storage devices.
 \section{eMMC}
+eMMC (embedded Multi-Media Controller) is a standard for embedded storage chips which contain both a flash controller and flash memory device in a single package.
+\section{eUFS}
+eUFS is a new standard intended to replace eMMC. Unfortunately not much information about eUFS is available at this time.
 \section{IDE}
-\section{SATA}
-\section{SAS}
+IDE is an older standard used for PC hard drives.
+\section{SATA/SAS}
+SATA is a newer standard used for PC hard drives.
 \section{NVMe}
+NVMe (Non-Volatile Memory express) is a storage technology which works over PCI Express.
 \section{Raw Flash}
 
 % End of document
