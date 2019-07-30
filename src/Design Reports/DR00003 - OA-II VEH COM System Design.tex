@@ -10,7 +10,7 @@
 \title{OA-II VEH COM System Design}
 \author{Jinzhi Cai}
 \itemcode{DR00003}
-\revnumber{A01}
+\revnumber{A02}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -30,9 +30,9 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document is describe a design for the OA-II VEH Computing and Operation Module.
+This document outlines the design for the OA-II VEG Computing and Operation Module.
 \section{Purpose}
-The goal for the design is to build a system that allow real time operation and multimedia processing happen in the same time during the flight.
+The design goal is to build a system that allows real time operation and multimedia processing simultaneously during flight.
 \chapter{Revision History}
 \begin{table}[H]
 	\centering
@@ -48,28 +48,29 @@ The goal for the design is to build a system that allow real time operation and 
 \newpage
 \chapter{Requirement Analysis}
 \section{Failure Recovery}
-In the OA-II VEH system requirement,failure recovery is always the most important part. The main requirement for failure recovery is in below.
-\subparagraph{Backup}For all the mission critical system, it mast have at least have one backup unit.
-\subparagraph{Fast Switch} When emergent scenario has been detected, the system will switch to backup unit within limited time and functioning.
-\subparagraph{Hierarchy Failure Recovery System} For different emergent scenario, failure recovery system have different plan to deal with to protect device and data.
+In the OA-OII VEH requirements, failure recovery is the most critical component. Proper recovery and redundancy requires the following:
+
+\subparagraph{Backup}Each mission critical system must have at least one backup unit.
+\subparagraph{Fast Switch} When an emergency scenario is detected, the system switches to backup unit quickly, and is able to keep that system operating.
+\subparagraph{Hierarchy Failure Recovery System} For each failure scenario, the recovery system has a plan to protect the device and preserve data.
 \section{Realtime Operating System}
-In the OA-II VEH system requirement, realtime operating system is the key to proform all the critical procedure.
-\subparagraph{Predictable Execution Time}All the procedure will need to execute on time with limited of error.
-\subparagraph{Interface with the Main System}The RTOS will need to be have to receive command from other system.
-\subparagraph{Execution Feedback}When a procedure is executed, it have to be comfirm with sensor.
+In the OA-II VEH requirements, a realtime operating system is key to performing critical procedures.
+\subparagraph{Predictable Execution Time}Each operation needs to be completed within a limited time and with minimal errors.
+\subparagraph{Interface with the Main System}The RTOS needs to be able to receive commands from other systems.
+\subparagraph{Execution Feedback}When a procedure is completed, it will need confirmation from sensor data.
 %\section{Additional Sensor Fusion}
 \newpage
 \chapter{Current Controller Analysis}
 \section{Arduino}
-Arduino is a common use in DIY electronics. It have an abundant library for different IC. It also friandly for the beginner. However, most of the arduino library is not effection and the interface choose is limited. Its main clock is running at 16MHz which is not enough for support a functional linux system.
+Aruino is a common and beginner friendly microcontroller used in DIY electronics, and has abundant libraries for different IC. However, most of these libraries are inefficient and the interface options are limited. Its core clock runs at 16MHz which is not fast enough to support a functional Linux system.
 \section{STM32 Serise}
-STM32 Serise is a common use microcontroller and it support up to 400MHz main clock. This kind of microcontroller also support to running a operating system. However, as the arduino, it lack the freedom to choose the the interface. 
+SYM32 Series is another common microcontroller that supports up to 400MHz core clock, and also supports Linux operating systems. However, like the Arduino, it lacks support for a custom interface.
 \section{Market SoC System}
-In the market, it have a lot of different SoC system, such as raspberry Pi and BeagleBone. It do come with a lot of different interface. However, it do not have a high speed interface what can use to connect between different system.
+SoC systems such as the Raspberry Pi and BeagleBone have a variety of interface options, but whose interfaces lack the high speed required for connections between systems.
 \section{FPGA Soft Core Processor}
-A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{Cite Needed} Almost every FPGA company will have it own soft core processor. Those processor existing in code form and allow user to rebuild them in the FPGA chip as long as the chip have enough resource. Even the soft core processor allow user to costume the structure, the speed of soft core processor will not as fast as the SoC processor. However, it is fairly easy to interface to other system.
+A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{Cite Needed} Almost every FPGA company will have it own soft core processor. This allows the core to be easily reprogrammed, as it is formed by "logical synthesis" and allow the user to rebuild them in the FPGA chip as long as the chip has enough resources. Even the soft core processor allow user to customize the structure, but the speed of soft core processor will not as fast as the SoC processor. Although, it is fairly easy to interface to other systems.
 \section{SoC FPGA}
-The SoC FPGA basicly also is a kind of FPGA. The only different it embedded a powerful processor as know as hard core processor. It help fuse the benefit between the SoC chip and FPGA chip. On one hand, it allow big system running in the powerful hard core processor. In the same time, the flexibility of FPGA chip allow costume interface and upgrade ability. However, SoC FPGA have less logic resource compare with the classic FPGA and weak proessing power compare with SoC which in the same price.
+The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor as know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs. On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradibility. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.
 \newpage
 \chapter{Recommend System Design}
 \section{SoC FPGA}
