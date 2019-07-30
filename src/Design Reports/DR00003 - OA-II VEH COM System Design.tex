@@ -72,9 +72,9 @@ A field-programmable gate array (FPGA) is an integrated circuit designed to be c
 \section{SoC FPGA}
 The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor as know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs. On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradibility. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.
 \newpage
-\chapter{Recommend System Design}
+\chapter{Recommended System Design}
 \section{SoC FPGA}
-In this design, the main processor will be a SoC FPGA that have about 70K LUT logic resource and dual core 800MHz - 1GHz hard core processor.
+In this design, the main processor will be a SoC FPGA that have about 70K LUT logic resources and a dual core 800MHz - 1GHz hard core processor.
 \begin{table}[H]
 	\centering
 	\resizebox{0.5\textwidth}{!}{%
@@ -90,7 +90,7 @@ In this design, the main processor will be a SoC FPGA that have about 70K LUT lo
 	\caption{Table of Logic Resource}
 	\label{tab:rev}
 \end{table}
-The hard core processor will be collecting data from the bus and sensor controller. It will storage those data and use it to resolve the rocket attitude and location. The result will transfer to command and send to the realtime soft core processor to control the PAM.\\
+The hard core processor will be collecting data from the bus and sensor controller. It will store that data and use it to resolve the rocket attitude and location. The result will then transfer to command and be sent to the realtime soft core processor to control the PAM.\\
 The FRU will have the same hardware structure as the MCU, but constantly get data from the MCU for error checking.
 \begin{center}
 \begin{figure}[htp]
