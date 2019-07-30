@@ -9,7 +9,7 @@
 \title{OA-II VEH TAM System Design}
 \author{Jinzhi Cai}
 \itemcode{DR00004}
-\revnumber{A01}
+\revnumber{A02}
 \date{\today}
 % End of document titles etc.
 %**********************************************************************
@@ -28,9 +28,9 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document analyze the requirement of ORBiT Avionics System II Vehicle Electronics Telecommunication and Acquisition Module(OA-II VEH TAM) and come up with recommand design for it.
+This document analyzes the requirements of ORBiT Avionics System II Vehicle Electronics Telecommunication and Acquisition Module(OA-II VEH TAM) and recommend the best design approach.
 \section{Purpose}
-The goal of this document is use to analyze the current sensor technology and come up with a recommand design.
+The goal of this document is use to analyze current sensor technology and come up with a design that fit the system requirements.
 \section{Relevant Documents}
 \begin{description}
 	\item[\textbf{ER00002}]ORBiT Avionics System II Requirements
@@ -52,20 +52,18 @@ The goal of this document is use to analyze the current sensor technology and co
 \newpage
 \chapter{Requirement Analysis}
 \section{General Requirement Analysis}
-The TAM system requirement mainly can be divide to two part. The first part is bridge which is transfer data from low speed parallel sensor connection to high speed serial backplane. The second part is control which configure all the sensor connect to the board and execute basic unit transformation.
+The TAM system requirements can be divided into two parts. The first part is the bridge which transfers data from a low speed parallel sensor connection to the high speed serial backplane. The second part is controls, which configure all the sensors to connect to the board and execute basic unit transformations.
 \section{Bridge Requirement Analysis}
-The TAM sensor unit need to be have to bridge different data bus to the backplane data bus. The TAM sensor unit need to support: 
+The TAM sensor unit needs to be have to bridge different data buses to the backplane data bus. The TAM sensor unit needs to support: 
 \section{Control Requirement Analysis}
-The TAM sensor unit need to be able to configure the sensor to correct status and execute basic data transformation to transfer data to real physical value. The delay should not more than 100ms and should support up to 32 channel.
+The TAM sensor unit needs to be able to configure the sensor to the correct state and execute basic data transformation to transfer data to real physical values. The delay should not be more than 100ms and should support up to 32 channels.
 \newpage
 \chapter{Current Controller Analysis}
 \section{Microcontroller}
-It do come with a lot of different interface. However, it do not have a high speed interface what can use to connect between different system. It usually have a lot of different interface in a few number. It is different with the requirement that need a few kind of interface with high speed.
+It does come with many interface options. However, it does not have a high speed interface needed for connections between other systems. It is different than the requirement, which needs a few kind of interfaces with high speed connectivity.
 \section{FPGA Soft Core Processor}
-A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{Cite Needed} Almost every FPGA company will have it own soft core processor. Those processor existing in code form and allow user to rebuild them in the FPGA chip as long as the chip have enough resource. Even the soft core processor allow user to costume the structure, the speed of soft core processor will not as fast as the SoC processor. However, it is fairly easy to interface to other system.
-\section{SoC FPGA}
-The SoC FPGA basicly also is a kind of FPGA. The only different it embedded a powerful processor as know as hard core processor. It help fuse the benefit between the SoC chip and FPGA chip. On one hand, it allow big system running in the powerful hard core processor. In the same time, the flexibility of FPGA chip allow costume interface and upgrade ability. However, SoC FPGA have less logic resource compare with the classic FPGA and weak proessing power compare with SoC which in the same price. In the TAM system, the computing power is not nessary.
-\newpage
+A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{Cite Needed} Almost every FPGA company will have it own soft core processor. This allows the core to be easily reprogrammed, as it is formed by "logical synthesis" and allow the user to rebuild them in the FPGA chip as long as the chip has enough resources. However, the speed of this soft core processor will not be as fast as the SoC processor. Although, it is fairly easy to interface to other systems.\section{SoC FPGA}
+The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs. On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradibility. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.\newpage
 \chapter{Recommand Design}
 \begin{figure}[htp]
 \begin{center}
