@@ -46,10 +46,12 @@ ES00004 - OA-II Base Station Electronics (BAS) System Architecture
 \end{table}
 \newpage
 \chapter{Requirement Analysis}
-\subparagraph{Power} The whole system will require at least 1000W ~ 1500W.
+Most of the BAS bus requirement is in those area:
+\subparagraph{Power} The whole system will require at least 1000W to 1500W.
 \subparagraph{Range} For safity, the distence between MCF and LCS should be at least 600m.
 \subparagraph{Data} The connection will need allow at least 10~50MB/s.
-
+\subparagraph{Safity} The bus will offer emergent cutoff when needed.\\\\
+Those requirement show the BAS bus system will need two parts. The first part will allow long range high speed data transmission. The second part is a power station that will be able to offer over 1500W power from bettery.
 \newpage
 \chapter{Communication Media}
 \section{Copper Cable}
@@ -57,9 +59,18 @@ The copper cable is a widly use connection choose. It is very easy to use and ch
 \section{Wireless Connection}
 The wireless connection is also a widly choose for communication. It is very easy to deploy and do not require extra compone to connect between two location. However, it do not have a static delay time and some time it will lose the connection. It could be up to 1~2MB/s(Wifi) with limited range. By improve the antenna, it might improve the performent.
 \section{Optical Fiber}
-The Optical Fiber is use to two fix point long range high speed connection. It will not have interfere over long distence and have fix delay time and no loss of packet over long distence. However, it require much more money and maintain to apply it to real life. It also require extra copper wire for power deliviery.
+The Optical Fiber is use to two fix point long range high speed connection. It will not have interfere over long distence and have fix delay time and no loss of packet over long distence. However, it require much more money and maintain to apply it to real life. Most of the four core armed fiber wire will cost \$100 to \$200 for each kilometer. It also require extra copper wire for power deliviery.
 \newpage
 \chapter{Recommand Design}
+\section{Copper Cable}
+In this plan, all system are connected by the copper cable. All the data exchange and power supply will be deliver by the a multi-core cable. The power source voltage will be at 200V to 1000V.\\\\
+The advenage of this plan is the connection will be easy to make and the whole system will only have one main power. However it will not have the ability to have above 10MB/s data rate over long distence. It mean beside the launch control station most of the other station will need to be close to the MCF.
+\section{Wireless Connection + Copper Cable}
+This plan, the between station connection will be use the wireless modem. It will help to improve the range of high speed transmission. In the same time, use Copper cable to deliver power will limited the number of power station.\\\\
+However, the copper cable will waste the power whole the distence increase. The wireless connection will also have risk to lose connection and unexcapted delay. It will increase risk for the whole mission.
+\section{Wireless Connection + Optical Fiber + Bettery}
+In this plan, the middle distence$\footnote{About 1000m}$ data transmission will be use optical fiber and the long distence data transmission will use the wireless modem which can increase the speed with some sacrifice of the speed. Each station will have it own power and do not require additional power from the MCF.\\\\
+The major disadventage of this plan is it do not have a core physical switch that will disable the whole system when failure happen. 
 % End of document
 %**********************************************************************
 \end{document}
