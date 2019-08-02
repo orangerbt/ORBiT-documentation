@@ -28,7 +28,7 @@
   - DR00005 - OA-II VEH PAM System Design
   - DR00006 - OA-II VEH Storage System Design
   - DR00007 - OA-II BAS Bus System Design
-  - DR00008 - OA-II BAS Radio System Design (TBD)
+  - DR00008 - OA-II Radio System Design
   - DR00009 - OA-II VEH Software System Design (TBD)
   - DR00010 - OA-II BAS Software System Design (TBD)
 - Engineering Instructions

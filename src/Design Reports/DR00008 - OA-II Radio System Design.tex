@@ -1,0 +1,80 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{OA-II Radio System Design}
+\author{Jinzhi Cai}
+\itemcode{DR00008}
+\revnumber{A01}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+\tableofcontents*
+\clearpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+
+\chapter{Introduction}
+\section{Scope}
+This document is desribe the radio system in the OA-II VEH and BAS system.
+\section{Purpose}
+The goal for this document is to create a radio system what will fit the requirement for the OA-II system.
+\section{Relevant Documents}
+DR00001 - OA-II Backplane Bus System\\
+DR00002 - OA-II VEH Camera System Design\\
+DR00004 - OA-II VEH TAM System Design\\
+DR00006 - OA-II VEH Storage System Design\\
+DR00007 - OA-II BAS Bus System Design\\
+ER00002 - ORBiT Avionics System II Requirements\\
+ES00002 - ORBiT Avionics System II Architecture\\
+ES00003 - OA-II Vehicle Electronics (VEH) System Architecture\\
+ES00004 - OA-II Base Station Electronics (BAS) System Architecture\\
+ES00005 - OA-II VEH Payload Modules General Architecture
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Jinzhi Cai & & Initial draft & 2019-08-02 \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+\newpage
+\chapter{Requirement Analysis}
+The main requirement of OA-II system in the wireless system can be divide to two major part. The data transmission and location tracking.
+\section{Data Transmission}
+Base on the requirement of the OA-II system, two type of data will be transmitted in the wireless connection system. The first type of data is vehicle status. This kind of data usually will not use a lot of bandwidth, but require highly reliable link. The second kind of data is live camera data. This kind of data require high bandwidth$\footnote{About 500kbp to 1Mbp}$ but do not require highly reliable connection.
+\section{Location Tracking}
+The location tracking require to use sidetone ranging to help the Main Control Facility and Vehicle to trace location. It require the base station to be cable to send a FM signal out and receive the reply from the rocket and analysis the different between those two.
+\newpage
+\chapter{Existing Radio Module}
+\section{RFD 900x-US Modem}
+The RFD 900x Modem is RFDesign company publish a wireless modem for long range transmission. It already demonstrated by Edge Research labs on a balloon, 57km in India, on Dipoles. It can transmit 224kbit/s by uart. Most of the configuration can be done via the uart interface. The range of this module is up to 40km. However, it do not allow range finding and location tracking.
+\section{LoRa Modem}
+\newpage
+\chapter{Open Source SDR Module}
+\section{HackRF One}
+The HackRF One is open source SDR module. It can directly connect to the GNU Radio software without additional modification. All the hardware and software sturture are opensource. However, most of the existing module are in a large frame and with only usb interface. It limited the use when apply it on the rocket.
+\newpage
+\chapter{Open Source SDR Solution}
+\section{AD9361+Matlab}
+This solution is similar with the opensource SDR module. However, it will offer more freedom in ADC selection and more difficulty on the building process. AD9361 is only one example for all the ADC, DAC chip. Those kind of chip will have good ability to connect to a FPGA or a SoC. The difficult part is how to build it and create correct software to drive it.
+\newpage
+\chapter{Recommand Design}
+\newpage
+% End of document
+%**********************************************************************
+\end{document}
