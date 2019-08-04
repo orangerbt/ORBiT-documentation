@@ -58,12 +58,13 @@ The main requirement of OA-II system in the wireless system can be divide to two
 \section{Data Transmission}
 Base on the requirement of the OA-II system, two type of data will be transmitted in the wireless connection system. The first type of data is vehicle status. This kind of data usually will not use a lot of bandwidth, but require highly reliable link. The second kind of data is live camera data. This kind of data require high bandwidth$\footnote{About 500kbp to 1Mbp}$ but do not require highly reliable connection.
 \section{Location Tracking}
-The location tracking require to use sidetone ranging to help the Main Control Facility and Vehicle to trace location. It require the base station to be cable to send a FM signal out and receive the reply from the rocket and analysis the different between those two.
+The location tracking require to use sidetone ranging to help the Main Control Facility and Vehicle to trace location. It require the base station to be cable to send a FM signal out and receive the reply from the rocket and analysis the different between those two. It also need to make sure safe recover after landing. It require the wireless system will be able to send out location information and radio ranging finding for upto 4-5 hour when the main power offline. 
 \newpage
 \chapter{Existing Radio Module}
 \section{RFD 900x-US Modem}
 The RFD 900x Modem is RFDesign company publish a wireless modem for long range transmission. It already demonstrated by Edge Research labs on a balloon, 57km in India, on Dipoles. It can transmit 224kbit/s by uart. Most of the configuration can be done via the uart interface. The range of this module is up to 40km. However, it do not allow range finding and location tracking.
 \section{LoRa Modem}
+The LoRa modem is a low power wireless connumicaiton protocal which design for the IoT device. It offer low power mode allow long battery life with low bandwidth. It also offer sleep mode which only awake when the master send out active packet. It have no native range finding feature but it allow to report an estimate range which measure by the time-of-fly. The range of LoRa modem is about 3km.
 \newpage
 \chapter{Open Source SDR Module}
 \section{HackRF One}
@@ -74,6 +75,12 @@ The HackRF One is open source SDR module. It can directly connect to the GNU Rad
 This solution is similar with the opensource SDR module. However, it will offer more freedom in ADC selection and more difficulty on the building process. AD9361 is only one example for all the ADC, DAC chip. Those kind of chip will have good ability to connect to a FPGA or a SoC. The difficult part is how to build it and create correct software to drive it.
 \newpage
 \chapter{Recommand Design}
+\section{RFD 900x-US Modem + LoRa Modem + Analog radio ranging finding} 
+In this plan, all the compone are commercial product. It fullfill the most of the requirement of OA-II radio system. It do not require anymore development beside create inferface for the modem. By install this solution will easy to debug. However, this plan have very low flexability. Most of the circuit need extra bridge to connect to the OA-II VEH and BAS system. 
+\section{Open Source SDR Module + LoRa Modem}
+In this plan, the major data tansmission and the ranging finding will be use the SDR modem. It allow upgradability and allow to use different kind of method to perform ranging finding. However, it mean it require more computing power and low speed interface between the SDR module and TAM TCU.
+\section{Open Source SDR Solution}
+This plan have the most flexability and it will be perform best in all of the plan. By using the opsen source SDR soluion, it will be able to have a direct interface with both the OA-II BAS and VEH system and it also allow hardware acceleration. However, it is very hard to apply and it require many time for development.
 \newpage
 % End of document
 %**********************************************************************
