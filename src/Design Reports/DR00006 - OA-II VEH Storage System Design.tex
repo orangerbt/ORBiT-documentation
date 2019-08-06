@@ -4,6 +4,9 @@
 \input{../Templates/packages.tex}
 \input{../Templates/presetup.tex}
 
+% Bibliography database
+\addbibresource{DR00006.bib}
+
 %**********************************************************************
 % Document titles etc. defined here: (replace [] as well)
 \title{OA-II VEH Storage System Design}
@@ -31,7 +34,7 @@
 This document covers a variety of storage technologies for use in the OA-II VEH system.
 
 \section{Purpose}
-The OA-II system design has a variety of sensors which must be recorded, camera feeds, and software logging information. This information is very important for future reports, analysis, and debugging. There must be a reliable system for storing this information onboard the flight vehicle, as it is not possible to transmit all of this information back to the base station reliably.
+The OA-II system design has a variety of sensors which must be recorded, camera feeds, and software logging information. This information is very important for future reports, analysis, and debugging. There must be a reliable system for storing this information onboard the flight vehicle, as it is not possible to transmit all of this information back to the base station reliably. For simplicity, only flash based storage methods are considered.
 
 \section{Relevant Documents}
 \begin{itemize}
@@ -58,20 +61,61 @@ Total storage is more difficult to calculate, as the length of a given mission o
 
 \chapter{Available Protocols}
 \section{SD}
-SD (Secure Digital) cards are a common method of data storage in embedded systems. A microSD card can store up to 1TB, with exterior dimensions of only 15x11x1mm. Additionally, using the latest SD Express standard, interface speeds can go up to 985MB/s. However, SD cards are primarily a consumer standard, and do not contain features such as ECC, encryption, increased redundancy or wear leveling. The connector is also not easily physically secured against vibration and shock, or available in ruggedized variants.
+SD (Secure Digital) cards are a common method of data storage in embedded systems. A microSD card can store up to 1TB, with exterior dimensions of only 15x11x1mm. Newer cards support very high interface speeds, depending on the generation: 104MB/s for UHS-I, 312MB/s for UHS-II, 624MB/s for UHS-III, and up to 985MB/s using the newest SD Express variant. However, SD cards are primarily a consumer standard, and do not contain features such as ECC, encryption, increased redundancy or wear leveling. The connector is also not easily physically secured against vibration and shock, or available in ruggedized variants. \cite{wiki:sdcard}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{c | c}
+		Pros & Cons \\ \hline
+		High density & Low reliabilty\\
+		High speed & Not ruggedized\\
+		Low cost & Consumer standard\\
+		Easy to implement interface & Limited advanced features\\
+	\end{tabu}
+	\caption{SD card pros vs cons}
+\end{table}
+
 \section{USB}
-USB (Universal Serial Bus) is a very common external bus, which is often used for consumer storage devices.
+USB (Universal Serial Bus) is a very common external bus, which is often used for consumer storage devices. In particular, the USB mass storage device class allows for devices which use flash storage. USB bandwidth varies from 1.5Mbps to 20Gbps, depending on generation. USB is also a consumer standard, and typically used over cabling rather than as a board-to-board interconnect. The USB standard supports many different types of devices, although devices are not required to implement all of them. USB bandwidth is typically limited by the host, and by bus overhead \cite{wiki:USB}. USB connectors and flash memory are available in ruggedized variants from companies such as Amphenol \cite{amphenol:ruggedusb}.
+\begin{table}[H]
+	\centering
+	\begin{tabu}{c | c}
+		Pros & Cons \\ \hline
+		High speed & Typically cable interface\\
+		Very versatile & Consumer standard\\
+		Ruggedized variants available & Low reliability\\
+		Low cost & Large physical size\\
+	\end{tabu}
+	\caption{USB Mass Storage pros vs cons}
+\end{table}
+
 \section{eMMC}
-eMMC (embedded Multi-Media Controller) is a standard for embedded storage chips which contain both a flash controller and flash memory device in a single package.
-\section{eUFS}
-eUFS is a new standard intended to replace eMMC. Unfortunately not much information about eUFS is available at this time.
+eMMC (embedded Multi-Media Controller) is a standard for embedded storage chips which contain both a flash controller and flash memory device in a single package. eMMC devices interface with many processors directly, and are used in consumer, industrial, and embedded applications. There are multiple standard eMMC packages, which are  eMMC is also small and typically low-cost, with high density \cite{kingston:emmc}. Since eMMC has a flash controller onboard, it has built-in functionality for "performance, security and reliability" \cite{datalight:emmc}. 
+\begin{table}[H]
+	\centering
+	\begin{tabu}{c | c}
+		Pros & Cons \\ \hline
+		High speed & Difficult to replace\\
+		Low cost & Limited capacity\\
+		Easy/common interface & \\
+		Industrial variants available & 
+	\end{tabu}
+	\caption{eMMC pros vs cons}
+\end{table}
+
 \section{IDE}
 IDE is an older standard used for PC hard drives.
 \section{SATA/SAS}
 SATA is a newer standard used for PC hard drives.
 \section{NVMe}
 NVMe (Non-Volatile Memory express) is a storage technology which works over PCI Express.
+\section{eUFS}
+eUFS is a new standard intended to replace eMMC. Unfortunately not much information about eUFS is available at this time.
 \section{Raw Flash}
+Flash storage can be used without any of the above protocols. There are two basic types of flash used: NOR and NAND. NAND is the more common type \cite{toradex:flash}. However, both styles of flash do not take care of several important features, such as wear leveling, error correction, bad block handling, and power failure handling \cite{toradex:flash}.
+\newpage
+
+\chapter{Bibliography}
+\printbibliography[heading=none]
 
 % End of document
 %**********************************************************************

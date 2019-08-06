@@ -13,6 +13,11 @@
 *.aux
 *.synctex.gz
 *.toc
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*-blx.bib
 
 # Packages #
 ############
