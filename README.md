@@ -31,6 +31,7 @@
   - DR00008 - OA-II Radio System Design
   - DR00009 - OA-II VEH Software System Design (TBD)
   - DR00010 - OA-II BAS Software System Design (TBD)
+  - DR00011 - Conformal Coating Methods
 - Engineering Instructions
   - EI00001 - Avionics System I User Manual
 - Engineering Requirements
