@@ -102,14 +102,28 @@ eMMC (embedded Multi-Media Controller) is a standard for embedded storage chips 
 	\caption{eMMC pros vs cons}
 \end{table}
 
-\section{IDE}
-IDE is an older standard used for PC hard drives.
-\section{SATA/SAS}
-SATA is a newer standard used for PC hard drives.
+\section{PATA}
+PATA (Parallel ATA) is an older standard used for PC hard drives. Originally ATA for AT Attachment, and also called IDE in later versions, PATA uses a 40 pin standard interface. PATA supports speeds up to 100MB/s. While the ATA command set remains in the form of SATA, the interface itself is essentially obsolete today. \cite{wiki:pata} The Compact Flash standard is substantially similar and electrically identical to PATA, providing support for more modern, high speed flash devices. \cite{wiki:compactflash} 
+\begin{table}[H]
+	\centering
+	\begin{tabu}{c | c}
+		Pros & Cons \\ \hline
+		Low cost & Obsolete\\
+		Easy to implement & Large number of signals\\
+		Widely supported & Low performance
+	\end{tabu}
+	\caption{PATA pros vs cons}
+\end{table}
+
+\section{SATA}
+SATA (Serial ATA) is a newer standard used for PC hard drives. It is substantially based on PATA, using the same command set, but over a newer, modern serial interface. \cite{wiki:sata}
+
 \section{NVMe}
 NVMe (Non-Volatile Memory express) is a storage technology which works over PCI Express.
+
 \section{eUFS}
 eUFS is a new standard intended to replace eMMC. Unfortunately not much information about eUFS is available at this time.
+
 \section{Raw Flash}
 Flash storage can be used without any of the above protocols. There are two basic types of flash used: NOR and NAND. NAND is the more common type \cite{toradex:flash}. However, both styles of flash do not take care of several important features, such as wear leveling, error correction, bad block handling, and power failure handling \cite{toradex:flash}.
 \newpage
