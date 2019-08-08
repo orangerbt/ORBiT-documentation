@@ -28,11 +28,15 @@
 
 \chapter{Introduction}
 \section{Scope}
-
+This document is describe the design of OA-II Base Station Electronics (BAS) System such as the detail description of each component. 
 \section{Purpose}
-
+The purpose is to come out a guide line document for the OA-II Base Station Electronics (BAS) System implementation.
 \section{Relevant Documents}
-
+ES00002 - ORBiT Avionics System II Architecture\\
+ES00003 - OA-II Vehicle Electronics (VEH) System Architecture\\
+ES00004 - OA-II Base Station Electronics (BAS) System Architecture\\
+ES00005 - OA-II VEH Payload Modules General Architecture\\
+ES00006 - OA-II VEH Payload Frame General Specifications\\
 \section{Revision History}
 \begin{table}[H]
 	\centering
@@ -45,6 +49,7 @@
 \end{table}
 \newpage
 \chapter{Big Picture}
+The whole system have different part. All the stations will connect via wire or wireless connection. All the station itself will have ability to process data and send it back to the Main Control Facility.
 \newpage
 \chapter{Main Control Facility (MCF)}
 The Main Control Facility shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data. All the gound control personnel will be locate in the Main Control Facility The Main Control Facility will also have protect to protect all ground control personnel from rocket explosive. The  It also will be able to connect to computer to allow analysis. A Main Control Facility will connect to different station, such as Launch Control Station(LCS), Terrestrial Telemetric Station(TTS), Ground Testing Station(GTS).\\\\
