@@ -9,7 +9,7 @@
 \title{OA-II VEH Camera System Design}
 \author{Jinzhi Cai}
 \itemcode{DR00002}
-\revnumber{A03}
+\revnumber{A04}
 \date{\today}
 %end of document titles etc.
 %**********************************************************************
@@ -27,9 +27,9 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document discuss the current camera technology and construct a design that will fulfill the need for OA-II VEH system.
+This document discusses current camera technology and outlines a design that will fulfill the needs for OA-II VEH.
 \section{Purpose}
-The goal for this document is come up with a design that will provide four 1080p 60Hz video steam and storage to a central storage media by research the current camera technology.
+The goal for this document is to come up with a design that will provide four 1080p 60Hz video steams and store that data to a central storage media by researching cuurent options in camera technology.
 \chapter{Revision History}
 
 \begin{table}[H]
@@ -49,7 +49,7 @@ The goal for this document is come up with a design that will provide four 1080p
 \newpage
 \chapter{General Structure of Camera System}
 \section{Introduction}
-The most basic camera system have three part. The camera sensor is the device that will receive data from the environment and transfer it via the camera interface. The data that flow out from the sensor is call raw data. It contain all the information that the camera get from the environment. A 1080p 60Hz camera have $1920*1080=2073600 pixels$. One pixels usually take $3 Bytes$ to save. For each second, $2073600*3*60=373248000Bytes$ will be created. That will be $355.96MB/s$ for one single camera.The encoder is use to compress the video steam smaller for it to transmission via long distence data link(usually with in $1MB/s$). The storage unit is use to save the video steam to a file and allow future replay.
+The most basic camera system has three parts. The camera sensor is the device that will receive data from the environment and transfer it via the camera interface. The data that flows out from the sensor is call raw data. It contains all the information that the camera takes in from the sensor. A 1080p 60Hz camera have $1920*1080=2073600 pixels$. One pixels usually take $3 Bytes$ to save. For each second, $2073600*3*60=373248000Bytes$ will be created. That will be $355.96MB/s$ for one single camera. An encoder is used to compress the video steam smaller for it to be transmitted via long distence data link(usually with in $1MB/s$). The storage unit is then used to save the video steam to a file for future replay.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_GenDia.png}
  \caption{General Structure of Camera System}	
@@ -59,7 +59,7 @@ The most basic camera system have three part. The camera sensor is the device th
 %**********************************************************************
 \chapter{Camera Sensor and Relative Interface}
 \section{Introduction}
-The camera sensor is the most improtant part in the camera system. The classic camera interface is use the same way to output the video signal as a monitor do. For each pixel clock, data of a pixel is been sended. After few clock(depend on the resolution), Line Sync rise to indecate one line data is finish transmission. The Frame Sync is indecate a frame of pixel data is sended. However, modern camera sensor usually use one of those three camera interface. Some of the is samiliar with the classic one, and other improve it.\\\\\
+The sensor is the most important part of the system. Using a classical implementation, in the same way as a monitor would, data is output as video signal to an external device. For each pixel clock, data of a pixel has been transmitted. After few clock(depend on the resolution), Line Sync rise to indecate one line data is finish transmission. The Frame Sync is indecate a frame of pixel data is sended. However, modern camera sensor usually use one of those three camera interface. Some of the is samiliar with the classic one, and other improve it.\\\\\
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_Cam.png}
  \caption{Classic Video Stream}	
