@@ -49,23 +49,16 @@ ES00006 - OA-II VEH Payload Frame General Specifications\\
 \end{table}
 \newpage
 \chapter{Big Picture}
-The whole system have different part. All the stations will connect via wire or wireless connection. All the station itself will have ability to process data and send it back to the Main Control Facility. Each station will include different component and the whole station will finish one feature.
+The whole system have different part. All the stations will connect via wire or wireless connection. All the station itself will have ability to process data and send it back to the Main Control Facility. The distance between any station and the Main Control Facility will be few kilometers away. Therefor all the stations will have its own power supply and processing power.\\\\
+The communication in the whole BAS system can be divide to two parts. The first part is Between Station Communication. This kind of data link will require low cost long distance with high data bandwidth. The second part is In Station Communication. This kind of data link will require very high bandwidth and high real-time and reliability.
 \newpage
 \chapter{Main Control Facility (MCF)}
-The Main Control Facility shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data. All the gound control personnel will be locate in the Main Control Facility The Main Control Facility will also have protect to protect all ground control personnel from rocket explosive. The  It also will be able to connect to computer to allow analysis. A Main Control Facility will connect to different station, such as Launch Control Station(LCS), Terrestrial Telemetric Station(TTS), Ground Testing Station(GTS).\\\\
+The Main Control Facility shows vehicle information during flight. This includes a 3D map of the flight path, propulsion system temperatures and pressures, and IMU data. All the ground control personnel will be locate in the Main Control Facility The Main Control Facility will also have protect to protect all ground control personnel from rocket explosive. The  It also will be able to connect to computer to allow analysis. A Main Control Facility will connect to different station, such as Launch Control Station(LCS), Terrestrial Telemetric Station(TTS), Ground Testing Station(GTS).\\\\
 The Main Control Facility include three part.
-\subparagraph{Upstream Router}
-The upstream router is performing communication between each station and the computer in the Main Control Facility. It also is the master in the whole Base Station Electronics System.
-\subparagraph{Remote Switch}
-The Remote Switch will allow to separate one link to different link.
-\subparagraph{Power Station} The power station is use to power all the Base Station Electronics System.
-\\
-\begin{figure}[htp]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{img/ES00004_MCF.png}
- \caption{Block Diagram For Main Control Facility}	
-\end{center}
-\end{figure}
+
+\subparagraph{Main Radio Tower}
+\subparagraph{Central Computer}
+\subparagraph{}
 \newpage
 \chapter{Utility Station}
 \section{Launch Control Station (LCS)}
@@ -73,8 +66,8 @@ The Launch Control Station is majorly use to performs a launch sequence. It will
 It will have ability to perform any action the launch pad needed, which will be execute one processor inside the station. It will have ability to connect to the Main Control Facility. The processor in the station will detect any lose packet before execute any important step. The processor also will be able directly connect to the OA-II VEH COM which allow it upgrade and upload the software system of the rocket. The LCS also will connect with a camera system which will record and send back the whole rocket launching process. 
 \section{Terrestrial Telemetric Station (TTS)}
 The Terrestrial Telemetric Station performs basic analysis on the live telemetry data. This includes displaying a Range Safe/Range Live indication, vehicle orientation from sensor fusion, flight profile stages, and error monitoring.\\
-The Terrestrial Telemetric Station is preform two jobs. The first job is monitoring the vehicle status via the radio module. It will report the data it receive to the Main Control Facility connect to it. The second job is locating the rocket during and after flight and report it back to the MCF. In a mission, multiple TTS might required. Each TTS will have two to four antennas and a central processor to analyze the antenna data. All the TTS should locate near the MCF with a circular shape. All the location calculation will set the MCF as the origin.\\
-The location tracking of the Terrestrial Telemetric Station majorly via two path. The first
+The Terrestrial Telemetric Station is preform two jobs. The first job is monitoring the vehicle status via the radio module. It will report the data it receive to the Main Control Facility connect to it. The second job is locating the rocket during and after flight and report it back to the MCF. In a mission, multiple TTS might required. Each TTS will have two to four antennas and a central processor to analyze the antenna data. All the TTS should locate near the MCF with a circular shape. All the location calculation will set the MCF as the origin.\\\\
+The location tracking of the Terrestrial Telemetric Station majorly via two path. The first path is radio ranging. The antenna sites will send and receive telemetry signal from the rocket and it will convert the data to digital format and send back to the main computer in the station. The second way is optical ranging. Each antenna site will also include a camera which will scan for the rocket. It will use the angle that each site report to calculate the location of the rocket. 
 \section{Ground Testing Station(GTS)}
 The Ground Testing Station have two part, the \textbf{Propulsion Test Branch}, and \textbf{Avionics Test Branch}.\\\\
 \textbf{Propulsion Test Branch} is majorly for the engine testing. It will help Main Control Facility to record and report testing engine thrust and thermo condition. It also will offer control on the rocket engine such as increase or cutoff fuel and oxidizer supply.\\\\
