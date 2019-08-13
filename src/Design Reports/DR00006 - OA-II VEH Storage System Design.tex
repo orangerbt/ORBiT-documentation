@@ -103,29 +103,49 @@ eMMC (embedded Multi-Media Controller) is a standard for embedded storage chips 
 \end{table}
 
 \section{PATA}
-PATA (Parallel ATA) is an older standard used for PC hard drives. Originally ATA for AT Attachment, and also called IDE in later versions, PATA uses a 40 pin standard interface. PATA supports speeds up to 100MB/s. While the ATA command set remains in the form of SATA, the interface itself is essentially obsolete today. \cite{wiki:pata} The Compact Flash standard is substantially similar and electrically identical to PATA, providing support for more modern, high speed flash devices. \cite{wiki:compactflash} 
+PATA (Parallel ATA) is an older standard used for PC hard drives. Originally ATA for AT Attachment, and also called IDE in later versions, PATA uses a 40 pin standard interface. PATA supports speeds up to 100MB/s. While the ATA command set remains in the form of SATA, the interface itself is essentially obsolete today. \cite{wiki:pata} The Compact Flash standard is substantially similar and electrically identical to PATA, providing support for more modern, high speed flash devices. \cite{wiki:compactflash}
 \begin{table}[H]
 	\centering
 	\begin{tabu}{c | c}
 		Pros & Cons \\ \hline
 		Low cost & Obsolete\\
-		Easy to implement & Large number of signals\\
+		Easy to implement & Wide electrical interface\\
 		Widely supported & Low performance
 	\end{tabu}
 	\caption{PATA pros vs cons}
 \end{table}
 
 \section{SATA}
-SATA (Serial ATA) is a newer standard used for PC hard drives. It is substantially based on PATA, using the same command set, but over a newer, modern serial interface. \cite{wiki:sata}
+SATA (Serial ATA) is a newer standard used for PC hard drives. It is substantially based on PATA, using the same command set, but over a newer, modern serial interface. SATA supports speeds up to 6Gb/s, significantly faster than PATA. The SATA physical interconnect supports SAS or Serial Attached SCSI, for high performance drives. SATA is one of the most common storage protocols today. \cite{wiki:sata} SATA is also available with ruggedized connectors, as well as ruggedized SSDs \cite{microsemi:rsata} \cite{amphenol:rsata}.
+\begin{table}[H]
+	\centering
+	\begin{tabu}{c | c}
+		Pros & Cons \\ \hline
+		High speed & Moderately difficult to implement\\
+		Narrow electrical interface & Moderate cost\\
+		Widely supported & \\
+	\end{tabu}
+	\caption{SATA pros vs cons}
+\end{table}
 
 \section{NVMe}
-NVMe (Non-Volatile Memory express) is a storage technology which works over PCI Express.
+NVMe (Non-Volatile Memory express) is a storage technology which works over PCI Express. NVMe was specifically designed for flash storage, and is used in very high performance applications \cite{wiki:nvme}. NVMe is capable of speeds up to 2.8GB/s with 8 PCIe lanes, faster than any other current storage technology \cite{ovh:nvme}. There are multiple different form factors available for NVMe drives, including U.2, M.2, and single chip solutions \cite{siliconmotion:ferrissd}.
+\begin{table}[H]
+	\centering
+	\begin{tabu}{c | c}
+		Pros & Cons \\ \hline
+		Very high speed, scalable & Difficult to implement\\
+		Narrow electrical interface & High cost\\
+		Widely supported & \\
+	\end{tabu}
+	\caption{NVMe pros vs cons}
+\end{table}
 
 \section{eUFS}
 eUFS is a new standard intended to replace eMMC. Unfortunately not much information about eUFS is available at this time.
 
 \section{Raw Flash}
-Flash storage can be used without any of the above protocols. There are two basic types of flash used: NOR and NAND. NAND is the more common type \cite{toradex:flash}. However, both styles of flash do not take care of several important features, such as wear leveling, error correction, bad block handling, and power failure handling \cite{toradex:flash}.
+Flash storage can be used without any of the above protocols. There are two basic types of flash used: NOR and NAND. NAND is the more common type. However, both styles of flash do not take care of several important features, such as wear leveling, error correction, bad block handling, and power failure handling \cite{toradex:flash}. As a result, it is highly advantageous to use a standard controller, as with the above protocols.
 \newpage
 
 \chapter{Bibliography}
