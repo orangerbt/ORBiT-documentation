@@ -4,6 +4,9 @@
 \input{../Templates/packages.tex}
 \input{../Templates/presetup.tex}
 
+% Bibliography database
+\addbibresource{DR00001.bib}
+
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
 \title{OA-II Backplane Bus System Design}
@@ -132,33 +135,33 @@ $(180Kbyte/s+4Mbyte/s+200byte/s+400Kbyte/s)\times2\approx10Mbyte/s$\\
 \newpage
 \chapter{Current Bus Analyze}
 \section{I2C}
-I2C is a serial protocol for two-wire interface to connect low-speed devices like microcontrollers, EEPROMs, A/D and D/A converters, I/O interfaces and other similar peripherals in embedded systems. It was invented by Philips and now it is used by almost all major IC manufacturers.\cite{Cite needed}\\\\
+I2C is a serial protocol for two-wire interface to connect low-speed devices like microcontrollers, EEPROMs, A/D and D/A converters, I/O interfaces and other similar peripherals in embedded systems. It was invented by Philips and now it is used by almost all major IC manufacturers.\cite{blog:I2C}\\\\
 I2C is a great low speed communication bus, however it do not support hardware priority level and change software topology.
 \section{SPI}
-Serial Peripheral Interface (SPI) is an interface bus commonly used to send data between microcontrollers and small peripherals such as shift registers, sensors, and SD cards.\cite{Cite needed}\\\\
+Serial Peripheral Interface (SPI) is an interface bus commonly used to send data between microcontrollers and small peripherals such as shift registers, sensors, and SD cards.\cite{blog:SPI}\\\\
 Serial Peripheral Interface allows the device to increase its bandwidth by increasing the data clock rate. However, it also does not support hardware priority level and change software topology.
 \section{UART}
-A universal asynchronous receiver-transmitter is a computer hardware device for asynchronous serial communication in which the data format and transmission speeds are configurable.\cite{Cite needed}\\\\
+A universal asynchronous receiver-transmitter is a computer hardware device for asynchronous serial communication in which the data format and transmission speeds are configurable.\cite{blog:UART}\\\\
 UART bus does not require clock line to transmit data. It also has different bitrate that is alterable by the device. However it is a point to point communication system, so it needs to switch for more than two devices. It is also too low bandwidth to meet the requirements.
 \section{CAN}
-A Controller Area Network (CAN bus) is a robust vehicle bus standard designed to allow microcontrollers and devices to communicate with each other in applications without a host computer.\cite{Cite needed}\\\\
+A Controller Area Network (CAN bus) is a robust vehicle bus standard designed to allow microcontrollers and devices to communicate with each other in applications without a host computer.\cite{canbus:CAN}\\\\
 The CAN bus have hardware priority level and support 500kbps$\footnote{About 62.5Kbyte/s}$ bandrate. It also allows group broadcast as well as point to point communication.
 \clearpage
 %**************************************%
 \section{PCIe}
-PCI Express, officially abbreviated as PCIe or PCI-e, is a high-speed serial computer expansion bus standard, designed to replace the older PCI, PCI-X and AGP bus standards. It is the common motherboard interface for personal computers' graphics cards, hard drives, SSDs, Wi-Fi and Ethernet hardware connections.\cite{Cite needed}\\\\
+PCI Express, officially abbreviated as PCIe or PCI-e, is a high-speed serial computer expansion bus standard, designed to replace the older PCI, PCI-X and AGP bus standards. It is the common motherboard interface for personal computers' graphics cards, hard drives, SSDs, Wi-Fi and Ethernet hardware connections.\cite{MR:PCIe}\\\\
 The PCI Express is a common use buses in personal computer. However, the topology of this bus is mostly tree structure. It will increase difficulty when a second master need to add into the system.
 \section{RapidIO}
-The RapidIO architecture is a high-performance packet-switched interconnect technology. RapidIO supports messaging, read/write and cache coherency semantics.\cite{Cite needed}\\\\
+The RapidIO architecture is a high-performance packet-switched interconnect technology. RapidIO supports messaging, read/write and cache coherency semantics.\cite{RapidIO:RapidIO}\\\\
 RapidIO is a high speed connection that supports up to 5Gbps$\footnote{About 625Mbyte/s}$ via a single lane. It also supports multi-master structure. By using a RapidIO switch, the system could change software topology. However, rapidIO is a new bus technology that is mainly used in DSP, high speed FPGA, and SoC. It require heavy hardware resources compared to the other buses.
 \section{SpaceWire}
-SpaceWire is defined in the European Cooperation for Space Standardization standard ECSS-E-ST-50-12C (replaces ECSS-E50-12A). The SpaceWire standard was authored by Steve Parkes, University of Dundee with contributions from many individuals within the SpaceWire Working Group from European Space Agency (ESA), European Space Industry, Academia and NASA.\cite{Cite needed}\\\\
+SpaceWire is defined in the European Cooperation for Space Standardization standard ECSS-E-ST-50-12C (replaces ECSS-E50-12A). The SpaceWire standard was authored by Steve Parkes, University of Dundee with contributions from many individuals within the SpaceWire Working Group from European Space Agency (ESA), European Space Industry, Academia and NASA.\cite{ESA:SpaceWire}\\\\
 The SpaceWire is use LVDS voltage standard which is a commonly use voltage standard in FPGA. The PHY for SpaceWire is relativly simple and require less resource for constructe the PHY. The newest SpaceWire bus support 400Mbps for one lane$\footnote{About 50Mbyte/s}$. 
 \section{Interlaken}
-Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology.\cite{Cite needed}\\\\
+Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology.\cite{blog:Interlaken}\\\\
 Interlaken is a bus deisgn for replacing ethernet. It supports port division and flow control, however, the Interlaken PHY does not support in most of the FPGA outlined.This means that it will require an extra chip for PHY. This has similar speed to RapidIO$\footnote{About 625Mbyte/s}$.
 \section{Ethernet}
-Ethernet as a widely used bus has many benefits to the data bus system, as its standard is implemented in many devices and drivers, a router for it is easy to develop. It also can go up to 10MB/s with correct PCB design. However, it does not have a real time clock as  SpaceWire does and is not as fast as the RapidIO or PCIe. Transmission via Ethernet is not designed for realtime applications.
+Ethernet as a widely used bus has many benefits to the data bus system, as its standard is implemented in many devices and drivers, a router for it is easy to develop. It also can go up to 10MB/s with correct PCB design. However, it does not have a real time clock as  SpaceWire does and is not as fast as the RapidIO or PCIe. Transmission via Ethernet is not designed for realtime applications.\cite{blog:Ethernet}
 
 \newpage
 \chapter{Recommend System Design}
@@ -245,9 +248,12 @@ In this plan, the command bus is using CAN. It provide prioritized data transmis
 In this plan, CAN bus still is the main command bus due to its prioritized data transmission. In the data bus, RapidIO each lane can carry 10 times data rate compared to SpaceWire. It can handle most future advanced missions without any hardware upgrades. A company will also be providing ASIC for rapidIO bus router.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00001_RapidIO.png}
- \caption{Recommand Design B}	
+ \caption{Recommend Design B}	
 \end{figure}
 \newpage
+\chapter{Bibliography}
+
+\printbibliography[heading=none]
 %\chapter{OA-II BUS Software Structure}
 %\newpage
 %end of document

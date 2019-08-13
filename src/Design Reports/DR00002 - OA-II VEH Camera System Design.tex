@@ -211,33 +211,9 @@ The Jetson Nano is a GPU computing module what NVIDIA produce for GPU AI compute
 
 \newpage
 %**********************************************************************
-\chapter{File System and Video Storage}
-\section{Introduction}
-The processor core selection will be down by another document$\footnote{ES00005 - OA-II Payload Modules Architecture}$. In the camera system, the main focus in the storage media and the inferface it had to connect to the processor. The whole OA-II VEH system will base on the embedded linux.$\footnote{DR00003 - OA-II VEH COM System Design}$ So the main file system will be use ext4.
-\section{Comparsion}
-\begin{table}[H]
-	\centering
-		\begin{tabu}{r || c | c | c | c }
-		Technology & Interface & Speed & Complexity & Price\\ \hline
-		SSD Drive & NVMe & 800MB/s & 9 &  \$100/500GB\\
-		SSD Drive & SATA & 715MB/s & 9 & \$100/500GB \\
-		eMMC & eMMC & 45MB/s & 5 & \$10/128G \\
-		SD Card & SDIO & 80MB/s & 5 & \$15/64G \\
-		\end{tabu}
-	\caption{SoC Summary}
-	\label{tab:socs}
-\end{table}
-\subparagraph{SSD Drive}
-The main problem for the SSD drive is this device need more research in order to intergrade into the VEH system. However, linux system do have exiting driver for them. It also have very high speed interface which allow fast data transformation.\\\\
-\subparagraph{eMMC}
-The main problem for eMMC device is it is not removable from the board. It mean the recovery of this storge will be very difficult. However, it is a building interface for most of the SoC and it have no problem with vibration.\\\\
-\subparagraph{SD Card}
-The main problem for sd card is the disconnection due to the vibration. It is the top choose due to its price and mobilablity. In many mobile camera product, SD card is the storage media they use for multimedia.
-\newpage
-%**********************************************************************
 \chapter{System Diagram}
 \section{USB camera with SoC FPGA chip}
-This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chip. The chip will translate the data to backplane bus and send to the storage device. It can use the buildin USB controller and system driver, which reduce the development time. It could up grade to better camera set by using self developped module. But the buildin USB interface will limited the bitrate encoding use and migth cause blur when the sensor meet frequenly virbation.\\
+This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chip. The chip will translate the data to back-plane bus and send to the storage device. It can use the builtin USB controller and system driver, which reduce the development time. It could up grade to better camera set by using self developed module. But the builtin USB interface will limited the bit-rate encoding use and might cause blur when the sensor meet frequently vibration.\\
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/DR00002_Plan1.png}
