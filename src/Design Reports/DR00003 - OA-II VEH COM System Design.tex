@@ -4,7 +4,8 @@
 \input{../Templates/packages.tex}
 \input{../Templates/presetup.tex}
 
-
+% Bibliography database
+\addbibresource{DR00003.bib}
 %**********************************************************************
 %Document titles etc. defined here: (replace [] as well)
 \title{OA-II VEH COM System Design}
@@ -54,7 +55,7 @@ In the OA-OII VEH requirements, failure recovery is the most critical component.
 \subparagraph{Fast Switch} When an emergency scenario is detected, the system switches to backup unit quickly, and is able to keep that system operating.
 \subparagraph{Hierarchy Failure Recovery System} For each failure scenario, the recovery system has a plan to protect the device and preserve data.
 \section{Realtime Operating System}
-In the OA-II VEH requirements, a realtime operating system is key to performing critical procedures.
+In the OA-II VEH requirements, a realtime operating system is key to performing critical procedures.\cite{wiki:RTOS}
 \subparagraph{Predictable Execution Time}Each operation needs to be completed within a limited time and with minimal errors.
 \subparagraph{Interface with the Main System}The RTOS needs to be able to receive commands from other systems.
 \subparagraph{Execution Feedback}When a procedure is completed, it will need confirmation from sensor data.
@@ -62,15 +63,15 @@ In the OA-II VEH requirements, a realtime operating system is key to performing 
 \newpage
 \chapter{Current Controller Analysis}
 \section{Arduino}
-Aruino is a common and beginner friendly microcontroller used in DIY electronics, and has abundant libraries for different IC. However, most of these libraries are inefficient and the interface options are limited. Its core clock runs at 16MHz which is not fast enough to support a functional Linux system.
+Aruino is a common and beginner friendly microcontroller used in DIY electronics, and has abundant libraries for different IC.\cite{offical:Arduino} However, most of these libraries are inefficient and the interface options are limited. Its core clock runs at 16MHz which is not fast enough to support a functional Linux system.
 \section{STM32 Serise}
-SYM32 Series is another common microcontroller that supports up to 400MHz core clock, and also supports Linux operating systems. However, like the Arduino, it lacks support for a custom interface.
+SYM32 Series is another common microcontroller that supports up to 400MHz core clock, and also supports Linux operating systems.\cite{offical:STM32} However, like the Arduino, it lacks support for a custom interface.
 \section{Market SoC System}
-SoC systems such as the Raspberry Pi and BeagleBone have a variety of interface options, but whose interfaces lack the high speed required for connections between systems.
+SoC systems such as the Raspberry Pi and BeagleBone have a variety of interface options, but whose interfaces lack the high speed required for connections between systems.\cite{offical:Beagles}
 \section{FPGA Soft Core Processor}
-A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{Cite Needed} Almost every FPGA company will have it own soft core processor. This allows the core to be easily reprogrammed, as it is formed by "logical synthesis" and allow the user to rebuild them in the FPGA chip as long as the chip has enough resources. Even the soft core processor allow user to customize the structure, but the speed of soft core processor will not as fast as the SoC processor. Although, it is fairly easy to interface to other systems.
+A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{wiki:FPGA} Almost every FPGA company will have it own soft core processor. This allows the core to be easily reprogrammed, as it is formed by "logical synthesis" and allow the user to rebuild them in the FPGA chip as long as the chip has enough resources. Even the soft core processor allow user to customize the structure, but the speed of soft core processor will not as fast as the SoC processor. Although, it is fairly easy to interface to other systems.
 \section{SoC FPGA}
-The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs. On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradibility. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.
+The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs.\cite{blog:socFPGA} On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradibility. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.
 \newpage
 \chapter{Recommended System Design}
 \section{SoC FPGA}
@@ -100,7 +101,9 @@ The FRU will have the same hardware structure as the MCU, but constantly get dat
 \end{center}
 \end{figure}
 \end{center}
-
+\newpage
+\chapter{Bibliography}
+\printbibliography[heading=none]
 %end of document
 %**********************************************************************
 \end{document}
