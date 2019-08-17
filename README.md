@@ -45,7 +45,7 @@
   - ES00004 - OA-II Base Station Electronics (BAS) System Architecture
   - ES00005 - OA-II VEH Payload Modules General Architecture
   - ES00006 - OA-II VEH Payload Frame General Specifications
-  - ES00007 - OA-II VEH Payload Bus Specifications (TBD)
+  - ES00007 - OA-II VEH Payload Bus Specifications
   - ES00008 - OA2-COM-MCU-N01 Description (TBD)
   - ES00009 - OA2-COM-FRU-N01 Description (TBD)
   - ES00010 - OA2-PAM-PMU-N01 Description (TBD)
@@ -65,13 +65,20 @@
   - DR00001 - OA-II Backplane Bus System
   - DR00002 - OA-II VEH Camera System Design
   - DR00003 - OA-II VEH COM System Design
+  - DR00004 - OA-II VEH TAM System Design
+  - DR00005 - OA-II VEH PAM System Design
+  - DR00006 - OA-II VEH Storage System Design
+  - DR00007 - OA-II BAS Bus System Design
+  - DR00008 - OA-II Radio System Design
+  - DR00009 - OA-II VEH Software System Design (TBD)
+  - DR00010 - OA-II BAS Software System Design (TBD)
   - ER00002 - ORBiT Avionics System II Requirements
   - ES00002 - ORBiT Avionics System II Architecture
   - ES00003 - OA-II Vehicle Electronics (VEH) System Architecture
   - ES00004 - OA-II Base Station Electronics (BAS) System 
   - ES00005 - OA-II Payload Modules Architecture
-  - ES00006 - OA-II Payload Frame Specifications (TBD)
-  - ES00007 - OA-II Payload Bus Specifications (TBD)
+  - ES00006 - OA-II Payload Frame Specifications
+  - ES00007 - OA-II Payload Bus Specifications 
 
 ## Credits
 

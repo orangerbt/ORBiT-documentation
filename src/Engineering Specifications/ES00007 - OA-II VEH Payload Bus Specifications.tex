@@ -1,0 +1,74 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{OA-II VEH Payload Bus Specifications}
+\author{Jinzhi Cai}
+\itemcode{ES00007}
+\revnumber{A01}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+\tableofcontents*
+\clearpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+
+\chapter{Introduction}
+\section{Scope}
+The document is describe the detail structure of OA-II VEH Payload Bus.
+\section{Purpose}
+The purpose of this document construct a standard for all the OA-II VEH component to transfer data via the OA-II VEH Payload Bus.
+\section{Relevant Documents}
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Jinzhi Cai & & Initial draft & 2019-8-15\\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+\newpage
+\chapter{Relative Technology Introduction}
+\section{CANbus}
+\section{SpaceWire}
+\newpage
+\chapter{Bus Structure}
+\section{Software Structure}
+The bus is from by two kind of device. \textbf{Router} is device that will have multiple OA-II VEH Payload Bus port allow other device to connect with it. It do not process any packet but will route packet to target destination. \textbf{Node} is device that will send out and receive data from other \textbf{Node} or \textbf{Router}. A node usually will contain one set of OA-II VEH Payload Bus port for it to connect to other device.\\\\
+All device in the OA-II VEH Payload Bus will only connect to one other device, know as point to point (P2P). \textbf{Router} will have the responsibility to relay packet base on priority. Each device will given a 16bit fix ID when it was made. Every time when a node want to deliverer a packet to another node, it will put the id into the message with the packet. The router will prioritize those packet base on their id and put it to the target node.
+\section{Port Definition}
+The OA-II VEH Payload Bus contain following lane.
+\begin{itemize}
+	\item 24V Main Power Lane \times 2
+	\item CANbus Lane \times 2
+	\item Dual-SpaceWire Lane \times 2
+\end{itemize}
+The two CANbus lane and two Dual-SpaceWire lane are mutual backup between the same bus. Between different lane, a signal ground will be placed for absorb spurious emission.
+\section{Packet Definition}
+In OA-II VEH Payload Bus, the packet format is following.
+\begin{itemize}
+	\item 16bit sender ID
+	\item 16bit Target ID
+	\item Data
+	\item CRC Code
+\end{itemize}
+\newpage
+% End of document
+%**********************************************************************
+\end{document}
