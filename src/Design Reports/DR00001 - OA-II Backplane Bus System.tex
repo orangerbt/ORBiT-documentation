@@ -23,7 +23,7 @@
 \input{../Templates/cover.tex}
 
 \tableofcontents*
-\clearpage
+\newpage
 
 
 %**********************************************************************
@@ -31,44 +31,43 @@
 
 \chapter{Introduction}
 \section{Scope}
-This document analyzes the requirements for OA-II VEH system data transmission, and current bus technologies in the field, and to outline a system design to fullfill the needs of OA-II VEH system.
+This document analyzes the requirements for OA-II VEH system data transmission, and current bus technologies in the field. It outlines a system design to fulfill the needs of OA-II VEH system.
 \section{Purpose}
-The goal for the OA-II backplane bus system is to construct a high speed, high compatibility, and highly robust backplane data transmission system.
-\chapter{Revision History}
+The goal for the OA-II VEH backplane bus system is to construct a fast, versatile, compact, and highly robust backplane data transmission system.
+\section{Revision History}
 \begin{table}[H]
 	\centering
-	\resizebox{0.8\textwidth}{!}{%
-		\begin{tabu}{r || c | c | c }
+	\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize & 2019-7-19\\\hline
 		A02 & Jinzhi Cai & Add detail Ethernet & 2019-7-22\\
-		\end{tabu}
-	}
+		A03 & Gabriel Smolnycki & Edits for clarity & 2019-08-17
+	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:rev}
 \end{table}
 \newpage
-\chapter{BUS System Requirement}
-\section{Hardware Requirement}
+
+\chapter{Bus System Requirements}
+\section{Hardware Requirements}
 \begin{description}
-	\item[\textbf{Backplane Bus}]The bus needs to suppport a swappable module.
-	\item[\textbf{Vribation-proof}]The bus needs to have good support to the module on the frame.
-	\item[\textbf{Size}]Needs to fit into the dimensions of the rocket.
-	\item[\textbf{Topology}]The hardware implementation needs to support out-of-order locating.
+	\item[Backplane Bus]The bus needs to support interchangeable modules.
+	\item[Vibration Resistant]The bus needs provide resistance high shock and vibration.
+	\item[Size]The bus needs to fit inside the rocket payload section.
+	\item[Topology]The hardware implementation cannot be location dependent.
 \end{description}
-\section{Software Requirement}
+\section{Software Requirements}
 \begin{description}
-	\item[\textbf{Point to Point \& Broadcast}]The bus need to support broadcasting data.
-	\item[\textbf{Bandwidth}]The bus needs to support the max bandwidth given.
-	\item[\textbf{Topology}]The bus needs to allow for changes in software topology.
-	\item[\textbf{Real Time}]The bus needs to support message priority levels.
-	\item[\textbf{Various Speed}]The bus needs to allow low end device connectivity into the system.
+	\item[Point to Point \& Broadcast]The bus needs to support broadcasting data.
+	\item[Bandwidth]The bus needs to support the max bandwidth given.
+	\item[Topology]The bus topology should be software defined and reconfigurable.
+	\item[Priority]The bus needs to support message priority levels, including real-time communication.
+	\item[Multiple Speeds]The bus needs to allow both high and low speed devices.
 \end{description}
 
 \section{Bandwidth Calculation}
-
-\subparagraph{Low Speed Payload}
-Each low speed payload is sensing in 10kHz 16bit
+\subsection{Low Speed Payload}
+Low speed payloads generate data at a minimum of 10kHz/16bit.
 \begin{itemize}
 \item 4 high pressure sensors for propulsion system
 \item 2 low pressure sensors for pitot tube
@@ -77,127 +76,153 @@ Each low speed payload is sensing in 10kHz 16bit
 \item 4 low temperature sensors for batteries
 \item 2 low temperature sensor for ambient
 \end{itemize}
-\begin{center}
-$4+2+4+4+4+2=20 chennals$\\
-$10kHz=10000Hz$\\
-$16bit=2byte$\\
-$10000Hz\times2byte=20000byte/s=20Kbyte/s$\\
-$20Kbyte/s\times20=400Kbyte/s$
-\end{center}
+\begin{equation}
+	4+2+4+4+4+2=20 channels
+\end{equation}
+\begin{equation}
+	16 bits (b) = 2 bytes (B)
+\end{equation}
+\begin{equation}
+	10kHz \times 2B =20kB/s
+\end{equation}
+\begin{equation}
+	20kB/s \times 20 = 400kB/s
+\end{equation}
 
-\subparagraph{High Speed Payload}
+\subsection{High Speed Payload}
 \begin{itemize}
 \item 9 axis IMU
-\item GNSS
-\item 4x cameras
+\item GNSS system
+\item 4x 1080p@60Hz cameras
 \end{itemize}
-\begin{center}
-9 axis IMU in 10kHz is\\
-$9\times10000Hz\times2byte=180000byte/s=180Kbyte/s$
-\end{center}
-\begin{center}
-GNSS module$\footnote{Did not include any fixing factor}$\\
-UTC launch time 4byte\\
-Latitude 4byte\\
-Longitude 4byte\\
-Height 4byte\\
-Direction+Ground speed 4byte\\
-$4byte\times5=20byte$\\
-$10Hz\times20byte=200byte/s$
-\end{center}
-\begin{center}
-Camera, set the bitrate to 8Mbps$\footnote{High bitrate is nessary for high virbation environment}$\\
-$8Mbps=1Mbyte/s$\\
-$1Mbyte/s\times4=4Mbyte/s$
-\end{center}
-\subparagraph{Total bandwidth}
-\begin{center}
-$(180Kbyte/s+4Mbyte/s+200byte/s+400Kbyte/s)\times2\approx10Mbyte/s$\\
-\end{center}
+
+For a 9 axis IMU at 10kHz/16bit per axis:
+\begin{equation}
+	9 \times 10kHz \times 2B = 180kB/s
+\end{equation}
+
+For a typical GNSS module running at 10Hz\footnote{Not including a safety factor}:
+\begin{itemize}
+	\item UTC launch time - 4 bytes
+	\item Latitude - 4 bytes
+	\item Longitude - 4 bytes
+	\item Altitude - 4 bytes
+	\item Direction + Ground speed - 4 bytes
+\end{itemize}
+\begin{equation}
+	4B \times 5 = 20B
+\end{equation}
+\begin{equation}
+	10Hz \times 20B =200B/s
+\end{equation}
+
+For cameras, assume a compressed bitrate of 8Mb/s\footnote{High bitrate is necessary for high vibration environment}:
+\begin{equation}
+	8Mb/s = 1MB/s
+\end{equation}
+\begin{equation}
+	1MB/s \times 4 = 4MB/s
+\end{equation}
+
+\subsection {Total bandwidth}
 \begin{table}[H]
 	\centering
-	\resizebox{0.8\textwidth}{!}{%
-		\begin{tabu}{r || c | c | c }
+	\begin{tabu}{r || c | c | c }
 		Device & Number & Bandwidth per Device & Total Bandwidth\\ \hline
-		High Pressure Sensor & 4 & 20KB/s & 80KB/s\\
+		High Pressure Sensors & 4 & 20KB/s & 80KB/s\\
 		Low Pressure sensors & 2 & 20KB/s & 40KB/s\\
 		High Temperature Sensors & 4 & 20KB/s & 80KB/s\\
 		Low Temperature Sensors & 10 & 20KB/s & 200KB/s\\
 		9 axis IMU & 1 & 180KB/s & 180KB/s\\
-		GNSS & 1 & 200B/s & 200KB/s\\
-		Cameras & 4 & 1MB/s & 4MB/s\\ \hline
-		Estimate Bandwidth & - & - & 10MB/s\\
-		\end{tabu}
-	}
-	\caption{Summary of Estimate Bandwidth}
-	\label{tab:rev}
+		GNSS system & 1 & 200B/s & 200KB/s\\
+		Cameras & 4 & 1MB/s & 4MB/s
+	\end{tabu}
+	\caption{Summary of Estimated Bandwidth}
+	\label{tab:bandwidth}
 \end{table}
+
+Using a factor of safety of 2 to compensate for encoding overhead:
+\begin{equation}
+	(180kB/s + 4MB/s + 200B/s + 400kB/s) \times 2 \approx 10MB/s
+\end{equation}
+
 \newpage
-\chapter{Current Bus Analyze}
+
+\chapter{Analysis of common bus protocols}
 \section{I2C}
-I2C is a serial protocol for two-wire interface to connect low-speed devices like microcontrollers, EEPROMs, A/D and D/A converters, I/O interfaces and other similar peripherals in embedded systems. It was invented by Philips and now it is used by almost all major IC manufacturers.\cite{blog:I2C}\\\\
-I2C is a great low speed communication bus, however it do not support hardware priority level and change software topology.
+I2C is a serial protocol for two-wire interface to connect low-speed devices like microcontrollers, EEPROMs, A/D and D/A converters, I/O interfaces and other similar peripherals in embedded systems. It was invented by Philips and now it is used by almost all major IC manufacturers \cite{blog:I2C}.\par
+I2C is a great low speed communication bus, however it does not support hardware priority level and software defined topology.
+
 \section{SPI}
-Serial Peripheral Interface (SPI) is an interface bus commonly used to send data between microcontrollers and small peripherals such as shift registers, sensors, and SD cards.\cite{blog:SPI}\\\\
-Serial Peripheral Interface allows the device to increase its bandwidth by increasing the data clock rate. However, it also does not support hardware priority level and change software topology.
+Serial Peripheral Interface (SPI) is an interface bus commonly used to send data between microcontrollers and small peripherals such as shift registers, sensors, and SD cards \cite{blog:SPI}.\par
+SPI allows the device to increase its bandwidth by increasing the data clock rate. However, it does not support hardware priority level or software defined topology.
+
 \section{UART}
-A universal asynchronous receiver-transmitter is a computer hardware device for asynchronous serial communication in which the data format and transmission speeds are configurable.\cite{blog:UART}\\\\
-UART bus does not require clock line to transmit data. It also has different bitrate that is alterable by the device. However it is a point to point communication system, so it needs to switch for more than two devices. It is also too low bandwidth to meet the requirements.
+A universal asynchronous receiver-transmitter is a computer hardware device for asynchronous serial communication in which the data format and transmission speeds are configurable \cite{blog:UART}.\par
+UART does not require a clock line to transmit data. It also can use individual bitrates per device. However it is a point to point communication system, so it needs a switch for more than two devices. It also does not support high enough bandwidth to meet the requirements.
+
 \section{CAN}
-A Controller Area Network (CAN bus) is a robust vehicle bus standard designed to allow microcontrollers and devices to communicate with each other in applications without a host computer.\cite{canbus:CAN}\\\\
-The CAN bus have hardware priority level and support 500kbps$\footnote{About 62.5Kbyte/s}$ bandrate. It also allows group broadcast as well as point to point communication.
-\clearpage
-%**************************************%
+A Controller Area Network (CAN bus) is a robust vehicle bus standard designed to allow microcontrollers and devices to communicate with each other in applications without a host computer \cite{canbus:CAN}.\par
+CANbus has hardware priority level support and works up to 500kbps\footnote{62.5kB/s} bandwidth. It also allows group broadcast as well as point to point communication.
+
 \section{PCIe}
-PCI Express, officially abbreviated as PCIe or PCI-e, is a high-speed serial computer expansion bus standard, designed to replace the older PCI, PCI-X and AGP bus standards. It is the common motherboard interface for personal computers' graphics cards, hard drives, SSDs, Wi-Fi and Ethernet hardware connections.\cite{MR:PCIe}\\\\
-The PCI Express is a common use buses in personal computer. However, the topology of this bus is mostly tree structure. It will increase difficulty when a second master need to add into the system.
+PCI Express, officially abbreviated as PCIe or PCI-e, is a high-speed serial computer expansion bus standard, designed to replace the older PCI, PCI-X and AGP bus standards. It is the common motherboard interface for personal computers' graphics cards, hard drives, SSDs, Wi-Fi and Ethernet hardware connections \cite{MR:PCIe}.\par
+PCI Express is a commonly used bus in personal computers. It supports up to 16GT/s\footnote{1.969 GB/s} per lane. However, it mostly uses a tree type topology. As a result, it is difficult to add a second master to the system.
+
 \section{RapidIO}
-The RapidIO architecture is a high-performance packet-switched interconnect technology. RapidIO supports messaging, read/write and cache coherency semantics.\cite{RapidIO:RapidIO}\\\\
-RapidIO is a high speed connection that supports up to 5Gbps$\footnote{About 625Mbyte/s}$ via a single lane. It also supports multi-master structure. By using a RapidIO switch, the system could change software topology. However, rapidIO is a new bus technology that is mainly used in DSP, high speed FPGA, and SoC. It require heavy hardware resources compared to the other buses.
+The RapidIO architecture is a high-performance packet-switched interconnect technology. RapidIO supports messaging, read/write and cache coherency semantics \cite{RapidIO:RapidIO}.\par
+RapidIO is a high speed connection that supports up to 5Gbps\footnote{About 625MB/s} per lane. It also supports multi-master structure. Using a RapidIO switch, software defined technology is also possible. However, RapidIO is a new bus technology that is mainly used in DSPs, high speed FPGAs, and SoCs. It require significant hardware resources compared to the other buses.
+
 \section{SpaceWire}
-SpaceWire is defined in the European Cooperation for Space Standardization standard ECSS-E-ST-50-12C (replaces ECSS-E50-12A). The SpaceWire standard was authored by Steve Parkes, University of Dundee with contributions from many individuals within the SpaceWire Working Group from European Space Agency (ESA), European Space Industry, Academia and NASA.\cite{ESA:SpaceWire}\\\\
-The SpaceWire is use LVDS voltage standard which is a commonly use voltage standard in FPGA. The PHY for SpaceWire is relativly simple and require less resource for constructe the PHY. The newest SpaceWire bus support 400Mbps for one lane$\footnote{About 50Mbyte/s}$. 
+SpaceWire is defined in the European Cooperation for Space Standardization standard ECSS-E-ST-50-12C (replaces ECSS-E50-12A). The SpaceWire standard was authored by Steve Parkes, University of Dundee with contributions from many individuals within the SpaceWire Working Group from European Space Agency (ESA), European Space Industry, Academia and NASA \cite{ESA:SpaceWire}. There is also a successor called SpaceFibre, which allows up to 15 times higher data rates per lane, while maintaining significant compatibility with SpaceWire \cite{ESA:SpaceFibre}.\par
+The SpaceWire uses the LVDS voltage standard which is a commonly use voltage standard in FPGAs. The PHY for SpaceWire is relatively simple and does not require significant resources. The newest SpaceWire bus supports speeds of up to 400Mbps per lane\footnote{50MB/s}. 
+
 \section{Interlaken}
-Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology.\cite{blog:Interlaken}\\\\
-Interlaken is a bus deisgn for replacing ethernet. It supports port division and flow control, however, the Interlaken PHY does not support in most of the FPGA outlined.This means that it will require an extra chip for PHY. This has similar speed to RapidIO$\footnote{About 625Mbyte/s}$.
+Interlaken was invented by Cisco Systems and Cortina Systems in 2006, optimized for high-bandwidth and reliable packet transfers. It builds on the channelization and per channel flow control features of SPI-4.2, while reducing the number of integrated circuit (chip) I/O pins by using high speed SerDes technology \cite{blog:Interlaken}.\par
+Interlaken is designed to replace Ethernet. It supports port division and flow control, however the Interlaken PHY is not supported by many FPGAs. This means that it will require an extra PHY chip. It supports similar speeds to RapidIO\footnote{625MB/s}.
+
 \section{Ethernet}
-Ethernet as a widely used bus has many benefits to the data bus system, as its standard is implemented in many devices and drivers, a router for it is easy to develop. It also can go up to 10MB/s with correct PCB design. However, it does not have a real time clock as  SpaceWire does and is not as fast as the RapidIO or PCIe. Transmission via Ethernet is not designed for realtime applications.\cite{blog:Ethernet}
+Ethernet is a widely used bus that has many benefits to the data bus system, as its standard is implemented in many devices and drivers, and a router for it is easy to develop. It also can go up to 1Gbps\footnote{125MB/s} with appropriate PCB design. However, it does not have a real time clock as with SpaceWire, and is not as fast as RapidIO or PCIe. Ethernet is also not designed for realtime applications \cite{blog:Ethernet}.
 
 \newpage
-\chapter{Recommend System Design}
-\section{General Structure}
-Based on the requirements of the bus, the OA-II Bus System will include two parts, the command bus which is in charge of the initialization of another bus and then prioritizes data transmission, the data bus which incharge the transmission of a large amount of data and of programs. The job for those two buses will be different during each stage.$\footnote{More detail in this section at ES00007 OA-II Payload Bus Specifications}$
+\chapter{Recommended System Design}
+\section{Bus Structure}
+Based on the requirements of the bus, the OA-II Bus System will include two parts: the command bus, which is in charge of the initialization of devices bus and then prioritizes data transmission, and the data bus which is in charge of the transmission of large amounts of data (including telemetry) and of programs. The job for those two buses will be different during each stage\footnote{More detail is included in \textit{ES00007 - OA-II Payload Bus Specifications}}.
 \subsection{Initialization}
-\begin{center}
-Command Bus \textbf{ON}\\
-Data Bus \textbf{Configuration}
-\end{center}
-In the initialization stage, OA-II VEH COM MCU(Main Control Unit) will sense all the on board devices and run a check to examine all devices and ensure they are functioning correctly. During this stage, all the commands and the replies will happen in the Command bus, and each device will start to configuring the data bus interface. The final checking message will send from the MCU via the command bus and reply by each device via data bus.
-\subsection{Launch Ready}
-\begin{center}
-Command Bus \textbf{ON}\\
-Data Bus \textbf{ON}
-\end{center}
-After the initialization stage, the whole vehicle will be into launch ready stage. In this stage, all the ignition process will download to all the unit via command bus and waiting for synchronize ignition signal. All the sensors will running at full speed and deliver data into MCU to monitor vehicle status via the data bus.
-\subsection{During Flight}
-\begin{center}
-Command Bus \textbf{StandBy}\\
-Data Bus \textbf{ON}
-\end{center}
-After the ignition, all the sensors will be running at full speed and deliver data into MCU to monitor vehicle status and recording via the data bus. Command Bus will be in the standby mode to be ready to send an emergency message to passby.
-\subsection{Post-Flight}
-\begin{center}
-Command Bus \textbf{StandBy}\\
-Data Bus \textbf{OFF}
-\end{center}OA-II VEH COM MCU(Main Control Unit)
-After landing, the MCU will again do a final check of all existing units via the Command bus before turning all sensor units' power off. The data bus will be off during the whole landing process.
-\subsection{Emergency Backup}
-\subparagraph{Scenario 1}Command Bus Failure \\
-When COM FRU detects a command bus failure, it will cutoff the control of the COM MCU and use data bus send out a Failure Alert to all the existing units. From this moment, the data bus will only transmiting critical data and commands. Other data units will be powered off or save to unti internal storage.
-\subparagraph{Scenario 2 }Data Bus Failure \\
-When COM FRU detect a data bus failure, it will use command bus to communicate with MCU and checking the MCU status. The mission will continue and all units will try to switch to secondary data bus which will running at a lower speed. 
+\begin{description}
+	\item[Command Bus] ON
+	\item[Data Bus] Configuration
+\end{description}
+In the initialization stage, OA-II VEH COM MCU will detect all the on board devices and run a self-test ensure all devices are functioning correctly. During this stage, all communication occurs via the command bus, and each device will initialize and configure its data bus interface. Finally, the MCU will send a request on the command bus and receive acknowledgment on the data bus.
 
-\subsection{Bus Data Summery}
+\subsection{Pre-launch}
+\begin{description}
+	\item[Command Bus] ON
+	\item[Data Bus] ON
+\end{description}
+After the initialization stage, the vehicle will enter the pre-launch stage. At this stage, all programs will be loaded onto their respective modules via command bus and wait for an ignition signal for synchronization. All sensors will be running at full speed and deliver data to the MCU to monitor vehicle status via the data bus.
+
+\subsection{During Flight}
+\begin{description}
+	\item[Command Bus] Standby
+	\item[Data Bus] ON
+\end{description}
+After ignition and during flight, all sensors will be running at full speed and deliver data to the MCU to monitor vehicle status and for recording via the data bus. The command bus will be in standby mode and ready to send an emergency messages.
+
+\subsection{Post-flight}
+\begin{description}
+	\item[Command Bus] Standby
+	\item[Data Bus] OFF
+\end{description}
+After landing, the MCU will again run a self test on all modules before turning off power. The data bus will be off during the landing process.
+
+\subsection{Emergency Backup}
+\subsubsection{Scenario 1 - Command Bus Failure}
+When COM FRU detects a command bus failure, it will disable COM MCU control and use the data bus to send out a Failure Alert to all modules. The data bus will only transmit critical data and commands. Other data units will be powered off or save data to their internal storage.
+\subsubsection{Scenario 2 - Data Bus Failure}
+When COM FRU detects a data bus failure, it will use command bus to communicate with MCU and check the MCU status. The mission will continue and all modules will switch communications to the secondary data bus, running at a lower speed. 
+
+\subsection{Bus Data Summary}
 \begin{table}[H]
 	\centering
 		\begin{tabu}{ c | c | c | c }
@@ -206,56 +231,67 @@ When COM FRU detect a data bus failure, it will use command bus to communicate w
 		To: TAM & Command Bus/Data Bus & X & Data Bus \\ \hline
 		To: PAM & Command Bus & Data Bus & X \\ \hline
 		\end{tabu}
-	\caption{Communication route}
-	\label{tab:socs}
+	\caption{Communication routes}
+	\label{tab:routes}
 \end{table}
 \begin{table}[H]
 	\centering
 		\begin{tabu}{ c | c }
 		Command Bus & Data Bus\\ \hline
-		Need realtime transmission & Not mission critical\\
-		Mission critical & high bitrate data\\
-		Small size data & Research data\\
-		Send from COM & Base station information\\
+		Mission critical & Not mission critical\\
+		Low bitrate data & High bitrate data\\
+		Realtime data & Research data\\
+		Internal communication & Communication with base station\\
 		\end{tabu}
 	\caption{Bus Data Catalog}
-	\label{tab:socs}
+	\label{tab:busdata}
 \end{table}
-\clearpage
+
+\newpage
+
 \section{System Redundancy}
-The command bus redundancy is accomplished by adding an additional bus. The primary and secondary command will send the same command at the same time and each device will only receive the one that reaches them first and use the second one for error checking.\\\\
-Each unit will have a two lane connection to each data bus router. Those two buses will send and receive the same information, each device will only receive the one that reached them first and use the second one as error checking.\\\
-During the Initialization, the primary data router will synchronize configuration with the second data routing core. When the configuration is finished, the link will be disabled.
-\begin{figure}[htp]
+The command bus will have two separate and redundant physical buses. The primary and secondary command buses will send the same command at the same time. Each device will receive information from the primary bus, and use the secondary bus for error checking.\par
+Each unit will have a two lane connection to each data bus router. Both buses will send and receive the same information. Each device will receive information from the primary bus, and use the secondary bus for error checking.\par
+During the Initialization stage, the primary data router will synchronize configuration with the second data routing core. When the configuration is finished, the link will be disabled.
+\begin{figure}[H]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{img/DR00001_SpaceWire_2.png}
- \caption{Data Router Structure}
+	\centering
+	\includegraphics[width=4.0in]{img/DR00001_SpaceWire_2.png}
+	\caption{Data Router Structure}
 \end{center}
 \end{figure}
-\clearpage
-\section{CAN + SpaceWire}
-\subparagraph{Command Bus}CAN
-\subparagraph{Data Bus}SpaceWire\\\\
-In this plan, the command bus is using CAN. It provide prioritized data transmission for small amounts of data transmission, up to 500kbps bandwidth, which is enough bandwidth for command data transmission. The data bus is using SpaceWire which provides enough bandwidth for this high speed data transmission. It also includes a timestamp feature that will help in future sensor fusion. The whole system is build based on two routers, one is the main router that will be used for the major data transmission and the other is a backup router which can take over in the event the main router fails.
-\begin{figure}[htp]
-\includegraphics[width=\textwidth]{img/DR00001_SpaceWire_1.png}
- \caption{Recommand Design A}	
-\end{figure}
-\clearpage
-\section{CAN + RapidIO}
-\subparagraph{Command Bus}CAN
-\subparagraph{Data Bus}RapidIO\\\\
-In this plan, CAN bus still is the main command bus due to its prioritized data transmission. In the data bus, RapidIO each lane can carry 10 times data rate compared to SpaceWire. It can handle most future advanced missions without any hardware upgrades. A company will also be providing ASIC for rapidIO bus router.
-\begin{figure}[htp]
-\includegraphics[width=\textwidth]{img/DR00001_RapidIO.png}
- \caption{Recommend Design B}	
-\end{figure}
-\newpage
-\chapter{Bibliography}
 
+\newpage
+
+\section{CAN + SpaceWire}
+\begin{description}
+	\item[Command Bus] CAN
+	\item[Data Bus] SpaceWire
+\end{description}
+In this setup, the command bus uses CAN. It provides prioritized data transmission for small amounts of data transmission, and speeds up to 500kbps, which is enough bandwidth for command data transmission. The data bus uses SpaceWire which provides enough bandwidth for high speed data transmission. It also includes a timestamp feature that will help in sensor fusion. The system is built around two routers, where one is the main router that will be used for primary data transmission and the other is a backup router which can take over in the event the main router fails.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/DR00001_SpaceWire_1.png}
+	\caption{Recommended Design A}	
+\end{figure}
+
+\newpage
+
+\section{CAN + RapidIO}
+\begin{description}
+	\item[Command Bus] CAN
+	\item[Data Bus] RapidIO
+\end{description}
+In this setup, CAN bus still is the main command bus due to its prioritized data transmission. However, the data bus uses RapidIO, where each lane can carry 10 times data rate compared to SpaceWire. This will handle most future advanced missions without significant hardware upgrades. This will require a separate ASIC for as a RapidIO router. This setup is more difficult to implement, but is a viable upgrade path from a CAN + SpaceWire design.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/DR00001_RapidIO.png}
+	\caption{Recommended Design B}
+\end{figure}
+
+\newpage
+
+\chapter{Bibliography}
 \printbibliography[heading=none]
-%\chapter{OA-II BUS Software Structure}
-%\newpage
-%end of document
-%**********************************************************************
+
 \end{document}
