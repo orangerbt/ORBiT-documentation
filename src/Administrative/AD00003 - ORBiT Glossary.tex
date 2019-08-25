@@ -1,0 +1,71 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{ORBiT Glossary}
+\author{Gabriel Smolnycki}
+\itemcode{AD00003}
+\revnumber{A01}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+\tableofcontents*
+\clearpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+
+\chapter{Introduction}
+\section{Scope}
+This document covers all special terminology used by ORBiT.
+
+\section{Purpose}
+Due to the large variety of specialized terminology used, this document provides basic definitions for any specialized acronyms or terminology used by ORBiT. This central resource should be regularly updated so as to reduce confusion and improve communication.
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Gabriel Smolnycki & & Initial draft & \\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+
+\newpage
+
+\chapter{Acronyms}
+
+\begin{description}
+	\item[BAS] Base Station Electronics
+	\item[GTS] Ground Testing System
+	\item[OA-I] ORBiT Avionics System I
+	\item[OA-II] ORBiT Avionics System II
+	\item[RCS] Radio Communication System
+	\item[VEH] Vehicle Electronics
+\end{description}
+
+\newpage
+
+\chapter{Words}
+
+\begin{description}
+	\item[Payload Frame] Connections all modules in the VEH assembly
+	\item[Vehicle] The rocket, or launch vehicle
+\end{description}
+
+% End of document
+%**********************************************************************
+\end{document}
