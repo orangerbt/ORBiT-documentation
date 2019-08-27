@@ -30,19 +30,18 @@
 \section{Scope}
 This document discusses current camera technology and outlines a design that will fulfill the needs for OA-II VEH.
 \section{Purpose}
-The goal for this document is to come up with a design that will provide four 1080p 60Hz video steams and store that data to a central storage media by researching cuurent options in camera technology.
-\chapter{Revision History}
+The goal for this document is to come up with a design that will provide four 1080p 60Hz video steams and store that data to a central storage media by researching current options in camera technology.
+\section{Revision History}
 
 \begin{table}[H]
 	\centering
-	\resizebox{0.8\textwidth}{!}{%
-		\begin{tabu}{r || c | c | c }
+	\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize & 2019-7-13\\ \hline
 		A02 & Jinzhi Cai & Add detail & 2019-7-15\\
 		A03 & Jinzhi Cai & Add Jetson Nano & 2019-7-24\\
-		\end{tabu}
-	}
+		A04 & Gabriel Smolnycki & Minor grammar edits & 2019-08-26
+	\end{tabu}
 	\caption{Summary of Revision History}
 	\label{tab:rev}
 \end{table}
@@ -50,7 +49,7 @@ The goal for this document is to come up with a design that will provide four 10
 \newpage
 \chapter{General Structure of Camera System}
 \section{Introduction}
-The most basic camera system has three parts. The camera sensor is the device that will receive data from the environment and transfer it via the camera interface. The data that flows out from the sensor is call raw data. It contains all the information that the camera takes in from the sensor. A 1080p 60Hz camera have $1920*1080=2073600 pixels$. One pixels usually take $3 Bytes$ to save. For each second, $2073600*3*60=373248000Bytes$ will be created. That will be $355.96MB/s$ for one single camera. An encoder is used to compress the video steam smaller for it to be transmitted via long distence data link(usually with in $1MB/s$).\cite{zhidao:Video} The storage unit is then used to save the video steam to a file for future replay.
+The most basic camera system has three parts. The camera sensor is the device that will receive data from the environment and transfer it via the camera interface. The data that flows out from the sensor is called raw data. It contains all the information that the camera takes in from the sensor. A 1080p 60Hz camera has $1920*1080=2073600 pixels$, and one pixel usually take $3 Bytes$ to save. For each second, $2073600*3*60=373248000Bytes$ will be created. That will be $355.96MB/s$ for one single camera. An encoder is used to compress the video steam smaller for it to be transmitted via long distance data link(usually with in $1MB/s$).\cite{zhidao:Video} The storage unit is then used to save the video steam to a file for future replay.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_GenDia.png}
  \caption{General Structure of Camera System}	
@@ -60,14 +59,14 @@ The most basic camera system has three parts. The camera sensor is the device th
 %**********************************************************************
 \chapter{Camera Sensor and Relative Interface}
 \section{Introduction}
-The sensor is the most important part of the system. Using a classical implementation, in the same way as a monitor would, data is output as video signal to an external device. For each pixel clock, data of a pixel has been transmitted. After few clock(depend on the resolution), Line Sync rise to indecate one line data is finish transmission. The Frame Sync is indecate a frame of pixel data is sended. However, modern camera sensor usually use one of those three camera interface. Some of the is samiliar with the classic one, and other improve it.\\\\
+The sensor is the most important part of the system. Using a classical implementation, in the same way as a monitor would, data is output as video signal to an external device. For each pixel clock, data of a pixel has been transmitted. After few clock(depend on the resolution), Line Sync rise to indicate one line data is finish transmission. The Frame Sync is indicate a frame of pixel data is sent. However, modern camera sensor usually use one of those three camera interface. Some of the is similar with the classic one, and other improve it.
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_Cam.png}
  \caption{Classic Video Stream}	
 \end{figure}
 \newpage
 \section{DVP Interface} 
-The DVP interface is use the classic video interface to transmit data out from the sensor. The I2C bus(SCK, SDA) that inside the interface is use to config the camera. The main clock is use to provide a clock for the camera. The VSYNC, HSYNC, PCLK is the clock system that help processor to indecate the weight and height of frame. The D OUT is data that comming out from the camera. It have low requirement on the trace and sample interface design. However, it can not offer long distence transmission and high speed clock. It usually use at low end 240p camera.\cite{blog:DVP}
+The DVP interface is use the classic video interface to transmit data out from the sensor. The I2C bus(SCK, SDA) that inside the interface is use to configure the camera. The main clock is use to provide a clock for the camera. The VSYNC, HSYNC, PCLK is the clock system that help processor to indicate the weight and height of frame. The D OUT is data that coming out from the camera. It have low requirement on the trace and sample interface design. However, it can not offer long distance transmission and high speed clock. It usually use at low end 240p camera.\cite{blog:DVP}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_DVP.png}
  \caption{Physical Layer for DVP Interface}	
@@ -99,7 +98,7 @@ The LVDS camera interface is use LVDS technology to improve classic DVP interfac
 \end{description}
 \newpage
 \section{MIPI CSI-2 Interface}
-The MIPI CSI-2 camera inferface$\footnote{Might only avaliable in high-end chip.}$ is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.\cite{blog:MIPICSI2}
+The MIPI CSI-2 camera interface$\footnote{Might only available in high-end chip.}$ is different from the old one. The goal for this bus is to cut down the lane count for camera module and allow more data flow to the processor. In structure, the MIPI CSI-2 camera interface use different way to communicate. The MIPI interface use package as the data communication unit. Inside the sensor, data will be pack into a package and send it via the two or four data lane. The same process will reverse and output the raw camera data. MIPI camera will allow 1080p 60Hz or 4K 30Hz.\cite{blog:MIPICSI2}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_MIPI.png}
  \caption{Physical Layer for 2 Lane MIPI Interface}	
@@ -113,12 +112,12 @@ The MIPI CSI-2 camera inferface$\footnote{Might only avaliable in high-end chip.
 	\item[\textbf{SCK}]I2C Clock Line
 \end{description}
 \section{USB Interface (UVC)}
-The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression.\cite{blog:USB} It is easy to use and support 60fps.$\footnote{With High End SoC chip	}$
+The USB camera interface$\footnote{It do have success example by using ZYNQ SoC FPGA.}$ is different with the rest of the interface. In those camera, it include DSP chip that already finish the video compression.\cite{blog:USB} It is easy to use and support 60fps.$\footnote{With High End SoC chip}$
 \newpage
 %**********************************************************************
 \chapter{Camera Interface Bridge Chip}
 \section{Lattice CrossLink}
-The CrossLink is Lattice made small scale MIPI bridge FPGA.$\footnote{Too small for hardware encoder}$ It include two MIPI D-PHY and up to 8 mipi data lane. It also support interface translation (MIPI CSI-2 -> DVP).\cite{Lattice:CrossLink}
+The CrossLink is Lattice made small scale MIPI bridge FPGA.$\footnote{Too small for hardware encoder}$ It include two MIPI D-PHY and up to 8 MIPI data lane. It also support interface translation (MIPI CSI-2 -> DVP).\cite{Lattice:CrossLink}
 \begin{figure}[htp]
 \includegraphics[width=\textwidth]{img/DR00002_CrossLink.png}
  \caption{Block Diagram for CrossLink}	
@@ -135,10 +134,10 @@ The Toshiba Camera Interface Bridge is a stand alone chip that can converse MIPI
 %**********************************************************************
 \chapter{H.264 Video Steam Encoding}
 \section{Introduction}
-The H.264 Encoder is another important unit in the camera system. Due to the data flow of a camera sensor is too much for the backplane bus, compression is nessary.
+The H.264 Encoder is another important unit in the camera system. Due to the data flow of a camera sensor is too much for the backplane bus, compression is necessary.
 \section{IP Core Description}
 \subsection{SoC Technology}
-This IP core fit for both \textbf{Intel} and \textbf{Xilinx}
+This IP core fit for both \textbf{Intel} and \textbf{Xilinx} \cite{ipcore:SoCTech} \cite{ipcore:A2ETech}.
 \begin{table}[H]
 	\centering
 		\begin{tabu}{r || c | c | c }
@@ -147,8 +146,8 @@ This IP core fit for both \textbf{Intel} and \textbf{Xilinx}
 		Slim Version & 50k & Artix-7 XC7A200T & \$300\\
 		I-Frame Version & 45k & Spartan-6 LX150 & \$200\\
 		\end{tabu}
-	\caption{SoC Summary}
-	\label{tab:socs}
+	\caption{Encoder Summary}
+	\label{tab:encoders}
 \end{table}
 \subsection{A2E Technology}
 \begin{table}[H]
@@ -158,18 +157,15 @@ This IP core fit for both \textbf{Intel} and \textbf{Xilinx}
 		Xilinx(1080p 30Hz) & 11K & Zynq-7 Z7020 & \$300\\
 		Xilinx(1080p 60Hz) & 11K & Kintex-7 & \$500\\
 		Xilinx(1080p 180Hz) & 11K & Zynq UltraScale & \$1000\\\hline
-		%*************************************************************%
 		Intel(1080p 30Hz) & 8K & Cyclone V SoC & \$500\\
 		\end{tabu}
 	\caption{SoC Summary}
 	\label{tab:socs}
 \end{table}
-\cite{ipcore:SoCTech}
-\cite{ipcore:A2ETech}
 \newpage
 \section{Encoding SoC Chip}
 \subsection{HiSilicon Hi3559}
-Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding up to 1080P 60Hz. It can output video via USB 2.0 bus.\cite{huawei:Hi3559}\\\\
+Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI interface and H.264 Video encoding up to 1080P 60Hz. It can output video via USB 2.0 bus.\cite{huawei:Hi3559}
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=\textwidth]{img/DR00002_Hi3559.png}
@@ -178,7 +174,7 @@ Hi3559 is HiSilicon made new generation mobile camera soc. It support MIPI inter
 \end{figure}
 \newpage
 \subsection{OmniVision OV798}
-OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video encoding up to 720P 60Hz. It can output video via USB 2.0 bus.\cite{omni:OV798}\\\\
+OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video encoding up to 720P 60Hz. It can output video via USB 2.0 bus.\cite{omni:OV798}
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=\textwidth]{img/DR00002_Omni.png}
@@ -187,7 +183,7 @@ OV798 is OmniVision made camera soc. It support MIPI interface and H.264 Video e
 \end{figure}
 \newpage
 \subsection{Ambarella H22}
-The Ambarella H22 SoC for consumer applications is a system-on-chip that integrates an advanced image sensor pipeline (ISP), H.265 (HEVC) and H.264 (AVC) encoders , and a powerful Quad core ARM® Cortex™-A53 CPU.\cite{ambarella:H22}$\footnote{H22 Video SoC for Consumer Applications}$\\\\
+The Ambarella H22 SoC for consumer applications is a system-on-chip that integrates an advanced image sensor pipeline (ISP), H.265 (HEVC) and H.264 (AVC) encoders , and a powerful Quad core ARM® Cortex™-A53 CPU.\cite{ambarella:H22}$\footnote{H22 Video SoC for Consumer Applications}$
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=\textwidth]{img/DR00002_Ambarella.png}
@@ -200,7 +196,7 @@ The Ambarella H22 SoC for consumer applications is a system-on-chip that integra
 \subsection{TMS320C6678 DSP}
 The TMS320C6678 DSP is a highest-performance fixed/floating-point DSP that is based on TI's KeyStone multicore
 architecture. Incorporating the new and innovative C66x DSP core, this device can run at a core speed of up to
-1.4 GHz.\cite{ti:TMS320C6678}$\footnote{TMS320C6678 Multicore Fixed and Floating-Point Digital Signal Processor}$\\
+1.4 GHz.\cite{ti:TMS320C6678}$\footnote{TMS320C6678 Multicore Fixed and Floating-Point Digital Signal Processor}$
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=\textwidth]{img/DR00002_DSP.png}
@@ -210,13 +206,13 @@ architecture. Incorporating the new and innovative C66x DSP core, this device ca
 \newpage
 \section{GPU Module}
 \subsection{Jetson Nano}
-The Jetson Nano is a GPU computing module what NVIDIA produce for GPU AI computer. It come with 6 MIPI CSI-2 interface and able to handle about 4K 60fps encoding. In the output option, it support PCIe output which can use as the interface. The only problem is it will require extra thermo solution due to the heat it produce and FPGA adoption program to translate the data to backplane bus.\cite{nv:JetsonNano}
+The Jetson Nano is a GPU computing module what NVIDIA produce for GPU AI computer. It come with 6 MIPI CSI-2 interface and able to handle about 4K 60fps encoding. In the output option, it support PCIe output which can use as the interface. The only problem is it will require extra thermal solution due to the heat it produce and FPGA adoption program to translate the data to backplane bus.\cite{nv:JetsonNano}
 
 \newpage
-%**********************************************************************
+
 \chapter{System Diagram}
 \section{USB camera with SoC FPGA chip}
-This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chip. The chip will translate the data to back-plane bus and send to the storage device. It can use the builtin USB controller and system driver, which reduce the development time. It could up grade to better camera set by using self developed module. But the builtin USB interface will limited the bit-rate encoding use and might cause blur when the sensor meet frequently vibration.\\
+This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chip. The chip will translate the data to back-plane bus and send to the storage device. It can use the builtin USB controller and system driver, which reduce the development time. It could up grade to better camera set by using self developed module. But the builtin USB interface will limited the bit-rate encoding use and might cause blur when the sensor meet frequently vibration.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/DR00002_Plan1.png}
@@ -236,7 +232,7 @@ This plan will use USB 2.0 UVC interface to connect one camera to a SoC FPGA chi
 \end{table}
 \newpage
 \section{MIPI camera + CrossLink with FPGA chip}
-This plan will use a crosslink chip to translate the MIPI signal to LVDS signal. The FPGA chip will receive the LVDS signal and use internal encoding IP core to process the data and send it out via the backplane bus. The CrossLink and the main chip are both FPGAs. It mean this system can easily increase the number of the camera. Four lane MIPI support up to 4K 180fps frame rate. It also allow future upgrade without change the hardware design due to the flexiblity of FPGA chip.
+This plan will use a CrossLink chip to translate the MIPI signal to LVDS signal. The FPGA chip will receive the LVDS signal and use internal encoding IP core to process the data and send it out via the backplane bus. The CrossLink and the main chip are both FPGAs. It mean this system can easily increase the number of the camera. Four lane MIPI support up to 4K 180fps frame rate. It also allow future upgrade without change the hardware design due to the flexiblity of FPGA chip.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/DR00002_Plan2.png}
@@ -256,7 +252,7 @@ This plan will use a crosslink chip to translate the MIPI signal to LVDS signal.
 \end{table}
 \newpage
 \section{LVDS camera with FPGA chip}
-This plan will connect a lvds camera to a FPGA. The FPGA will encode the video and send it via the backplane. The video will be encoded in the FPGA IP core and pack it into the backplane bus packet. Because the camera sensor use the fpga support standard, it will reduce the problem of formate translation. It also allow future upgrade without change the hardware design due to the flexiblity of FPGA chip.
+This plan will connect a LVDS camera to a FPGA. The FPGA will encode the video and send it via the backplane. The video will be encoded in the FPGA IP core and pack it into the backplane bus packet. Because the camera sensor use the FPGA support standard, it will reduce the problem of format translation. It also allow future upgrade without change the hardware design due to the flexiblity of FPGA chip.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/DR00002_Plan3.png}
@@ -276,7 +272,7 @@ This plan will connect a lvds camera to a FPGA. The FPGA will encode the video a
 \end{table}
 \newpage
 \section{MIPI camera with Multimedia SoC chip}
-This plan will use the solution that company provide and add addtional chip for the data translation from the USB to backplane bus. Because of the solution mostly will be provided by the company, it will be more stable. However, it lose the ability for upgrade. Also, because it use the MIPI bus, it require the PCB manifacture to use 100$\Omega$ impedance trace to keep the differential pairs stable.
+This plan will use the solution that company provide and add additional chip for the data translation from the USB to backplane bus. Because of the solution mostly will be provided by the company, it will be more stable. However, it lose the ability for upgrade. Also, because it use the MIPI bus, it require the PCB manufacture to use 100$\Omega$ impedance trace to keep the differential pairs stable.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/DR00002_Plan4.png}
@@ -296,7 +292,7 @@ This plan will use the solution that company provide and add addtional chip for 
 \end{table}
 \newpage
 \section{MIPI camera with Multimedia DSP and FPGA chip}
-This plan use DSP chip as the encoder. However the dsp do not have any video interface, it will need FPGA to finish the formate translation and feed it into the DSP chip. Also, because it use the MIPI bus, it require the PCB manifacture to use 100$\Omega$ impedance trace to keep the differential pairs stable. The DSP itself also have a set of SDK need to be take care off. It might require additional time to constructure the program.
+This plan use DSP chip as the encoder. However the DSP do not have any video interface, it will need FPGA to finish the format translation and feed it into the DSP chip. Also, because it use the MIPI bus, it require the PCB manufacture to use 100$\Omega$ impedance trace to keep the differential pairs stable. The DSP itself also have a set of SDK need to be take care off. It might require additional time to construct the program.
 \begin{figure}[htp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/DR00002_Plan5-2.png}

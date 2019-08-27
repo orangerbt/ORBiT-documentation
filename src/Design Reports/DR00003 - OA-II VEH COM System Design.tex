@@ -34,13 +34,14 @@
 This document outlines the design for the OA-II VEG Computing and Operation Module.
 \section{Purpose}
 The design goal is to build a system that allows real time operation and multimedia processing simultaneously during flight.
-\chapter{Revision History}
+\section{Revision History}
 \begin{table}[H]
 	\centering
 	\resizebox{0.8\textwidth}{!}{%
 		\begin{tabu}{r || c | c | c }
 		Rev\# & Editor & Delta & Date\\ \hline
 		A01 & Jinzhi Cai & Initialize & 2019-7-20\\
+		A02 & Gabriel Smolnycki & Minor grammar fixes & 2019-08-26
 		\end{tabu}
 	}
 	\caption{Summary of Revision History}
@@ -49,7 +50,7 @@ The design goal is to build a system that allows real time operation and multime
 \newpage
 \chapter{Requirement Analysis}
 \section{Failure Recovery}
-In the OA-OII VEH requirements, failure recovery is the most critical component. Proper recovery and redundancy requires the following:
+In the OA-II VEH requirements, failure recovery is the most critical component. Proper recovery and redundancy requires the following:
 
 \subparagraph{Backup}Each mission critical system must have at least one backup unit.
 \subparagraph{Fast Switch} When an emergency scenario is detected, the system switches to backup unit quickly, and is able to keep that system operating.
@@ -63,15 +64,15 @@ In the OA-II VEH requirements, a realtime operating system is key to performing 
 \newpage
 \chapter{Current Controller Analysis}
 \section{Arduino}
-Aruino is a common and beginner friendly microcontroller used in DIY electronics, and has abundant libraries for different IC.\cite{offical:Arduino} However, most of these libraries are inefficient and the interface options are limited. Its core clock runs at 16MHz which is not fast enough to support a functional Linux system.
-\section{STM32 Serise}
-SYM32 Series is another common microcontroller that supports up to 400MHz core clock, and also supports Linux operating systems.\cite{offical:STM32} However, like the Arduino, it lacks support for a custom interface.
+Arduino is a common and beginner friendly microcontroller used in DIY electronics, and has abundant libraries for different IC.\cite{offical:Arduino} However, most of these libraries are inefficient and the interface options are limited. Its core clock runs at 16MHz which is not fast enough to support a functional Linux system.
+\section{STM32 Series}
+STM32 Series is another common microcontroller that supports up to 400MHz core clock, and also supports Linux operating systems.\cite{offical:STM32} However, like the Arduino, it lacks support for a custom interface.
 \section{Market SoC System}
 SoC systems such as the Raspberry Pi and BeagleBone have a variety of interface options, but whose interfaces lack the high speed required for connections between systems.\cite{offical:Beagles}
 \section{FPGA Soft Core Processor}
 A field-programmable gate array (FPGA) is an integrated circuit designed to be configured by a customer or a designer after manufacturing – hence the term "field-programmable".\cite{wiki:FPGA} Almost every FPGA company will have it own soft core processor. This allows the core to be easily reprogrammed, as it is formed by "logical synthesis" and allow the user to rebuild them in the FPGA chip as long as the chip has enough resources. Even the soft core processor allow user to customize the structure, but the speed of soft core processor will not as fast as the SoC processor. Although, it is fairly easy to interface to other systems.
 \section{SoC FPGA}
-The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs.\cite{blog:socFPGA} On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradibility. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.
+The SoC FPGA is another kind of FPGA. The difference is the embedded, more powerful processor know as hard core processor. It helps fuse the benefit between the SoC chip and FPGA chip designs.\cite{blog:socFPGA} On one hand, it allows a big system to run in the powerful hard core processor, and, at the same time, the flexibility of an FPGA chip allows a custom interface and upgradability. However, SoC FPGAs have less logical resources compared with a classic FPGA and weak proessing power when compared with SoC which is the same cost.
 \newpage
 \chapter{Recommended System Design}
 \section{SoC FPGA}
@@ -81,7 +82,7 @@ In this design, the main processor will be a SoC FPGA that have about 70K LUT lo
 	\resizebox{0.5\textwidth}{!}{%
 		\begin{tabu}{ c | c }
 		IP core or Logic & Resource Cost\\ \hline
-		Blackbone Bus Controller & 50K(Max)\\
+		Backbone Bus Controller & 50K(Max)\\
 		Low Speed Sensor Controller & 10K\\
 		Soft Core Processor & 9K\\
 		Debug JTAG Core & 1K\\ \hline
@@ -89,9 +90,9 @@ In this design, the main processor will be a SoC FPGA that have about 70K LUT lo
 		\end{tabu}
 	}
 	\caption{Table of Logic Resource}
-	\label{tab:rev}
+	\label{tab:logic}
 \end{table}
-The hard core processor will be collecting data from the bus and sensor controller. It will store that data and use it to resolve the rocket attitude and location. The result will then transfer to command and be sent to the realtime soft core processor to control the PAM.\\
+The hard core processor will be collecting data from the bus and sensor controller. It will store that data and use it to resolve the rocket attitude and location. The result will then transfer to command and be sent to the realtime soft core processor to control the PAM.\par
 The FRU will have the same hardware structure as the MCU, but constantly get data from the MCU for error checking.
 \begin{center}
 \begin{figure}[htp]
