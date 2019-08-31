@@ -13,6 +13,7 @@
   - AD00001 - ORBiT Documentation Practices
   - AD00002 - ORBiT Avionics Technology Roadmap
   - AD00003 - ORBiT Glossary
+  - AD00004 - ORBiT Welcome Pack (TBD)
 - Datasheets
   - DS00001 - TELXX-YYWW_CE CONRAD
   - DS00002 - ORBiT Avionics System I
