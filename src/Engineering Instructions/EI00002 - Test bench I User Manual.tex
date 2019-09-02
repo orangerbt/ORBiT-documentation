@@ -1,0 +1,93 @@
+% This document must be compiled with LuaLaTeX
+\documentclass[12pt,article]{memoir}
+
+\input{../Templates/packages.tex}
+\usepackage{rotating}
+\input{../Templates/presetup.tex}
+
+%**********************************************************************
+% Document titles etc. defined here: (replace [] as well)
+\title{Test Bench I User Manual}
+\author{Cem Eden}
+\itemcode{EI00002}
+\revnumber{A01}
+\date{\today}
+% End of document titles etc.
+%**********************************************************************
+
+\input{../Templates/postsetup.tex}
+
+\begin{document}
+	
+\input{../Templates/cover.tex}
+
+\tableofcontents*
+\clearpage
+
+%**********************************************************************
+% Everything after this is the main document. Edit below this line.
+
+\chapter{Introduction}
+\section{Scope}
+A quick overview of the electronics test bench.
+
+\newpage
+\chapter{Overview}
+\section{Main Parts}
+\includegraphics[width=7in]{EI00002_overview.jpg}
+
+1. DAQ board. Allows for pressure transducers and other resistive measurement devices to be converted to a usable analog signal. Used with the National Instruments ADC (USB-6000).
+
+2 Fuses. Provides separate fuses to parts of the system. Namely, one fuse to drive high-load circuitry (ignition and solenoids) and one to drive the remaining system.
+
+3. Beaglebone Black Stack. The main computational stack that will be tested and programmed.
+
+4. Relays and Relay-Drivers. A temporary installment that allows the Beaglebones' GPIO pins to directly drive a high load through a relay.
+
+5. DC-DC 24V Step-up Converter. A DIN-rail device that will step up the battery voltage (~12V) to the a higher 24V used by the relays (I bought the wrong ones).
+
+6. DC-DC 5V Power Regulator. A through hole 5V step mode power regulator to provide 5V power to various systems.
+
+7. Power Switches for main and secondary power.
+
+\begin{sidewaysfigure} % couldn't quite get this figure set up right
+	\section{Circuitry}
+	\centering
+	\includegraphics[width=10in]{EI00002_schematic.pdf} %angle=270, origin=c,
+\end{sidewaysfigure}
+
+\newpage
+\section{Usage guide}
+The test bench as it is currently is built to allow for actuation of a solenoid valve and an ignition coil, with the ability to add more high-power devices to the empty relays. It also provides signal conditioners for 2 force transducers and a pressure transducer.
+
+To utilize the relays, the corresponding GPIO pin on the Beaglebone has to be driven high (or low, I don't remember). However, the first relay is meant as an enable for the remaining relays (see circuit diagram above) to allow for a safety interlock. In addition, the switch labeled SECONDARY must be enabled to allow for relay actuation to allow for manual override.\\
+NOTE: When using the relays, make sure to set the pin mode to OUTPUT (i.e. run the script BEFORE turning on SECONDARY power) as a floating output may cause false triggers.
+
+To utilize the signal conditioners, attach the National Instruments ADC to a computer running LabVIEW (namely the Japanese "still better than a mac" laptop). Run the LabVIEW program on that computer to start recording data.
+
+\section{Additional notes}
+The two fuses in the fuse box are rated loosely to protect the remaining circuitry. The higher rated fuse is meant to provide power to high-power devices (Ignition \& solenoid). The lower rated fuse provides power to the rest of the system.
+Note that these fuses have not been tested, and a short on the ignition coil will cause all systems to crash.
+
+\textbf{CAUTION:} All information contained in this documentation may be inaccurate or wrong. The test bench is not meant to be a final device and is built crudely at best.
+
+\textbf{DO NOT USE IN CRITICAL APLICATIONS}
+
+
+\newpage
+%\section{Relevant Documents}
+
+\section{Revision History}
+\begin{table}[H]
+	\centering
+	\begin{tabu}{r || c | c | c | c }
+		Rev & Author & Approver & Changes & Date\\ \hline
+		A01 & Cem Eden & - & Initial draft & 2019-09-02\\
+	\end{tabu}
+	\caption{Summary of Revision History}
+	\label{tab:rev}
+\end{table}
+
+% End of document
+%**********************************************************************
+\end{document}
