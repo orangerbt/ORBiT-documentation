@@ -36,6 +36,7 @@
   - DR00011 - Conformal Coating Methods
 - Engineering Instructions
   - EI00001 - Avionics System I User Manual
+  - EI00002 - Test Bench I User Manual
 - Engineering Requirements
   - ER00001 - Project Goals
   - ER00002 - ORBiT Avionics System II Requirements
@@ -53,7 +54,7 @@
 - Templates
   - LaTeX template
   - Microsoft Word template
-
+  
 ## Project Document Index
 
 - ORBiT Avionics System I
